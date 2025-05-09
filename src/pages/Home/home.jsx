@@ -1,0 +1,115 @@
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { SwiperStyles } from './homeStyle';
+import { FaChevronRight } from 'react-icons/fa';
+
+
+const slides = [
+    {
+      image: 'https://picsum.photos/id/1015/1200/600',
+      HeadingText: 'Explore the Mountains',
+      paraText: 'Experience breathtaking views and peaceful moments in nature.',
+    },
+    {
+      image: 'https://picsum.photos/id/1016/1200/600',
+      HeadingText: 'Adventure Awaits',
+      paraText: 'Unleash your spirit of adventure with thrilling destinations.',
+    },
+    {
+      image: 'https://picsum.photos/id/1018/1200/600',
+      HeadingText: 'Discover the World',
+      paraText: 'Travel the globe and discover hidden treasures and cultures.',
+    },
+  ];
+  
+
+const HomePage = () => {
+  return (
+    <>
+      <SwiperStyles />
+      <Swiper
+        modules={[Navigation]}
+        navigation
+        loop
+        className="mySwiper"
+        style={{ height: '100vh' }}
+      >
+        {slides.map((slide, index) => (
+            <SwiperSlide key={index}>
+  <div
+    style={{
+      position: 'relative',
+      backgroundImage: `url(${slide.image})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      width: '100%',
+      height: '100%',
+    }}
+  >
+    {/* Dark overlay */}
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        zIndex: 1,
+      }}
+    />
+    
+    {/* Text & Button Content */}
+    <div
+      style={{
+        position: 'relative',
+        zIndex: 2,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        height: '100%',
+        color: 'white',
+        textAlign: 'center',
+        padding: '0 20px',
+      }}
+    >
+      <h1 style={{ fontSize: '3rem', marginBottom: '0rem' }}>{slide.HeadingText}</h1>
+      <p style={{
+        fontSize: '1.1rem',
+        maxWidth: '600px',
+        marginBottom: '1.5rem',
+        color: '#f0f0f0'
+      }}>
+        {slide.paraText}
+      </p>
+      <button
+        style={{
+          padding: '12px 24px',
+          display:'flex',
+          alignContent:'center',
+          justifyContent:'center',
+          backgroundColor: `var(--primary-button)`,
+          color: '#fff',
+          border: 'none',
+          fontSize: '1rem',
+          cursor: 'pointer',
+          transition: 'background-color 0.3s ease',
+        }}
+      >
+        Contact Us < FaChevronRight  style={{fontSize:'17.5px'}}/>
+      </button>
+    </div>
+  </div>
+</SwiperSlide>
+        ))}
+      </Swiper>
+      
+    </>
+  );
+};
+
+export default HomePage;
