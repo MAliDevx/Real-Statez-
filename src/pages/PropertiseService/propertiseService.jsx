@@ -10,9 +10,22 @@ import {
   PriceValues,
   SearchButton,
   OuterContainer,
-  FilteredContent
+  FilteredContent,
+  
 } from './propertyStyle';
-import { DividerWithText } from '../../styles/commanClasses';
+import { DividerWithText,  CarouselWrapper,
+  Card,
+  CardImg,
+  CardBodyTop,
+  CardBodyBottom
+ } from '../../styles/commanClasses';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay, Mousewheel } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { MdLocationOn } from "react-icons/md";
+import { FaBath, FaBed, FaInbox , FaMap } from 'react-icons/fa';
+
 const PropertyFilter = () => {
   const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
 
@@ -46,6 +59,99 @@ const PropertyFilter = () => {
     { value: '3', label: '3 Bathrooms' },
   ];
 
+  const listings = [
+    {
+      image: 'https://wallsproperty.netlify.app/images/gallery17.jpg',
+      name: 'Modern Villa',
+      location: 'Los Angeles, CA',
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "43 Sq Ft",
+      ownerName: 'Alice Johnson',
+      price: "$3,300"
+    },
+    {
+      image: 'https://wallsproperty.netlify.app/images/gallery11.jpg',
+      name: 'Urban Apartment',
+      location: 'New York, NY',
+      rooms: 2,
+      bedRooms: 2,
+      baths: 1,
+      Area: "38 Sq Ft",
+      ownerName: 'Michael Lee',
+      price: "$2,200"
+    },
+    {
+      image: 'https://wallsproperty.netlify.app/images/gallery17.jpg',
+      name: 'Cozy Cottage',
+      location: 'Nashville, TN',
+      rooms: 3,
+      bedRooms: 3,
+      baths: 2,
+      Area: "40 Sq Ft",
+      ownerName: 'Samantha Brown',
+      price: "$2,800"
+    },
+    {
+      image: 'https://wallsproperty.netlify.app/images/gallery10.jpg',
+      name: 'Luxury Loft',
+      location: 'Chicago, IL',
+      rooms: 2,
+      bedRooms: 2,
+      baths: 2,
+      Area: "35 Sq Ft",
+      ownerName: 'Daniel Green',
+      price: "$3,100"
+    },
+    {
+      image: 'https://wallsproperty.netlify.app/images/gallery15.jpg',
+      name: 'Beach House',
+      location: 'Miami, FL',
+      rooms: 5,
+      bedRooms: 5,
+      baths: 4,
+      Area: "55 Sq Ft",
+      ownerName: 'Olivia Martinez',
+      price: "$5,200"
+    },
+    {
+      image: 'https://wallsproperty.netlify.app/images/gallery16.jpg',
+      name: 'Penthouse',
+      location: 'San Francisco, CA',
+      rooms: 3,
+      bedRooms: 3,
+      baths: 2,
+      Area: "48 Sq Ft",
+      ownerName: 'Chris Evans',
+      price: "$4,700"
+    },
+    {
+      image: 'https://picsum.photos/id/1027/600/300',
+      name: 'Suburban Home',
+      location: 'Dallas, TX',
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "50 Sq Ft",
+      ownerName: 'Emma Watson',
+      price: "$3,600"
+    },
+    {
+      image: 'https://wallsproperty.netlify.app/images/gallery18.jpg',
+      name: 'Ranch House',
+      location: 'Austin, TX',
+      rooms: 6,
+      bedRooms: 6,
+      baths: 5,
+      Area: "60 Sq Ft",
+      ownerName: 'Liam Carter',
+      price: "$6,000"
+    }
+  ];
+  
+  
+
   return (
     <OuterContainer>
     <FilterContainer>
@@ -74,7 +180,7 @@ const PropertyFilter = () => {
           </PriceValues>
         </PriceRange>
         <SearchButton>
-          <FaSearch /> Search
+          Search <FaSearch /> 
         </SearchButton>
       </FilterRow>
     </FilterContainer>
@@ -83,8 +189,130 @@ const PropertyFilter = () => {
   <span>Featured Properties
   </span>
 </DividerWithText>
+<p>handpicked exclusive properties by our team.</p>
+<CarouselWrapper>
+      <Swiper
+     modules={[Pagination, Autoplay]}
+  slidesPerView={2}          
+  slidesPerGroup={2}        
+  spaceBetween={20}
+  loop={true}
+  autoplay={{ delay: 6000 }}
+  pagination={{ clickable: true }}
+      >
 
+        {listings.map((item, idx) => (
+          <SwiperSlide key={idx}>
+            <Card>
+              <button className='property-feature'>Featured</button>
+              <button className='isForSale'>For Sale</button>
+              <CardImg src={item.image} alt={item.name} />
+              <CardBodyTop>
+                <button className="isHouse">House</button>
+                <h4 className='property-name'>{item.name}</h4>
+                <p className='property-location'><MdLocationOn /> {item.location}</p>
+              </CardBodyTop>
+              <CardBodyBottom>
+                <div className="bath-box">
+                <div> Baths</div> <div className='bottom-box'><FaBath /> {item.baths}</div>
+                </div>
+                <div className="beds-box">
+                <div> Beds</div> <div className='bottom-box'><FaBed />{item.bedRooms}</div>
+                </div>
+                <div className="room-box">
+                <div> Rooms</div> <div className='bottom-box'><FaInbox  />{item.rooms}</div>
+                </div>
+                <div className="area-box">
+                <div> Area</div> <div className='bottom-box'><FaMap />{item.Area}</div>
+                </div>
+
+
+
+              </CardBodyBottom>
+<div className="property-profile">
+  <div className="property-profile__info">
+   <figure>
+   <img
+      src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
+      alt="Owner"
+      className="property-profile__image"
+    />
+   </figure>
+    <p className="property-profile__name">{item.ownerName}</p>
+  </div>
+  <div className="property-profile__price">{item.price}.00</div>
+</div>
+            </Card>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </CarouselWrapper>
 </FilteredContent>
+<FilteredContent style={{background:'#F9F9F8'}}>
+<DividerWithText>
+  <span>Recent Property
+  </span>
+</DividerWithText>
+<p>We provide full service at every step</p>
+<CarouselWrapper>
+      <Swiper
+     modules={[Pagination, Autoplay]}
+  slidesPerView={2}          
+  slidesPerGroup={2}        
+  spaceBetween={20}
+  loop={true}
+  autoplay={{ delay: 6000 }}
+  pagination={{ clickable: true }}
+      >
+
+        {listings.map((item, idx) => (
+          <SwiperSlide key={idx}>
+            <Card>
+              <button className='property-feature'>Featured</button>
+              <button className='isForSale'>For Sale</button>
+              <CardImg src={item.image} alt={item.name} />
+              <CardBodyTop>
+                <button className="isHouse">House</button>
+                <h4 className='property-name'>{item.name}</h4>
+                <p className='property-location'><MdLocationOn /> {item.location}</p>
+              </CardBodyTop>
+              <CardBodyBottom>
+                <div className="bath-box">
+                <div> Baths</div> <div className='bottom-box'><FaBath /> {item.baths}</div>
+                </div>
+                <div className="beds-box">
+                <div> Beds</div> <div className='bottom-box'><FaBed />{item.bedRooms}</div>
+                </div>
+                <div className="room-box">
+                <div> Rooms</div> <div className='bottom-box'><FaInbox  />{item.rooms}</div>
+                </div>
+                <div className="area-box">
+                <div> Area</div> <div className='bottom-box'><FaMap />{item.Area}</div>
+                </div>
+
+
+
+              </CardBodyBottom>
+<div className="property-profile">
+  <div className="property-profile__info">
+   <figure>
+   <img
+      src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
+      alt="Owner"
+      className="property-profile__image"
+    />
+   </figure>
+    <p className="property-profile__name">{item.ownerName}</p>
+  </div>
+  <div className="property-profile__price">{item.price}.00</div>
+</div>
+            </Card>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </CarouselWrapper>
+</FilteredContent>
+
     </OuterContainer>
   );
 };

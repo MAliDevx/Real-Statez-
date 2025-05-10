@@ -32,8 +32,8 @@ const Header = () => {
       <NavLinks>
         <NavLink scrolled={scrolled} >Home</NavLink>
         <NavLink scrolled={scrolled} onClick={() => navigate('/property-listing')}>Property</NavLink>
-        <NavLink scrolled={scrolled}>Contact</NavLink>
         <NavLink scrolled={scrolled}>Agents</NavLink>
+        <NavLink scrolled={scrolled}>Contact</NavLink>
       </NavLinks>
       <LoginButtonWrapper>
         <LoginButton scrolled={scrolled}>Login <FaSignInAlt style={{marginLeft:5}} size={18} /></LoginButton>

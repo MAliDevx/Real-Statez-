@@ -8,7 +8,7 @@ position: relative;
 export const FilteredContent = styled.div`
     padding: 2rem;
     text-align: center;
-    padding-top: 141px;
+    padding-top: 90px;
 
 `;
 
@@ -16,7 +16,7 @@ export const FilteredContent = styled.div`
 export const FilterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   padding: 1rem;
   width: 80%;
   margin: 0 auto;
@@ -27,6 +27,10 @@ export const FilterContainer = styled.div`
   background: white;
   z-index: 10;
   overflow-x: visible;  
+  top: -100px;
+  .css-13cymwt-control{
+    height: 50px;
+  }
 `;
 
 
@@ -34,19 +38,19 @@ export const FilterContainer = styled.div`
 export const FilterRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
 `;
 
 
 export const StyledSelect = styled(Select)`
-  flex: 1 1 22%;
+  flex: 0 1 22%;
   min-width: 180px;
+
 `;
 
 export const PriceRange = styled.div`
-  flex: 1 1 38%;
-  min-width: 220px;
+width: 22%;
 `;
 
 export const PriceValues = styled.div`
@@ -58,17 +62,20 @@ export const PriceValues = styled.div`
 
 export const SearchButton = styled.button`
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: var(--primary-button);
   color: white;
   border: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   cursor: pointer;
-  border-radius: 4px;
-  height: 38px;
+  height: 40px;
+  width: 22%;
+  font-size: 16.5px;
 
   &:hover {
     background-color: #0056b3;
   }
 `;
+

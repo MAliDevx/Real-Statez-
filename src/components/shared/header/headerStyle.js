@@ -9,7 +9,7 @@ export const HeaderContainer = styled.header`
   justify-content: space-around;
   align-items: center;
   padding: 12px 0px;
-  background-color: ${({ scrolled }) => (scrolled ? '#fff' : 'rgba(124, 124, 124, 0.1)')};
+  background-color: ${({ scrolled }) => (scrolled ? '#fff' : 'transparent')};
   box-shadow: ${({ scrolled }) => (scrolled ? '0 2px 5px rgba(0, 0, 0, 0.1)' : 'none')};
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 `;
@@ -28,12 +28,14 @@ export const NavLinks = styled.nav`
 
 export const NavLink = styled.a`
   text-decoration: none;
-  color: ${({ scrolled }) => (scrolled ? '#333' : 'rgba(94, 94, 94, 0.1)')};
-  font-weight: 500;
+  color: ${({ scrolled }) => (scrolled ? '#333' : 'white')};
+  font-weight: 600;
   transition: all 0.3s ease;
   position: relative;
   padding-bottom: 4px;
-  font-size: 17px;
+  font-size: 15px;
+  text-transform: uppercase;
+  cursor: pointer;
 
   &:hover {
     color: #007BFF;

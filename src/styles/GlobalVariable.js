@@ -1,11 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 const Variables = createGlobalStyle`
-:root{
+  :root {
     --primary-button: #3454d1;
-
-}
-
+    --large-text: rgb(0, 34, 71);
+    --light-gray: #dddddd;
+    --gray: rgb(73, 80, 87);
+    --white-color: #ffffff;
+  }
 `;
 
 export default Variables;
