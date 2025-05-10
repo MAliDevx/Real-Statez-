@@ -9,17 +9,17 @@ import { FaChevronRight } from 'react-icons/fa';
 
 const slides = [
     {
-      image: 'https://picsum.photos/id/1015/1200/600',
+      image: 'https://wallsproperty.netlify.app/images/bg.jpg',
       HeadingText: 'Explore the Mountains',
       paraText: 'Experience breathtaking views and peaceful moments in nature.',
     },
     {
-      image: 'https://picsum.photos/id/1016/1200/600',
+      image: 'https://wallsproperty.netlify.app/images/bg15.jpg',
       HeadingText: 'Adventure Awaits',
       paraText: 'Unleash your spirit of adventure with thrilling destinations.',
     },
     {
-      image: 'https://picsum.photos/id/1018/1200/600',
+      image: '	https://wallsproperty.netlify.app/images/bg19.jpg',
       HeadingText: 'Discover the World',
       paraText: 'Travel the globe and discover hidden treasures and cultures.',
     },
@@ -35,7 +35,7 @@ const HomePage = () => {
         navigation
         loop
         className="mySwiper"
-        style={{ height: '100vh' }}
+        style={{ height: '93vh', top:'-100px' }}
       >
         {slides.map((slide, index) => (
             <SwiperSlide key={index}>
@@ -57,7 +57,6 @@ const HomePage = () => {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.4)',
         zIndex: 1,
       }}
     />
