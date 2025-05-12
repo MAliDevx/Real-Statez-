@@ -4,13 +4,15 @@ import Header from "./components/shared/header/header";
 import HomePage from "./pages/Home/home";
 import GlobalStyling from "./styles/globalStyling";
 import PropertyFilter from "./pages/PropertiseService/propertiseService";
+import PublicRoutes from "./routes/public.routes";
 function App() {
   return (
     <>
       <Header />
-      <GlobalStyling />
-      <HomePage />
-      <PropertyFilter />
+      {/* <HomePage /> */}
+      <GlobalStyling/>
+      <PublicRoutes />
+      {/* <PropertyFilter /> */}
       <FooterPage />
     </>
   );
