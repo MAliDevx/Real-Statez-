@@ -5,7 +5,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { SwiperStyles } from './homeStyle';
 import { FaChevronRight } from 'react-icons/fa';
-import PropertyFilter from '../PropertiseService/propertiseService';
+import PropertyFilter from '../PropertiseService/propertiseService'
+import { Button } from '../../styles/commanClasses';
+ import {AnimatedHeading} from './homeStyle';
 
 const slides = [
     {
@@ -76,7 +78,7 @@ const HomePage = () => {
         padding: '0 20px',
       }}
     >
-      <h1 style={{ fontSize: '3rem', marginBottom: '0rem' }}>{slide.HeadingText}</h1>
+      <AnimatedHeading >{slide.HeadingText}</AnimatedHeading>
       <p style={{
         fontSize: '1.1rem',
         maxWidth: '600px',
@@ -85,22 +87,9 @@ const HomePage = () => {
       }}>
         {slide.paraText}
       </p>
-      <button
-        style={{
-          padding: '12px 24px',
-          display:'flex',
-          alignContent:'center',
-          justifyContent:'center',
-          backgroundColor: `var(--primary-button)`,
-          color: '#fff',
-          border: 'none',
-          fontSize: '1rem',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s ease',
-        }}
-      >
+      <Button>
         Contact Us < FaChevronRight  style={{fontSize:'17.5px'}}/>
-      </button>
+      </Button>
     </div>
   </div>
 </SwiperSlide>

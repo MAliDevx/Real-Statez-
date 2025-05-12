@@ -10,7 +10,7 @@ export const DividerWithText = styled.div`
   &::before,
   &::after {
     content: "";
-    flex: 0.07;
+    flex: 0.13;
     border-bottom: 1px solid #ccc;
   }
 
@@ -114,6 +114,7 @@ export const Card = styled.div`
     font-weight: normal;
     color: var(--gray);
     margin: 0;
+    font-size: 15px;
   }
 
   &__price {
@@ -181,3 +182,16 @@ text-align: start;
   }
   
 `;
+export const Button = styled.div`
+
+          padding: 12px 24px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          background-color: var(--primary-button);
+          color: var(--white-color);
+          border: none;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+`
