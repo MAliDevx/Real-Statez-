@@ -7,13 +7,11 @@ const Variables = createGlobalStyle`
     --light-gray: #dddddd;
     --gray: rgb(73, 80, 87);
     --white-color: #ffffff;
-  
-   --background-color:#F2F2F2;
+    --background-color:#F2F2F2;
    --subheading-color:#000;
    --border-color:#eee;
-   --white-color:#ffff;
-}
-
+    --background-light-gray: #F9F9F8;
+  }
 `;
 
 export default Variables;

@@ -9,7 +9,6 @@ import {
 } from './headerStyle';
 import { FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { NavLink as RouterNavLink } from 'react-router-dom';
 
 
 const Header = () => {

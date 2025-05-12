@@ -25,7 +25,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { MdLocationOn } from "react-icons/md";
 import { FaBath, FaBed, FaInbox , FaMap } from 'react-icons/fa';
-
+import CompanyShowCase from '../CompanyShowcase/CompanyShowcase';
 const PropertyFilter = () => {
   const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
 
@@ -248,7 +248,7 @@ const PropertyFilter = () => {
       </Swiper>
     </CarouselWrapper>
 </FilteredContent>
-<FilteredContent style={{background:'#F9F9F8'}}>
+<FilteredContent style={{background:`var(--background-light-gray)`}}>
 <DividerWithText>
   <span>Recent Property
   </span>
@@ -313,6 +313,7 @@ const PropertyFilter = () => {
     </CarouselWrapper>
 </FilteredContent>
 
+<CompanyShowCase />
     </OuterContainer>
   );
 };
