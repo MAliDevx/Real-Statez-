@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { SwiperStyles } from './homeStyle';
 import { FaChevronRight } from 'react-icons/fa';
-
+import PropertyFilter from '../PropertiseService/propertiseService';
 
 const slides = [
     {
@@ -106,7 +106,7 @@ const HomePage = () => {
 </SwiperSlide>
         ))}
       </Swiper>
-      
+      <PropertyFilter/>
     </>
   );
 };

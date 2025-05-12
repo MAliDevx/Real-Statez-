@@ -30,10 +30,13 @@ const Header = () => {
         <img src="https://wallsproperty.netlify.app/images/logo-blue-stiky.png" alt="Logo" />
       </Logo>
       <NavLinks>
-        <NavLink scrolled={scrolled} >Home</NavLink>
-        <NavLink scrolled={scrolled} onClick={() => navigate('/property-listing')}>Property</NavLink>
+        {/* <NavLink scrolled={scrolled} >Home</NavLink> */}
+        <NavLink scrolled={scrolled} onClick={() => navigate('')}>Home</NavLink >    
+        {/* <NavLink scrolled={scrolled} onClick={() => navigate('/property-listing')}>Property</NavLink> */}
+           <NavLink scrolled={scrolled} onClick={() => navigate('/property-listing')}>Property</NavLink>
+
         <NavLink scrolled={scrolled}>Agents</NavLink>
-        <NavLink scrolled={scrolled}>Contact</NavLink>
+        <NavLink scrolled={scrolled} onClick={() => navigate('/contact')}>Contact</NavLink>
       </NavLinks>
       <LoginButtonWrapper>
         <LoginButton scrolled={scrolled}>Login <FaSignInAlt style={{marginLeft:5}} size={18} /></LoginButton>
