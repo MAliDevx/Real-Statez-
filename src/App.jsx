@@ -9,10 +9,8 @@ function App() {
   return (
     <>
       <Header />
-      {/* <HomePage /> */}
       <GlobalStyling/>
       <PublicRoutes />
-      {/* <PropertyFilter /> */}
       <FooterPage />
     </>
   );

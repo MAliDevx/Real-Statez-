@@ -26,7 +26,11 @@ import 'swiper/css/pagination';
 import { MdLocationOn } from "react-icons/md";
 import { FaBath, FaBed, FaInbox , FaMap } from 'react-icons/fa';
 import CompanyShowCase from '../CompanyShowcase/CompanyShowcase';
+import { useNavigate } from 'react-router-dom';
+
 const PropertyFilter = () => {
+  const navigate = useNavigate()
+
   const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
 
   const statusOptions = [
@@ -69,7 +73,9 @@ const PropertyFilter = () => {
       baths: 3,
       Area: "43 Sq Ft",
       ownerName: 'Alice Johnson',
-      price: "$3,300"
+      price: "$3,300",
+      id:"sdkjf8938432kjadlkajd"
+
     },
     {
       image: 'https://wallsproperty.netlify.app/images/gallery11.jpg',
@@ -80,7 +86,9 @@ const PropertyFilter = () => {
       baths: 1,
       Area: "38 Sq Ft",
       ownerName: 'Michael Lee',
-      price: "$2,200"
+      price: "$2,200",
+      id:"asdjask93823432jksd"
+
     },
     {
       image: 'https://wallsproperty.netlify.app/images/gallery17.jpg',
@@ -91,7 +99,9 @@ const PropertyFilter = () => {
       baths: 2,
       Area: "40 Sq Ft",
       ownerName: 'Samantha Brown',
-      price: "$2,800"
+      price: "$2,800",
+      id:"adja3849jkdjsdlask"
+
     },
     {
       image: 'https://wallsproperty.netlify.app/images/gallery10.jpg',
@@ -102,7 +112,9 @@ const PropertyFilter = () => {
       baths: 2,
       Area: "35 Sq Ft",
       ownerName: 'Daniel Green',
-      price: "$3,100"
+      price: "$3,100",
+      id:"sdkjf8938432kjadlkajd"
+
     },
     {
       image: 'https://wallsproperty.netlify.app/images/gallery15.jpg',
@@ -113,7 +125,9 @@ const PropertyFilter = () => {
       baths: 4,
       Area: "55 Sq Ft",
       ownerName: 'Olivia Martinez',
-      price: "$5,200"
+      price: "$5,200",
+      id:"sdkjf8938432kjadlkajd"
+
     },
     {
       image: 'https://wallsproperty.netlify.app/images/gallery16.jpg',
@@ -124,7 +138,9 @@ const PropertyFilter = () => {
       baths: 2,
       Area: "48 Sq Ft",
       ownerName: 'Chris Evans',
-      price: "$4,700"
+      price: "$4,700",
+      id:"sdkjf8938432kjadlkajd"
+
     },
     {
       image: 'https://picsum.photos/id/1027/600/300',
@@ -135,7 +151,9 @@ const PropertyFilter = () => {
       baths: 3,
       Area: "50 Sq Ft",
       ownerName: 'Emma Watson',
-      price: "$3,600"
+      price: "$3,600",
+      id:"sdkjf8938432kjadlkajd"
+
     },
     {
       image: 'https://wallsproperty.netlify.app/images/gallery18.jpg',
@@ -146,7 +164,9 @@ const PropertyFilter = () => {
       baths: 5,
       Area: "60 Sq Ft",
       ownerName: 'Liam Carter',
-      price: "$6,000"
+      price: "$6,000",
+      id:"sdkjf8938432kjadlkajd"
+
     }
   ];
   
@@ -203,8 +223,8 @@ const PropertyFilter = () => {
 
         {listings.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <Card>
-              <button className='property-feature'>Featured</button>
+<Card onClick={() => navigate(`/propertydetails/${item.id}`)}>
+          <button className='property-feature'>Featured</button>
               <button className='isForSale'>For Sale</button>
               <CardImg src={item.image} alt={item.name} />
               <CardBodyTop>
@@ -267,8 +287,8 @@ const PropertyFilter = () => {
 
         {listings.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <Card>
-              <button className='property-feature'>Featured</button>
+<Card onClick={() => navigate(`/propertydetails/${item.id}`)}>
+<button className='property-feature'>Featured</button>
               <button className='isForSale'>For Sale</button>
               <CardImg src={item.image} alt={item.name} />
               <CardBodyTop>
