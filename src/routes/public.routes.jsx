@@ -3,6 +3,11 @@ import PropertyListing from "../pages/propertyListing/propertyListing";
 import HomePage from "../pages/Home/home";
 import Contact from "../pages/Contact/Contact";
 import SinglePropertyDetail from "../pages/PropertyDetails/PropertyDetails";
+import AuthLogin from "../Auth/Login/login";
+import ResetPassword from "../Auth/forgotPassword/forgotPassword";
+import VerifyEmail from "../Auth/EmailVerify/verifyEmail";
+import OtpVerify from "../Auth/OTP/OTP";
+import SignUp from "../Auth/signUp/signUp";
 const PublicRoutes = () => {
   return (
     <Routes>
@@ -10,6 +15,11 @@ const PublicRoutes = () => {
       <Route path="/property-listing" element={<PropertyListing />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/propertydetails/:id" element={<SinglePropertyDetail />} />
+      <Route path="/login" element={<AuthLogin />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
+      <Route path="/otp-verification" element={<OtpVerify />} />
+      <Route path="/sign-up" element={<SignUp />} />
     </Routes>
   )
 }

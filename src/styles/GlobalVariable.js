@@ -11,6 +11,7 @@ const Variables = createGlobalStyle`
    --subheading-color:#000;
    --border-color:#eee;
     --background-light-gray: #F9F9F8;
+    --input-border: #e9ecef;
   }
 `;
 
