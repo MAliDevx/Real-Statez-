@@ -11,7 +11,7 @@ export const DividerWithText = styled.div`
   &::after {
     content: "";
     flex: 0.13;
-    border-bottom: 1px solid #ccc;
+    /* border-bottom: 1px solid #ccc; */
   }
 
   span {
