@@ -78,16 +78,16 @@ export const PropertyFilterdiv = styled.div`
     align-items: center;
     justify-content: flex-start; /* More natural icon alignment */
     border: 1px solid var(--border-color);
-    padding: 0px 10px;
+    /* padding: 0px 10px; */
     /* border-radius: 4px; */
   }
 
   .icons {
-    padding: 6px 4px;
+    padding: 8px 4px;
     color: var(--primary-button);
     cursor: pointer;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 20px;
     font-size: 16px;
     transition: all 0.2s ease;
     /* border-radius: 4px; */
@@ -134,9 +134,9 @@ export const PropertyCardContainer = styled.div`
 
   .list-card-container {
     display: ${({ view }) => (view === "list" ? "flex" : "grid")};
-    flex-direction: flex;
-    /* gap: 30px */
-    justify-content:space-between;
+    /* flex-direction: flex; */
+    gap: 110px
+    /* justify-content:space-between; */
   }
 `;
 
@@ -183,8 +183,9 @@ export const Card = styled.div`
     justify-content: ${({ view }) =>
       view === "list" ? "center" : "space-between"};
     align-items: center;
-    gap: ${({ view }) => (view === "list" ? "10px" : "0")};
+    gap: ${({ view }) => (view === "list" ? "20px" : "0")};
     padding: 9px 20px;
+    margin-right: ${({ view }) => (view === "list" ? "-100px" : "0")};
     border-top: ${({ view }) =>
       view === "list" ? "none" : "1px solid var(--light-gray)"};
     figure {
@@ -229,12 +230,14 @@ export const CardDetailListContainer = styled.div`
   display: ${({ view }) => (view === "list" ? "flex" : "block")};
   flex-direction: ${({ view }) => (view === "list" ? "column" : "initial")};
   justify-content: ${({ view }) => (view === "list" ? "center" : "initial")};
+  margin-left: ${({ view }) => (view === "list" ? "-100px" : "0")};
 `;
 
 export const CardWrapper = styled.div`
   position: relative;
-  width: ${(props) => (props.view === "list" ? "40%" : "100%")} !important;
+  width: ${({ view }) => (view === "list" ? "45%" : "100%")} !important;
 `;
+
 
 
 export const SaleButton = styled.button`

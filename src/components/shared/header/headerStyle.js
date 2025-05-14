@@ -28,7 +28,7 @@ export const NavLinks = styled.nav`
 
 export const NavLink = styled.a`
   text-decoration: none;
-  color: ${({ scrolled }) => (scrolled ? '#333' : 'white')};
+  color: ${({ scrolled }) => (scrolled ? '#333' : '#ddd')};
   font-weight: 600;
   transition: all 0.3s ease;
   position: relative;

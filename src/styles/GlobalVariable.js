@@ -14,6 +14,7 @@ const Variables = createGlobalStyle`
     --light-blue:#007bff;
     --dark-blue:#6610f2;
     --cyan:#C1D0FF;
+    --input-border: #e9ecef;
   }
 `;
 

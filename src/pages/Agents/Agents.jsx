@@ -42,6 +42,7 @@ import {
 } from "react-icons/fa";
 
 import { TfiYoutube } from "react-icons/tfi";
+import { useNavigate } from "react-router-dom";
 
 const Agents = () => {
   const propertyCategories = [
@@ -53,7 +54,7 @@ const Agents = () => {
 
   const [primaryAgent, setPrimaryAgent] = useState(null);
   const [backupAgent, setBackupAgent] = useState(null);
-
+const navigate=useNavigate()
   const dummyAgents = [
     {
       id: 1,
@@ -89,7 +90,7 @@ const Agents = () => {
       image: agentsiamge1,
     },
     {
-      id: 3,
+      id: 4,
       name: "Sarah Lee",
       title: "Rental Agent",
       office: "456 789 123",
@@ -100,7 +101,7 @@ const Agents = () => {
       image: agentsiamge3,
     },
     {
-      id: 3,
+      id: 5,
       name: "Sarah Lee",
       title: "Rental Agent",
       office: "456 789 123",
@@ -111,7 +112,7 @@ const Agents = () => {
       image: agentsiamge3,
     },
     {
-      id: 3,
+      id: 6,
       name: "Sarah Lee",
       title: "Rental Agent",
       office: "456 789 123",
@@ -122,7 +123,7 @@ const Agents = () => {
       image: agentsiamge3,
     },
     {
-      id: 3,
+      id: 7,
       name: "Sarah Lee",
       title: "Rental Agent",
       office: "456 789 123",
@@ -133,7 +134,7 @@ const Agents = () => {
       image: agentsiamge3,
     },
     {
-      id: 3,
+      id: 8,
       name: "Sarah Lee",
       title: "Rental Agent",
       office: "456 789 123",
@@ -254,7 +255,7 @@ const Agents = () => {
 
           {/* Dynamic Cards Section */}
           {dummyAgents.map((agent) => (
-            <Card key={agent.id}>
+  <Card key={agent.id} onClick={() => navigate(`/agent-detail/${agent.id}`)}>
               <ImageWrapper>
                 <img src={agent.image} alt={agent.name} />
                 <Badge>{agent.listings} LISTING</Badge>

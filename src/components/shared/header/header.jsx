@@ -36,7 +36,7 @@ const Header = () => {
         <NavLink scrolled={scrolled} onClick={() => navigate('/contact')}>Contact</NavLink>
       </NavLinks>
       <LoginButtonWrapper>
-        <LoginButton scrolled={scrolled}>Login <FaSignInAlt style={{marginLeft:5}} size={18} /></LoginButton>
+        <LoginButton onClick={()=> navigate('/login')} scrolled={scrolled}>Login <FaSignInAlt style={{marginLeft:5}} size={18} /></LoginButton>
       </LoginButtonWrapper>
     </HeaderContainer>
   );

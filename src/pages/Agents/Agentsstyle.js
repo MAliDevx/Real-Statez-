@@ -6,6 +6,8 @@ export const AgentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+    box-sizing: border-box;
+
   .imageContainer {
     width: 100%;
     height: 300px;
@@ -65,7 +67,8 @@ export const PropertyContainerMaindiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  margin: 100px 0px;
+  margin-top: 100px;
+  margin-bottom: 50px;
   top: 70px;
   position: sticky !important;
 `;
@@ -76,6 +79,7 @@ export const SearchagentConatiner = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   .heading-container {
     padding: 20px;
     /* border-bottom: 1px solid var(--border-color); */
@@ -86,7 +90,8 @@ export const SearchagentConatiner = styled.div`
       font-size: 18px;
       font-weight: 600;
       line-height: 24px;
-      font-family: "Open Sans", serif;
+      font-family: "Open Sans", serif;margin:0;
+      padding: 0;
     }
   }
   .InputContainer {
@@ -94,6 +99,7 @@ export const SearchagentConatiner = styled.div`
     padding: 15px;
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
   }
   .lable-input-div {
     width: 100%;
@@ -103,6 +109,7 @@ export const SearchagentConatiner = styled.div`
     flex-direction: column;
     gap: 10px;
     padding: 15px;
+    box-sizing: border-box;
     label {
       font-family: "Open Sans", sans-serif;
       font-weight: 500;
@@ -111,9 +118,10 @@ export const SearchagentConatiner = styled.div`
       line-height: 1.5;
     }
     input {
-      height: 60px;
+      height: 55px;
       font-size: 16px;
-      padding: 0.75rem;
+      /* padding: 0.75rem; */
+      padding: 0px 20px;
       border: 1px solid var(--border-color);
       font-weight: 400;
       outline: none;
@@ -157,38 +165,44 @@ export const customSelectStyles = {
     ...provided,
     height: "60px",
     padding: "0 10px",
-    margin:"0",
+    boxSizing: "border-box",
     border: `1px solid ${
       state.isFocused ? "var(--primary-button)" : "var(--border-color)"
     }`,
     boxShadow: "none",
     fontFamily: '"Open Sans", sans-serif',
     fontSize: "16px",
-    alignItems: "center",
     display: "flex",
+    alignItems: "center", // ✅ ensures vertical centering
     cursor: "pointer",
-    margin: "0px",
     transition: "border-color 0.3s ease",
     "&:hover": {
       borderColor: "var(--primary-button)",
     },
   }),
+
   singleValue: (provided) => ({
     ...provided,
     fontSize: "16px",
     color: "rgb(33, 37, 41)",
     fontFamily: '"Open Sans", sans-serif',
     display: "flex",
-    alignItems: "center",
+    alignItems: "center",  // ✅ added
+    height: "60px",        // ✅ match control height
+    lineHeight: "60px",    // ✅ for vertical centering
   }),
+
   placeholder: (provided) => ({
     ...provided,
     fontSize: "16px",
     color: "#999",
     fontFamily: '"Open Sans", sans-serif',
     display: "flex",
-    alignItems: "center",
+    alignItems: "center",  // ✅ added
+    height: "60px",        // ✅ match control height
+    lineHeight: "60px",    // ✅ vertical centering
   }),
+
   option: (provided, state) => ({
     ...provided,
     fontSize: "16px",
@@ -196,11 +210,17 @@ export const customSelectStyles = {
     color: state.isFocused ? "#fff" : "rgb(33, 37, 41)",
     fontFamily: '"Open Sans", sans-serif',
     cursor: "pointer",
+    display: "flex",
+    alignItems: "center",  // ✅ ensures centered options
+    height: "40px",        // ✅ adjust based on design
+    lineHeight: "40px",    // ✅ vertical centering
   }),
+
   indicatorSeparator: () => ({
     display: "none",
   }),
 };
+
 
 export const Subheading = styled.div`
   width: 100%;
@@ -216,6 +236,7 @@ export const Heading = styled.h4`
   font-weight: 600;
   line-height: 24px;
   padding: 20px 0px;
+  margin: 0;
   /* border-bottom: 1px solid var(--border-color); */
   font-family: "Open Sans", serif;
 `;

@@ -52,7 +52,7 @@ export const Card = styled.div`
   overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+cursor: pointer;
   .isForSale {
     color: black;
     position: absolute;
