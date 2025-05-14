@@ -9,7 +9,7 @@ import VerifyEmail from "../Auth/EmailVerify/verifyEmail";
 import OtpVerify from "../Auth/OTP/OTP";
 import SignUp from "../Auth/signUp/signUp";
 import Agents from "../pages/Agents/Agents";
-import SingleAgentDetail from "../pages/SingleAgentDetail/SingleAgentDetail";
+// import SingleAgentDetail from "../pages/SingleAgentDetail/SingleAgentDetail";
 const PublicRoutes = () => {
   return (
     <Routes>
@@ -23,7 +23,7 @@ const PublicRoutes = () => {
       <Route path="/otp-verification" element={<OtpVerify />} />
       <Route path="/sign-up" element={<SignUp />} />
         <Route path="/agents" element={<Agents />} />
-<Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
+{/* <Route path="/agent-detail/:id" element={<SingleAgentDetail />} /> */}
 
     </Routes>
   )
