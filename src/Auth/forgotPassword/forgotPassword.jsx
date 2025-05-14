@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AuthPageLayout, FormCard } from "./forgotPasswordStyle";
+import { showSuccessToast, showErrorToast } from "../../components/shared/toaster/toaster";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -9,20 +10,45 @@ const ResetPassword = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+
+  // Refs to focus on error
+  const newPasswordRef = useState(null);
+  const confirmPasswordRef = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
+    console.log(newPassword);
+    
+if(newPassword == null){
+    setError("Enter Password.");
 
-    if (newPassword !== confirmPassword) {
-      setError("Passwords do not match.");
+}
+    if (!newPassword) {
+      setError("Please enter a new password.");
+      showErrorToast("Please enter a new password.");
+      newPasswordRef.current.focus();
       return;
     }
 
-    // Proceed with password update logic
-    alert("Password updated successfully!");
-    navigate("/login");
+    if (!confirmPassword) {
+      setError("Please confirm your password.");
+      showErrorToast("Please confirm your password.");
+      confirmPasswordRef.current.focus();
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match.");
+      showErrorToast("Passwords do not match.");
+      confirmPasswordRef.current.focus();
+      return;
+    }
+
+    navigate("/");
+    showSuccessToast("Password updated successfully!");
   };
 
   return (
@@ -32,7 +58,7 @@ const ResetPassword = () => {
           <h2>Change Password</h2>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="form-fields">
             <div className="input-field">
               <label htmlFor="newPassword">New Password</label>
@@ -42,6 +68,8 @@ const ResetPassword = () => {
                   id="newPassword"
                   placeholder="Enter new password"
                   required
+                  ref={newPasswordRef}
+                  className={`${error ? "error-input" : ""}`}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
@@ -59,6 +87,8 @@ const ResetPassword = () => {
                   id="confirmPassword"
                   placeholder="Re-enter your password"
                   required
+                  ref={confirmPasswordRef}
+                  className={`${error ? "error-input" : ""}`}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -71,7 +101,7 @@ const ResetPassword = () => {
 
           {error && <div style={{ color: "red", margin: "0.5em 0" }}>{error}</div>}
 
-          <button type="submit" className="btn-primary-full">
+          <button type="submit" className="btn-primary-full" onClick={handleSubmit}>
             Confirm
           </button>
 

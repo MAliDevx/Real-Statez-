@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthPageLayout, FormCard } from "./OTPStyle";
 import OtpInput from "react-otp-input";
+import { showSuccessToast, showErrorToast } from "../../components/shared/toaster/toaster";
+
 
 const OtpVerify = () => {
   const [otp, setOtp] = useState('');
@@ -12,13 +14,15 @@ const OtpVerify = () => {
     e.preventDefault();
     setError('');
 
-    if (otp.length !== 5) {
-      setError("Please enter the 5-digit OTP.");
+    if (otp.length !== 5 || !/^\d+$/.test(otp)) {
+      setError("Please enter the 5-digit OTP using numbers only.");
+      showErrorToast("Please enter the 5-digit OTP using numbers only.");
       return;
     }
 
-    alert("OTP verified!");
-    navigate("/reset-password"); 
+    console.log("OTP entered:", otp); 
+    showSuccessToast('Verified OTP')
+    navigate("/reset-password");
   };
 
   return (
@@ -30,35 +34,46 @@ const OtpVerify = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="otp-input-wrapper">
-          <OtpInput
-  value={otp}
-  onChange={setOtp}
-  numInputs={5}
-  isInputNum={true} 
-  renderSeparator={<span>*</span>}
-  renderInput={(props) => <input {...props} inputMode="numeric" />} 
-  inputStyle={{
-    width: '2.5em',
-    height: '2.5em',
-    fontSize: '1.2rem',
-    margin: '0 0.5em',
-    textAlign: 'center',
-    border: '1px solid #ccc',
-    outline: 'none',
-  }}
-/>
-
+            <OtpInput
+              value={otp}
+              onChange={setOtp}
+              numInputs={5}
+              isInputNum={true}
+              renderSeparator={<span>-</span>}
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  inputMode="numeric"
+                />
+              )}
+              inputStyle={{
+                width: '2.5em',
+                height: '2.5em',
+                fontSize: '1.2rem',
+                margin: '0 0.5em',
+                textAlign: 'center',
+                border: '1px solid #ccc',
+                outline: 'none',
+              }}
+            />
           </div>
 
-          {error && <div style={{ color: "red", marginTop: "1em" }}>{error}</div>}
+          {error && (
+            <div style={{ color: "red", marginTop: "1em" }}>{error}</div>
+          )}
 
-          <button type="submit" className="btn-primary-full" onClick={() => navigate("/reset-password")}>
+          <button type="submit" className="btn-primary-full">
             Verify OTP
           </button>
 
           <div className="sign-up">
             Didn't receive OTP?
-            <a onClick={() => alert("Resending OTP...")}>Resend</a>
+            <a
+              onClick={() => alert("Resending OTP...")}
+              style={{ cursor: "pointer", marginLeft: "0.3em", color: "blue" }}
+            >
+              Resend
+            </a>
           </div>
         </form>
       </FormCard>
