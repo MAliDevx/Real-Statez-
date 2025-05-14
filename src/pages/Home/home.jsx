@@ -8,6 +8,7 @@ import { FaChevronRight } from 'react-icons/fa';
 import PropertyFilter from '../PropertiseService/propertiseService'
 import { Button } from '../../styles/commanClasses';
  import {AnimatedHeading} from './homeStyle';
+ import { useNavigate } from 'react-router-dom';
 
 const slides = [
     {
@@ -29,6 +30,7 @@ const slides = [
   
 
 const HomePage = () => {
+  const navigate = useNavigate()
   return (
     <>
       <SwiperStyles />
@@ -87,7 +89,7 @@ const HomePage = () => {
       }}>
         {slide.paraText}
       </p>
-      <Button>
+      <Button onClick={() => navigate('/contact')}>
         Contact Us < FaChevronRight  style={{fontSize:'17.5px'}}/>
       </Button>
     </div>

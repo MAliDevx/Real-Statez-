@@ -1,22 +1,43 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AuthPageLayout, FormCard } from "./verifyEmailStyle";
+import { showSuccessToast, showErrorToast } from "../../components/shared/toaster/toaster";
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
- 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!email) {
+      setError("Email is required");
+      showErrorToast('Email is required')
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Invalid email format");
+      showErrorToast('Invalid email format')
+
+      return;
+    }
+
+    setError("");
+    showSuccessToast('Verified Check email')
+    navigate("/otp-verification");
   };
 
   return (
     <AuthPageLayout>
       <FormCard>
-        <div className="logo">
-        </div>
+        <div className="logo"></div>
         <div className="form-title">
           <h2>Enter Valid Email</h2>
         </div>
@@ -24,14 +45,25 @@ const VerifyEmail = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-fields">
             <div className="input-field">
-              <label htmlFor="username">Username</label>
-              <div className="field-wrap">
-                <input type="text" id="username" placeholder="Enter your username" required />
+              <label htmlFor="email">Email</label>
+              <div className={`field-wrap ${error ? "error-input" : ""}`}>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
+              {/* {error && <p className="error-text">{error}</p>} */}
             </div>
           </div>
 
-          <button type="submit" className="btn-primary-full"onClick={() => navigate("/otp-verification")}>Verify</button>
+          <button type="submit" className="btn-primary-full">
+            Verify
+          </button>
+
           <div className="btns-tray">
             <button
               type="button"
@@ -52,7 +84,6 @@ const VerifyEmail = () => {
             </button>
           </div>
         </form>
- 
       </FormCard>
     </AuthPageLayout>
   );

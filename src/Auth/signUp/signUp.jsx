@@ -2,12 +2,13 @@ import { useState } from "react";
 import { AuthPageLayout, FormCard } from "./signUpStyle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { showSuccessToast, showErrorToast } from "../../components/shared/toaster/toaster";
 
 const SignUp = () => {
-    const navigate = useNavigate();
-
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,19 +20,54 @@ const SignUp = () => {
     repeatPassword: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setErrors(prev => ({ ...prev, [name]: "" })); // Clear error on input
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formData.password !== formData.repeatPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-    // Submit form logic here
+  const validate = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formData.firstName.trim()) newErrors.firstName = "First name required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name required";
+    if (!formData.email.trim()) newErrors.email = "Email required";
+    else if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email format";
+
+    if (!formData.gender) newErrors.gender = "Gender required";
+    if (!formData.city.trim()) newErrors.city = "City required";
+    if (!formData.country) newErrors.country = "Country required";
+
+    if (!formData.password) newErrors.password = "Password required";
+    else if (formData.password.length < 6) newErrors.password = "Minimum 6 characters";
+
+    if (!formData.repeatPassword) newErrors.repeatPassword = "Repeat password";
+    else if (formData.password !== formData.repeatPassword)
+      newErrors.repeatPassword = "Passwords do not match";
+
+    return newErrors;
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newErrors = validate();    
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      showErrorToast("Please enter all input fields");
+      return;
+    }else{
+        showSuccessToast("Account created successfully!");
+        console.log(formData);
+        navigate("/");
+    }
+    } 
+  
+
+  const errorClass = (field) => errors[field] ? "error-border" : "";
 
   return (
     <AuthPageLayout>
@@ -50,9 +86,9 @@ const SignUp = () => {
                 id="firstName"
                 name="firstName"
                 placeholder="First name"
+                className={errorClass("firstName")}
                 value={formData.firstName}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="input-field">
@@ -62,14 +98,14 @@ const SignUp = () => {
                 id="lastName"
                 name="lastName"
                 placeholder="Last name"
+                className={errorClass("lastName")}
                 value={formData.lastName}
                 onChange={handleChange}
-                required
               />
             </div>
           </div>
 
-          {/* Row 2: Email */}
+          {/* Email */}
           <div className="input-field" id="email-field">
             <label htmlFor="email">Email</label>
             <input
@@ -77,22 +113,31 @@ const SignUp = () => {
               id="email"
               name="email"
               placeholder="Enter your email"
+              className={errorClass("email")}
               value={formData.email}
               onChange={handleChange}
-              required
             />
           </div>
 
-          {/* Row 3: Gender */}
-          <div className="input-field">
+          {/* Gender */}
+          <div>
             <label>Gender</label>
             <div style={{ display: "flex", gap: "1em", marginTop: "0.5em" }}>
-              <label className="select-gender"><input type="radio" name="gender"  value="male" onChange={handleChange} required /> Male</label>
-              <label className="select-gender"><input type="radio" name="gender"  value="female" onChange={handleChange} /> Female</label>
-              <label className="select-gender"><input type="radio" name="gender" value="other" onChange={handleChange} /> Other</label>
+              {["male", "female", "other"].map((g) => (
+                <label key={g} className="select-gender">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value={g}
+                    checked={formData.gender === g}
+                    onChange={handleChange}
+                  /> {g.charAt(0).toUpperCase() + g.slice(1)}
+                </label>
+              ))}
             </div>
           </div>
 
+          {/* City and Country */}
           <div className="form-row" id="location">
             <div className="input-field">
               <label htmlFor="city">City</label>
@@ -101,9 +146,9 @@ const SignUp = () => {
                 id="city"
                 name="city"
                 placeholder="City"
+                className={errorClass("city")}
                 value={formData.city}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="input-field">
@@ -111,11 +156,11 @@ const SignUp = () => {
               <select
                 id="country"
                 name="country"
+                className={errorClass("country")}
                 value={formData.country}
                 onChange={handleChange}
-                required
               >
-                <option value="" disabled>Select Country</option>
+                <option value="">Select Country</option>
                 <option value="pakistan">Pakistan</option>
                 <option value="india">India</option>
                 <option value="usa">USA</option>
@@ -124,18 +169,19 @@ const SignUp = () => {
             </div>
           </div>
 
+          {/* Password */}
           <div className="form-row">
             <div className="input-field">
               <label htmlFor="password">Password</label>
-              <div className="field-wrap password-wrap">
-                <input
+              <div className={`field-wrap password-wrap ${errorClass("password")}`}>
+              <input
                   type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   placeholder="Password"
+                  
                   value={formData.password}
                   onChange={handleChange}
-                  required
                 />
                 <div className="icon" onClick={() => setShowPassword(p => !p)}>
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -145,15 +191,14 @@ const SignUp = () => {
 
             <div className="input-field">
               <label htmlFor="repeatPassword">Repeat Password</label>
-              <div className="field-wrap password-wrap">
-                <input
+              <div className={`field-wrap password-wrap ${errorClass("password")}`}>
+              <input
                   type={showRepeatPassword ? "text" : "password"}
                   id="repeatPassword"
                   name="repeatPassword"
                   placeholder="Repeat password"
                   value={formData.repeatPassword}
                   onChange={handleChange}
-                  required
                 />
                 <div className="icon" onClick={() => setShowRepeatPassword(p => !p)}>
                   {showRepeatPassword ? <FaEyeSlash /> : <FaEye />}
@@ -164,7 +209,10 @@ const SignUp = () => {
 
           <button type="submit" className="btn-primary-full">Sign Up</button>
         </form>
-        <div className="sign-up">I Have account <a onClick={()=> navigate('/login')} >Sign In</a></div>
+
+        <div className="sign-up">
+          I have an account <a onClick={() => navigate('/login')}>Sign In</a>
+        </div>
       </FormCard>
     </AuthPageLayout>
   );

@@ -13,7 +13,9 @@ export const FormCard = styled.div`
   width: 35%;
   background-color: #ffffff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-
+  .error-border {
+  border: 1px solid red !important;
+}
   .input-field{
     width: 50%;
     padding: 10px 0px;
@@ -109,4 +111,6 @@ gap: 20px;
         }
     }
 }
+
+
 `;
