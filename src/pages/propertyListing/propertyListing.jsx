@@ -1,19 +1,19 @@
+import React, { useState } from "react";
 import {
   PropertyListingContainer,
   PropertyFilterdiv,
   Filterbox,
-  StyledSelectBox
+  StyledSelectBox,
+  PropertyCardContainer,
+  Card,
+  CardImg,
+  CardBodyTop,
+  CardBodyBottom,
+  CardDetailListContainer,
+  CardWrapper,
+  SaleButton
 } from "./propertyListingStyle";
-import { FaHome } from "react-icons/fa";
-import { IoIosArrowForward } from "react-icons/io";
-import Slider from "rc-slider";
-// import Slider from 'rc-slider';
-import "rc-slider/assets/index.css";
-import React, { useState } from "react";
-import { FaThList } from "react-icons/fa";
-import { IoGridSharp } from "react-icons/io5";
 
-import { FaSearch } from "react-icons/fa";
 import {
   FilterContainer,
   FilterRow,
@@ -22,33 +22,18 @@ import {
   PriceValues,
   SearchButton,
   OuterContainer,
-  FilteredContent,
 } from "../PropertiseService/propertyStyle";
-import { DividerWithText } from "../../styles/commanClasses";
+
+import { FaHome, FaSearch, FaBath, FaBed, FaInbox, FaMap, FaThList } from "react-icons/fa";
+import { IoGridSharp } from "react-icons/io5";
+import { IoIosArrowForward } from "react-icons/io";
+import { MdLocationOn } from "react-icons/md";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+
 const PropertyListing = () => {
-  const properties = [
-    {
-      id: 1,
-      name: "Luxury Villa",
-      price: "$1,500,000",
-      location: "California, USA",
-    },
-    {
-      id: 2,
-      name: "Modern Apartment",
-      price: "$350,000",
-      location: "New York, USA",
-    },
-    {
-      id: 3,
-      name: "Beachfront House",
-      price: "$2,000,000",
-      location: "Florida, USA",
-    },
-    { id: 4, name: "Cozy Cottage", price: "$150,000", location: "Oregon, USA" },
-  ];
-const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
-const [activeView, setActiveView] = useState("grid"); // default to "grid" or "list"
+  const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
+  const [activeView, setActiveView] = useState("grid");
 
   const statusOptions = [
     { value: "for-sale", label: "For Sale" },
@@ -80,6 +65,76 @@ const [activeView, setActiveView] = useState("grid"); // default to "grid" or "l
     { value: "3", label: "3 Bathrooms" },
   ];
 
+  const listings = [
+    {
+      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
+      name: "Modern Villa",
+      location: "Los Angeles, CA",
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "43 Sq Ft",
+      ownerName: "Alice Johnson",
+      price: "$3,300",
+    },
+    {
+      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
+      name: "Modern Villa",
+      location: "Los Angeles, CA",
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "43 Sq Ft",
+      ownerName: "Alice Johnson",
+      price: "$3,300",
+    },
+    {
+      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
+      name: "Modern Villa",
+      location: "Los Angeles, CA",
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "43 Sq Ft",
+      ownerName: "Alice Johnson",
+      price: "$3,300",
+    },
+    {
+      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
+      name: "Modern Villa",
+      location: "Los Angeles, CA",
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "43 Sq Ft",
+      ownerName: "Alice Johnson",
+      price: "$3,300",
+    },
+    {
+      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
+      name: "Modern Villa",
+      location: "Los Angeles, CA",
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "43 Sq Ft",
+      ownerName: "Alice Johnson",
+      price: "$3,300",
+    },
+    {
+      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
+      name: "Modern Villa",
+      location: "Los Angeles, CA",
+      rooms: 4,
+      bedRooms: 4,
+      baths: 3,
+      Area: "43 Sq Ft",
+      ownerName: "Alice Johnson",
+      price: "$3,300",
+    },
+    //... other listings
+  ];
+
   return (
     <PropertyListingContainer>
       <div className="property-heading-box">
@@ -91,18 +146,15 @@ const [activeView, setActiveView] = useState("grid"); // default to "grid" or "l
           <span id="housetype">Luxury family home</span>
         </div>
       </div>
+
       <OuterContainer>
         <FilterContainer>
           <FilterRow>
-            <StyledSelect
-              options={statusOptions}
-              placeholder="Property Status"
-            />
+            <StyledSelect options={statusOptions} placeholder="Property Status" />
             <StyledSelect options={typeOptions} placeholder="Property Type" />
             <StyledSelect options={areaOptions} placeholder="Area From" />
             <StyledSelect options={locationOptions} placeholder="Locations" />
           </FilterRow>
-
           <FilterRow>
             <StyledSelect options={bedroomOptions} placeholder="Bedrooms" />
             <StyledSelect options={bathroomOptions} placeholder="Bathrooms" />
@@ -117,8 +169,7 @@ const [activeView, setActiveView] = useState("grid"); // default to "grid" or "l
                 onChange={(value) => setPriceRange(value)}
               />
               <PriceValues>
-                <span>${priceRangeValue[0]}</span> -{" "}
-                <span>${priceRangeValue[1]}</span>
+                <span>${priceRangeValue[0]}</span> - <span>${priceRangeValue[1]}</span>
               </PriceValues>
             </PriceRange>
             <SearchButton>
@@ -126,64 +177,101 @@ const [activeView, setActiveView] = useState("grid"); // default to "grid" or "l
             </SearchButton>
           </FilterRow>
         </FilterContainer>
-        <FilteredContent>
-         
-        </FilteredContent>
       </OuterContainer>
 
       <PropertyFilterdiv>
         <div className="filter-container">
-  <span>Sort by</span>
-        <Filterbox>
-          <StyledSelectBox options={statusOptions} placeholder="Property Status"   styles={{
-    control: (base) => ({
-      ...base,
-      border: 'none',
-      boxShadow: 'none',
-    }),
-  }}
- />
-        </Filterbox>
+          <span>Sort by</span>
+          <Filterbox>
+            <StyledSelectBox
+              options={statusOptions}
+              placeholder="Property Status"
+              styles={{
+                control: (base) => ({
+                  ...base,
+                  border: "none",
+                  boxShadow: "none",
+                }),
+              }}
+            />
+          </Filterbox>
         </div>
-      
-       <div className="icon-container">
-  <FaThList
-    className={`icons ${activeView === "list" ? "active" : ""}`}
-    onClick={() => setActiveView("list")}
-  />
-  <IoGridSharp
-    className={`icons ${activeView === "grid" ? "active" : ""}`}
-    onClick={() => setActiveView("grid")}
-  />
-</div>
-
+        <div className="icon-container">
+          <FaThList
+            className={`icons ${activeView === "list" ? "active" : ""}`}
+            onClick={() => setActiveView("list")}
+          />
+          <IoGridSharp
+            className={`icons ${activeView === "grid" ? "active" : ""}`}
+            onClick={() => setActiveView("grid")}
+          />
+        </div>
       </PropertyFilterdiv>
 
-      <h1 className="text-center mb-4">Property Listings</h1>
-      <div className="row">
-        {properties.map((property) => (
-          <div key={property.id} className="col-md-4 mb-4">
-            <div className="card">
-              <img
-                src="https://via.placeholder.com/300x200"
-                className="card-img-top"
-                alt="property"
-              />
-              <div className="card-body">
-                <h5 className="card-title">{property.name}</h5>
-                <p className="card-text">
-                  <strong>Price: </strong>
-                  {property.price}
-                  <br />
-                  <strong>Location: </strong>
-                  {property.location}
-                </p>
-                <button className="btn btn-primary">View Details</button>
+      <PropertyCardContainer view={activeView}>
+        <div className={`property-card-grid ${activeView}`}>
+          {listings.map((item, idx) => (
+            <Card key={idx} view={activeView}>
+              <div className="list-card-container">
+                <button className="property-feature">Featured</button>
+                <CardWrapper view={activeView}>
+                  <SaleButton>For Sale</SaleButton>
+                  <CardImg src={item.image} alt={item.name} view={activeView} />
+                </CardWrapper>
+
+                <CardDetailListContainer view={activeView}>
+                  <CardBodyTop view={activeView}>
+                    <button className="isHouse">House</button>
+                    <h4 className="property-name">{item.name}</h4>
+                    <p className="property-location">
+                      <MdLocationOn /> {item.location}
+                    </p>
+                  </CardBodyTop>
+                  <CardBodyBottom>
+                    <div className="bath-box">
+                      <div>Baths</div>
+                      <div className="bottom-box">
+                        <FaBath /> {item.baths}
+                      </div>
+                    </div>
+                    <div className="beds-box">
+                      <div>Beds</div>
+                      <div className="bottom-box">
+                        <FaBed /> {item.bedRooms}
+                      </div>
+                    </div>
+                    <div className="room-box">
+                      <div>Rooms</div>
+                      <div className="bottom-box">
+                        <FaInbox /> {item.rooms}
+                      </div>
+                    </div>
+                    <div className="area-box">
+                      <div>Area</div>
+                      <div className="bottom-box">
+                        <FaMap /> {item.Area}
+                      </div>
+                    </div>
+                  </CardBodyBottom>
+                </CardDetailListContainer>
+                <div className="property-profile">
+                  <div className="property-profile__info">
+                    <figure>
+                      <img
+                        src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
+                        alt="Owner"
+                        className="property-profile__image"
+                      />
+                    </figure>
+                    <p className="property-profile__name">{item.ownerName}</p>
+                  </div>
+                  <div className="property-profile__price">{item.price}.00</div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      </PropertyCardContainer>
     </PropertyListingContainer>
   );
 };

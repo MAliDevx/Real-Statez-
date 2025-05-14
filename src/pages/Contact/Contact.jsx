@@ -5,7 +5,7 @@ import {
   InfoSection,
   InfoBox,
   InfoItem,
-SocialIconDiv,
+  SocialIconDiv,
   span,
   MapPlaceholder,
   LocationItemDiv,
@@ -25,7 +25,6 @@ import { FaTwitter } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa6";
-
 
 function Contact() {
   return (
@@ -47,36 +46,38 @@ function Contact() {
           <form>
             <div className="input-grid">
               <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Your name</label>
                 <input type="text" id="name" placeholder="Your Name" />
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Your email</label>
                 <input type="email" id="email" placeholder="Your Email" />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input type="text" id="subject" placeholder="Subject" />
               </div>
 
               <div className="form-group">
                 <label htmlFor="website">Website</label>
                 <input type="url" id="website" placeholder="Website URL" />
               </div>
+              <div className="form-group">
+                <label htmlFor="subject">Subject</label>
+                <input type="text" id="subject" placeholder="Subject" />
+              </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message">Your message</label>
               <textarea
                 id="message"
                 placeholder="Your Message"
                 rows="5"
               ></textarea>
             </div>
+            <div className="buttonDiv">
+            <button type="submit">Submit</button>
 
-            <button type="submit">Send Message</button>
+            </div>
+
           </form>
         </div>
 
@@ -101,7 +102,7 @@ function Contact() {
             </div>
 
             <div>
-              <h3 style={{margin:"0px"}}>Info Location</h3>
+              <h3>Info Location</h3>
               <InfoBox>
                 <LocationItemDiv>
                   <div className="IconsBox">
@@ -133,22 +134,28 @@ function Contact() {
             </div>
 
             <SocialIconDiv>
-  <div className="SocialIcons">
-                    <FaFacebookF className="Icons" />
-                  </div>
-  <div className="SocialIcons">
-                    <FaTwitter className="Icons" />
-                  </div>
-  <div className="SocialIcons">
-                    <FaWhatsapp className="Icons" />
-                  </div>
-  <div className="SocialIcons">
-                    <FaTelegram className="Icons" />
-                  </div>
-  <div className="SocialIcons">
-                    <FaLinkedin className="Icons" />
-                  </div>
+              <div>
+                <h3>Find Us</h3>
+              </div>
+<div className="social-icon-container">
+  <div className="SocialIcons facebook">
+    <FaFacebookF className="Icons" />
+  </div>
+  <div className="SocialIcons twitter">
+    <FaTwitter className="Icons" />
+  </div>
+  <div className="SocialIcons whatsapp">
+    <FaWhatsapp className="Icons" />
+  </div>
+  <div className="SocialIcons telegram">
+    <FaTelegram className="Icons" />
+  </div>
+  <div className="SocialIcons linkedin">
+    <FaLinkedin className="Icons" />
+  </div>
+</div>
 
+            
             </SocialIconDiv>
           </InfoSection>{" "}
         </div>
