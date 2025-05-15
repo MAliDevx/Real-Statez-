@@ -4,14 +4,8 @@ import {
   PropertyFilterdiv,
   Filterbox,
   StyledSelectBox,
-  PropertyCardContainer,
-  Card,
-  CardImg,
-  CardBodyTop,
-  CardBodyBottom,
-  CardDetailListContainer,
-  CardWrapper,
-  SaleButton
+  ListConatiner,
+  GridContainer
 } from "./propertyListingStyle";
 
 import {
@@ -23,15 +17,44 @@ import {
   SearchButton,
   OuterContainer,
 } from "../PropertiseService/propertyStyle";
-
-import { FaHome, FaSearch, FaBath, FaBed, FaInbox, FaMap, FaThList } from "react-icons/fa";
+import { 
+  Card,
+  CardImg,
+  CardBodyTop,
+  CardBodyBottom
+ } from '../../styles/commanClasses';
+import {
+  FaPaperPlane,
+  FaHome,
+  FaSearch,
+  FaBath,
+  FaBed,
+  FaInbox,
+  FaMap,
+  FaThList, FaMapMarkerAlt,
+} from "react-icons/fa";
 import { IoGridSharp } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
-import { MdLocationOn } from "react-icons/md";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-
+import { MdLocationOn } from "react-icons/md";
+import {
+  CardContainer,
+  ImageContainer,
+  SoldOutRibbon,
+  InfoSection,
+  Tag,
+  AgentTitle,
+  Location,
+  DetailRow,
+  RightSection,
+  AgentCircle,
+  AgentName,
+  Price,
+} from "../SingleAgentDetail/SingleAgentDetailStyle";
+import {useNavigate } from "react-router-dom";
 const PropertyListing = () => {
+  const navigate = useNavigate()
   const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
   const [activeView, setActiveView] = useState("grid");
 
@@ -150,7 +173,10 @@ const PropertyListing = () => {
       <OuterContainer>
         <FilterContainer>
           <FilterRow>
-            <StyledSelect options={statusOptions} placeholder="Property Status" />
+            <StyledSelect
+              options={statusOptions}
+              placeholder="Property Status"
+            />
             <StyledSelect options={typeOptions} placeholder="Property Type" />
             <StyledSelect options={areaOptions} placeholder="Area From" />
             <StyledSelect options={locationOptions} placeholder="Locations" />
@@ -169,7 +195,8 @@ const PropertyListing = () => {
                 onChange={(value) => setPriceRange(value)}
               />
               <PriceValues>
-                <span>${priceRangeValue[0]}</span> - <span>${priceRangeValue[1]}</span>
+                <span>${priceRangeValue[0]}</span> -{" "}
+                <span>${priceRangeValue[1]}</span>
               </PriceValues>
             </PriceRange>
             <SearchButton>
@@ -207,71 +234,91 @@ const PropertyListing = () => {
           />
         </div>
       </PropertyFilterdiv>
+      {/* Conditional rendering based on activeView */}
+      {activeView === "grid" && (
+        <GridContainer >
+                    
 
-      <PropertyCardContainer view={activeView}>
-        <div className={`property-card-grid ${activeView}`}>
-          {listings.map((item, idx) => (
-            <Card key={idx} view={activeView}>
-              <div className="list-card-container">
-                <button className="property-feature">Featured</button>
-                <CardWrapper view={activeView}>
-                  <SaleButton>For Sale</SaleButton>
-                  <CardImg src={item.image} alt={item.name} view={activeView} />
-                </CardWrapper>
 
-                <CardDetailListContainer view={activeView}>
-                  <CardBodyTop view={activeView}>
-                    <button className="isHouse">House</button>
-                    <h4 className="property-name">{item.name}</h4>
-                    <p className="property-location">
-                      <MdLocationOn /> {item.location}
-                    </p>
-                  </CardBodyTop>
-                  <CardBodyBottom>
-                    <div className="bath-box">
-                      <div>Baths</div>
-                      <div className="bottom-box">
-                        <FaBath /> {item.baths}
-                      </div>
-                    </div>
-                    <div className="beds-box">
-                      <div>Beds</div>
-                      <div className="bottom-box">
-                        <FaBed /> {item.bedRooms}
-                      </div>
-                    </div>
-                    <div className="room-box">
-                      <div>Rooms</div>
-                      <div className="bottom-box">
-                        <FaInbox /> {item.rooms}
-                      </div>
-                    </div>
-                    <div className="area-box">
-                      <div>Area</div>
-                      <div className="bottom-box">
-                        <FaMap /> {item.Area}
-                      </div>
-                    </div>
-                  </CardBodyBottom>
-                </CardDetailListContainer>
-                <div className="property-profile">
-                  <div className="property-profile__info">
-                    <figure>
-                      <img
-                        src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
-                        alt="Owner"
-                        className="property-profile__image"
-                      />
-                    </figure>
-                    <p className="property-profile__name">{item.ownerName}</p>
-                  </div>
-                  <div className="property-profile__price">{item.price}.00</div>
+        {listings.map((item, idx) => (
+<Card onClick={() => navigate(`/propertydetails/${item.id}`)}>
+          <button className='property-feature'>Featured</button>
+              <button className='isForSale'>For Sale</button>
+              <CardImg src={item.image} alt={item.name} />
+              <CardBodyTop>
+                <button className="isHouse">House</button>
+                <h4 className='property-name'>{item.name}</h4>
+                <p className='property-location'><MdLocationOn /> {item.location}</p>
+              </CardBodyTop>
+              <CardBodyBottom>
+                <div className="bath-box">
+                <div> Baths</div> <div className='bottom-box'><FaBath /> {item.baths}</div>
                 </div>
-              </div>
+                <div className="beds-box">
+                <div> Beds</div> <div className='bottom-box'><FaBed />{item.bedRooms}</div>
+                </div>
+                <div className="room-box">
+                <div> Rooms</div> <div className='bottom-box'><FaInbox  />{item.rooms}</div>
+                </div>
+                <div className="area-box">
+                <div> Area</div> <div className='bottom-box'><FaMap />{item.Area}</div>
+                </div>
+
+
+
+              </CardBodyBottom>
+<div className="property-profile">
+  <div className="property-profile__info">
+   <figure>
+   <img
+      src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
+      alt="Owner"
+      className="property-profile__image"
+    />
+   </figure>
+    <p className="property-profile__name">{item.ownerName}</p>
+  </div>
+  <div className="property-profile__price">{item.price}.00</div>
+</div>
             </Card>
-          ))}
-        </div>
-      </PropertyCardContainer>
+        ))}
+        </GridContainer>
+      )}
+
+      {activeView === "list" && (
+        <ListConatiner>
+                  {listings.map((property, index) => (
+                    <CardContainer key={index}>
+                      <ImageContainer>
+                        <img src={property.image} alt={property.title} />
+                        <SoldOutRibbon>Sold Out</SoldOutRibbon>
+                        <button>For Sale</button>
+                      </ImageContainer>
+
+                      <InfoSection>
+                        <Tag>House</Tag>
+                        <AgentTitle>{property.name}</AgentTitle>
+                        <Location>
+                          <FaMapMarkerAlt size={12} style={{marginTop:'2px'}} /> {property.location}
+                        </Location>
+
+                        <DetailRow>
+                          <p><span>Baths</span><span><FaBath /> {property.baths}</span></p>
+                          <p><span>Beds</span><span><FaBed /> {property.beds}</span></p>
+                          <p><span>Rooms</span><span><FaInbox /> {property.rooms}</span></p>
+                          <p><span>Area</span><span><FaMap /> {property.area} Sq Ft</span></p>
+                        </DetailRow>
+                      </InfoSection>
+
+                      <RightSection>
+                        <AgentCircle>{property.agentInitial}</AgentCircle>
+                        <AgentName>{property.agentName}</AgentName>
+                        <Price>${property.price}</Price>
+                      </RightSection>
+                    </CardContainer>
+                  ))}
+        </ListConatiner>
+      )}
     </PropertyListingContainer>
   );
 };

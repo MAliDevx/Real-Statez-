@@ -235,7 +235,7 @@ const SingleAgentDetail = () => {
                         <Tag>{property.type}</Tag>
                         <AgentTitle>{property.title}</AgentTitle>
                         <Location>
-                          <FaMapMarkerAlt size={12} /> {property.location}
+                          <FaMapMarkerAlt size={12} style={{marginTop:'2px'}} /> {property.location}
                         </Location>
 
                         <DetailRow>

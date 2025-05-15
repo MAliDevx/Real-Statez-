@@ -10,6 +10,8 @@ import OtpVerify from "../Auth/OTP/OTP";
 import SignUp from "../Auth/signUp/signUp";
 import Agents from "../pages/Agents/Agents";
 import SingleAgentDetail from "../pages/SingleAgentDetail/SingleAgentDetail";
+import NotFoundPage from "../components/shared/pageNotFound/pageNotFount";
+NotFoundPage
 const PublicRoutes = () => {
   return (
     <Routes>
@@ -24,7 +26,7 @@ const PublicRoutes = () => {
       <Route path="/sign-up" element={<SignUp />} />
         <Route path="/agents" element={<Agents />} />
 <Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
-
+<Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }

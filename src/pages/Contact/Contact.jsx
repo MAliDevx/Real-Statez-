@@ -75,7 +75,6 @@ function Contact() {
             </div>
             <div className="buttonDiv">
             <button type="submit">Submit</button>
-
             </div>
 
           </form>

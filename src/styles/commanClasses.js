@@ -6,23 +6,24 @@ export const DividerWithText = styled.div`
   justify-content: center;
   text-align: center;
   width: 100%;
+  margin: 2rem 0;
 
   &::before,
   &::after {
     content: "";
-    flex: 0.13;
-    /* border-bottom: 1px solid #ccc; */
+    flex: .1;
+    border-bottom: 1px solid #ccc;
+    margin: 0 1rem;
   }
 
   span {
-    padding: 0 1rem;
     font-weight: bold;
-    color: #666;
+    color: var(--large-text, #666); /* fallback if --large-text is undefined */
     white-space: nowrap;
-    font-size: 27px;
-    color: var(--large-text);
+    font-size: 1.5rem;
   }
 `;
+
 
 export const CarouselWrapper = styled.div`
   width: 85%;
@@ -53,6 +54,12 @@ export const Card = styled.div`
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+&:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
   .isForSale {
     color: black;
     position: absolute;
@@ -130,6 +137,11 @@ export const CardImg = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
+  transition: transform 0.3s ease; /* Smooth transition */
+
+&:hover {
+  transform: scale(1.05); /* Zoom in slightly */
+}
 `;
 
 export const CardBodyTop = styled.div`
