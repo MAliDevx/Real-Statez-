@@ -1,4 +1,5 @@
 import React from "react";
+import footerlogo from '../../../assets/Images/logo-blue-stiky.png'
 import {
   FooterContainer,
   FooterWrapper,
@@ -22,7 +23,7 @@ function FooterPage() {
       <FooterWrapper>
         <Column>
           <Logo>
-            <img src="https://wallsproperty.netlify.app/images/logo-blue.png" alt="Logo" width="140" />
+            <img src={footerlogo} alt="Logo" width="140" />
 
           </Logo>
           <p>

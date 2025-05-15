@@ -5,6 +5,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import pattnerImage1 from '../../assets/Images/partner-logo1.png'
+import pattnerImage2 from '../../assets/Images/partner-logo2.png'
+import pattnerImage3 from '../../assets/Images/partner-logo3.png'
+import pattnerImage4 from '../../assets/Images/partner-logo4.png'
+import pattnerImage5 from '../../assets/Images/partner-logo5.png'
 import { FaChevronRight } from 'react-icons/fa';
 // import newImg1 from '../../assets/newsImg1.jpg'
 // import newImg2 from '../../assets/newsImg2.jpg'
@@ -64,11 +69,11 @@ const CompanyShowCase = () => {
       Brand Partners Successful Projects Trusted Many Clients Real Estate
       </Para>
       <div className="partners__logos" id="partnersLogos">
-        <img src="	https://wallsproperty.netlify.app/images/partner-logo6.png" alt="Partner 1" className="partners__logo" />
-        <img src="	https://wallsproperty.netlify.app/images/partner-logo7.png" alt="Partner 2" className="partners__logo" />
-        <img src="	https://wallsproperty.netlify.app/images/partner-logo8.png" alt="Partner 3" className="partners__logo" />
-        <img src="	https://wallsproperty.netlify.app/images/partner-logo1.png" alt="Partner 4" className="partners__logo" />
-        <img src="	https://wallsproperty.netlify.app/images/partner-logo5.png" alt="Partner 5" className="partners__logo" />
+        <img src={pattnerImage1} alt="Partner 1" className="partners__logo" />
+        <img src={pattnerImage2} alt="Partner 2" className="partners__logo" />
+        <img src={pattnerImage3} alt="Partner 3" className="partners__logo" />
+        <img src={pattnerImage4} alt="Partner 4" className="partners__logo" />
+        <img src={pattnerImage5} alt="Partner 5" className="partners__logo" />
       </div>
     </PartnersSection>
 

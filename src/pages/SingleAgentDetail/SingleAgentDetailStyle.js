@@ -43,6 +43,10 @@ export const AgentContentMainContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible !important;
+  align-items: flex-start; /* ✅ Important to align to top */
+
+  /* ✅ Required for sticky to work */
 `;
 export const StyledAgentInnerContainer = styled.div`
   width: 80%;
@@ -50,6 +54,8 @@ export const StyledAgentInnerContainer = styled.div`
   justify-content: center;
   gap: 50px;
   margin: 70px 0px;
+    position: relative !important; /* ✅ Add this */
+
   /* align-items: center; */
 `;
 
@@ -455,7 +461,7 @@ export const PropertyContainerMaindiv = styled.div`
   gap: 30px;
   position: sticky;
   top: 70px;
-  align-self: flex-start; /* ✅ important inside flex */
+  align-self: flex-start !important; /* ✅ important inside flex */
 `;
 
 export const SearchagentConatiner = styled.div`

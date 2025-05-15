@@ -9,7 +9,7 @@ import {
 } from './headerStyle';
 import { FaSignInAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
+import navlogo from '../../../assets/Images/logo-blue-stiky.png'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <HeaderContainer scrolled={scrolled}>
       <Logo>
-        <img src="https://wallsproperty.netlify.app/images/logo-blue-stiky.png" alt="Logo" />
+        <img src={navlogo} alt="Logo" />
       </Logo>
       <NavLinks>
         <NavLink scrolled={scrolled} onClick={() => navigate('')}>Home</NavLink >    
