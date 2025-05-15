@@ -170,8 +170,8 @@ const PropertyListing = () => {
         </div>
       </div>
 
-      <OuterContainer>
-        <FilterContainer>
+      <OuterContainer style={{top:'45px'}}>
+        <FilterContainer style={{ boxShadow:'0 0 0px rgba(0, 0, 0, 0.2)'}}>
           <FilterRow>
             <StyledSelect
               options={statusOptions}

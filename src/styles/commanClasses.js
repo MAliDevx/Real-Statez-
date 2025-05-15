@@ -6,21 +6,22 @@ export const DividerWithText = styled.div`
   justify-content: center;
   text-align: center;
   width: 100%;
-  margin: 2rem 0;
+  margin: 0;
 
   &::before,
   &::after {
     content: "";
     flex: .1;
     border-bottom: 1px solid #ccc;
-    margin: 0 1rem;
+    margin: 0 ;
   }
 
   span {
     font-weight: bold;
-    color: var(--large-text, #666); /* fallback if --large-text is undefined */
+    color: var(--large-text, #666);
     white-space: nowrap;
     font-size: 1.5rem;
+    margin: 0px 30px;
   }
 `;
 
