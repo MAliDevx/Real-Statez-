@@ -7,6 +7,8 @@ import GlobalStyling from "./styles/globalStyling";
 import PropertyFilter from "./pages/PropertiseService/propertiseService";
 import PublicRoutes from "./routes/public.routes";
 import { FaAngleUp } from "react-icons/fa6";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -32,6 +34,8 @@ function App() {
   }, []);
   return (
     <>
+          <ToastContainer   autoClose={2000} position="top-right" style={{ zIndex: 99999 }} />
+
       <button
         onClick={scrollToTop}
         style={{

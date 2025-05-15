@@ -74,7 +74,9 @@ export const FormCard = styled.div`
         border-color: #0077b6;
       }
     }
-
+    .error-input input {
+  border: 1px solid red;
+}
 
   }
 `;

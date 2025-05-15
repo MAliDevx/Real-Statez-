@@ -49,7 +49,7 @@ export const FormCard = styled.div`
       position: relative;
 
       input {
-        width: 85%;
+        width: 84%;
         padding: 1em;
         padding-right: 3em;
         border: 1px solid #ccc;
@@ -134,5 +134,11 @@ export const FormCard = styled.div`
          text-decoration: underline;
         }
     }
+
+}
+
+.error-input{
+    border: 1px solid red !important;
+
 }
 `;

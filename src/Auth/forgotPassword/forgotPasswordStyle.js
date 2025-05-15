@@ -138,4 +138,7 @@ export const FormCard = styled.div`
         }
     }
 }
+.error-input {
+  border: 1px solid red !important;
+}
 `;
