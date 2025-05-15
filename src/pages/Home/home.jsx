@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { SwiperStyles } from './homeStyle';
@@ -35,10 +35,11 @@ const HomePage = () => {
     <>
       <SwiperStyles />
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
         navigation
-        loop
+        loop={true}
         className="mySwiper"
+        autoplay={{ delay: 3000 }}
         style={{ height: '93vh', top:'-100px' }}
       >
         {slides.map((slide, index) => (

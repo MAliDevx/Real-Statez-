@@ -18,8 +18,6 @@ export const SingleAgentHeadingContainer = styled.div`
     color: var(--white-color);
 
     h2 {
-      font-family: "Open Sans", serif;
-      margin-bottom: 10px;
       text-transform: capitalize;
       font-size: 32px;
       font-weight: 700;
@@ -226,7 +224,6 @@ export const TabsButtonContainer = styled.div`
   }
   /* Default tab button */
   .Tab-Button {
-    font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: 600;
     text-transform: capitalize;
@@ -255,14 +252,12 @@ export const TabsButtonContainer = styled.div`
 
     p {
       font-size: 14px;
-      font-family: "Open Sans", sans-serif;
       font-weight: 500;
       color: #495057;
       line-height: 1.5;
       margin: 6px 0px;
     }
     .descriptionButton {
-      font-family: "Open Sans", sans-serif;
       width: fit-content;
       font-size: 16px;
       font-weight: 600;
@@ -293,20 +288,34 @@ export const CardContainer = styled.div`
   border: 1px solid #e0e0e0;
   overflow: hidden;
   background: #fff;
-  margin-top: 40px;
+  margin: 20px 0px;
+  width:100%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+&:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 export const ImageContainer = styled.div`
   position: relative;
   width: 40%;
-  /* min-width: 100%; */
   height: auto;
+  overflow: hidden; 
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease; /* Smooth transition */
+
+    &:hover {
+      transform: scale(1.05); /* Zoom in slightly */
+    }
   }
+
   button {
     position: absolute;
     right: 10px;
@@ -320,19 +329,21 @@ export const ImageContainer = styled.div`
   }
 `;
 
+
 export const SoldOutRibbon = styled.div`
   position: absolute;
   top: 77px;
   left: -28px;
-  width: 151px;
-  padding: 6px 40px;
+  width: 131px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transform: rotate(-45deg);
   transform-origin: left top;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 13px;
   background-color: var(--primary-button);
   color: white;
-  font-size: 14px;
   text-transform: uppercase;
   cursor: pointer;
   z-index: 1;
@@ -353,26 +364,27 @@ export const Tag = styled.span`
   border: none;
   width: fit-content;
   outline: none;
-  padding: 6px 8px;
+  padding: 3px 6px;
   color: var(--white-color);
   background-color: var(--primary-button);
-  margin-bottom: 10px;
+  font-size: 15px;
 `;
 
 export const AgentTitle = styled.h2`
-  font-family: "Open Sans", serif;
   font-weight: 700;
   color: #002247;
   font-size: 18px;
+  margin: 8px 0px;
 `;
 
 export const Location = styled.div`
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
   font-weight: 500;
   color: #495057;
   line-height: 1.5;
-  /* margin-bottom: 10px; */
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 export const DetailRow = styled.div`
@@ -567,14 +579,11 @@ export const Subheading = styled.div`
 `;
 export const Heading = styled.h4`
   text-transform: capitalize;
-  /* color: rgb(33, 37, 41); */
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
   padding: 20px 0px;
   margin: 0;
-  /* border-bottom: 1px solid var(--border-color); */
-  font-family: "Open Sans", serif;
 `;
 
 export const PropertyCetagoriesContainer = styled.div`

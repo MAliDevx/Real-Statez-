@@ -195,7 +195,7 @@ const SinglePropertyDetail = () => {
 
                   {openIndexes === index && (
                     <div className="floor-details-wrapper">
-                      <img src={floor.img} alt="" style={{ width: "100%" }} />
+                      <img src={floor.img} alt="" style={{ width: "100%", height:'70vh' }} />
                       <p>{floor.details}</p>
                     </div>
                   )}

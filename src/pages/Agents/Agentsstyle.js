@@ -366,16 +366,13 @@ export const PropertyAttachmentDiv = styled.div`
 export const Card = styled.div`
   /* width: 300px; */
   border: 1px solid #e0e0e0;
-  border-radius: 6px;
   flex-wrap: wrap;
   overflow: hidden;
-  font-family: sans-serif;
   background: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  &:hover {
-    transform: translateY(-5px);
+&:hover {
+    transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
 `;
