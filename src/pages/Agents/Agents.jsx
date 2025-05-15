@@ -54,7 +54,7 @@ const Agents = () => {
 
   const [primaryAgent, setPrimaryAgent] = useState(null);
   const [backupAgent, setBackupAgent] = useState(null);
-const navigate=useNavigate()
+  const navigate = useNavigate();
   const dummyAgents = [
     {
       id: 1,
@@ -164,135 +164,133 @@ const navigate=useNavigate()
           </div>
         </div>
       </AgentContainer>
-<WrapperContainer>
+      <WrapperContainer>
+        <PropertyContainerMaindiv>
+          <SearchagentConatiner>
+            <div className="heading-container">
+              <Heading>find agents</Heading>
+            </div>
 
+            <div className="InputContainer">
+              <div className="lable-input-div">
+                <label htmlFor="agentName">Enter Agent Name</label>
+                <input
+                  id="agentName"
+                  type="text"
+                  placeholder="Enter agent name"
+                />
 
-     <PropertyContainerMaindiv>
-            <SearchagentConatiner>
-              <div className="heading-container">
-                <Heading>find agents</Heading>
+                <label htmlFor="primaryAgent">All Categories</label>
+                <Select
+                  id="primaryAgent"
+                  options={agentOptions}
+                  value={agentOptions.find(
+                    (option) => option.value === primaryAgent
+                  )}
+                  onChange={(selectedOption) =>
+                    setPrimaryAgent(selectedOption.value)
+                  }
+                  placeholder="All Categories
+"
+                  styles={customSelectStyles}
+                />
+
+                <label htmlFor="backupAgent">All Cities</label>
+                <Select
+                  id="backupAgent"
+                  options={agentOptions}
+                  value={agentOptions.find(
+                    (option) => option.value === backupAgent
+                  )}
+                  onChange={(selectedOption) =>
+                    setBackupAgent(selectedOption.value)
+                  }
+                  placeholder="All Cities"
+                  styles={customSelectStyles}
+                />
               </div>
+            </div>
 
-              <div className="InputContainer">
-                <div className="lable-input-div">
-                  <label htmlFor="agentName">Enter Agent Name</label>
-                  <input
-                    id="agentName"
-                    type="text"
-                    placeholder="Enter agent name"
-                  />
+            <div className="ButtonDiv">
+              <button type="button">Search Agents</button>
+              <FaSearch />
+            </div>
+          </SearchagentConatiner>
 
-                  <label htmlFor="primaryAgent">Primary Agent</label>
-                  <Select
-                    id="primaryAgent"
-                    options={agentOptions}
-                    value={agentOptions.find(
-                      (option) => option.value === primaryAgent
-                    )}
-                    onChange={(selectedOption) =>
-                      setPrimaryAgent(selectedOption.value)
-                    }
-                    placeholder="Select primary agent"
-                    styles={customSelectStyles}
-                  />
+          <PropertyCetagoriesContainer>
+            <Subheading>
+              <Heading>Categories Property</Heading>
+            </Subheading>
+            <div className="property-category-div">
+              {propertyCategories.map((category, index) => (
+                <div className="property-category-item" key={index}>
+                  <span>{category.name}</span>
+                  <span className="property-count">{category.count}</span>
+                </div>
+              ))}
+            </div>
+          </PropertyCetagoriesContainer>
 
-                  <label htmlFor="backupAgent">Backup Agent</label>
-                  <Select
-                    id="backupAgent"
-                    options={agentOptions}
-                    value={agentOptions.find(
-                      (option) => option.value === backupAgent
-                    )}
-                    onChange={(selectedOption) =>
-                      setBackupAgent(selectedOption.value)
-                    }
-                    placeholder="Select backup agent"
-                    styles={customSelectStyles}
-                  />
+          <PropertyAttachmentDiv>
+            <div>
+              <Heading>Property Attachments</Heading>
+              <div className="button-container">
+                <div className="button-div">
+                  <FaRegFilePdf />
+                  <button>Download Documents.Pdf</button>
+                </div>
+                <div className="button-div">
+                  <FaRegFileWord />
+                  <button>Presentation 2016-17 .Doc</button>
                 </div>
               </div>
+            </div>
+          </PropertyAttachmentDiv>
+        </PropertyContainerMaindiv>
+        <AgentGridContainer>
+          <div className="grid-container">
+            {/* Dynamic Cards Section */}
+            {dummyAgents.map((agent) => (
+              <Card
+                key={agent.id}
+                onClick={() => navigate(`/agent-detail/${agent.id}`)}
+              >
+                <ImageWrapper>
+                  <img src={agent.image} alt={agent.name} />
+                  <Badge>{agent.listings} LISTING</Badge>
+                </ImageWrapper>
+                <Content>
+                  <Name>{agent.name}</Name>
+                  <Title>{agent.title}</Title>
 
-              <div className="ButtonDiv">
-                <button type="button">Search Agents</button>
-                <FaSearch />
-              </div>
-            </SearchagentConatiner>
+                  <InfoRow>
+                    <FaBuilding /> <span>Office:</span>{" "}
+                    <span>{agent.office}</span>
+                  </InfoRow>
+                  <InfoRow>
+                    <FaPhoneAlt /> <span>Mobile:</span>{" "}
+                    <span>{agent.mobile}</span>
+                  </InfoRow>
+                  <InfoRow>
+                    <FaFax /> <span>Fax:</span> <span>{agent.fax}</span>
+                  </InfoRow>
+                  <InfoRow>
+                    <FaEnvelope /> <span>Email:</span>{" "}
+                    <span>{agent.email}</span>
+                  </InfoRow>
 
-            <PropertyCetagoriesContainer>
-              <Subheading>
-                <Heading>Categories Property</Heading>
-              </Subheading>
-              <div className="property-category-div">
-                {propertyCategories.map((category, index) => (
-                  <div className="property-category-item" key={index}>
-                    <span>{category.name}</span>
-                    <span className="property-count">{category.count}</span>
-                  </div>
-                ))}
-              </div>
-            </PropertyCetagoriesContainer>
-
-            <PropertyAttachmentDiv>
-              <div>
-                <Heading>Property Attachments</Heading>
-                <div className="button-container">
-                  <div className="button-div">
-                    <FaRegFilePdf />
-                    <button>Download Documents.Pdf</button>
-                  </div>
-                  <div className="button-div">
-                    <FaRegFileWord />
-                    <button>Presentation 2016-17 .Doc</button>
-                  </div>
-                </div>
-              </div>
-            </PropertyAttachmentDiv>
-          </PropertyContainerMaindiv>
-      <AgentGridContainer>
-       
-        <div className="grid-container">
-      
-
-          {/* Dynamic Cards Section */}
-          {dummyAgents.map((agent) => (
-  <Card key={agent.id} onClick={() => navigate(`/agent-detail/${agent.id}`)}>
-              <ImageWrapper>
-                <img src={agent.image} alt={agent.name} />
-                <Badge>{agent.listings} LISTING</Badge>
-              </ImageWrapper>
-              <Content>
-                <Name>{agent.name}</Name>
-                <Title>{agent.title}</Title>
-
-                <InfoRow>
-                  <FaBuilding /> <span>Office:</span>{" "}
-                  <span>{agent.office}</span>
-                </InfoRow>
-                <InfoRow>
-                  <FaPhoneAlt /> <span>Mobile:</span>{" "}
-                  <span>{agent.mobile}</span>
-                </InfoRow>
-                <InfoRow>
-                  <FaFax /> <span>Fax:</span> <span>{agent.fax}</span>
-                </InfoRow>
-                <InfoRow>
-                  <FaEnvelope /> <span>Email:</span>{" "}
-                  <span>{agent.email}</span>
-                </InfoRow>
-
-                <SocialIcons>
-                  <FaFacebookF style={{ background: "rgb(59, 89, 153)" }} />
-                  <FaTwitter style={{ background: "rgb(85, 172, 238)" }} />
-                  <FaLinkedinIn style={{ background: "rgb(0, 119, 181)" }} />
-                  <FaInstagram style={{ background: "rgb(217, 28, 172)" }} />
-                  <TfiYoutube style={{ background: "rgb(204, 24, 30)" }} />
-                </SocialIcons>
-              </Content>
-            </Card>
-          ))}
-        </div>
-        
-      </AgentGridContainer>
+                  <SocialIcons>
+                    <FaFacebookF style={{ background: "rgb(59, 89, 153)" }} />
+                    <FaTwitter style={{ background: "rgb(85, 172, 238)" }} />
+                    <FaLinkedinIn style={{ background: "rgb(0, 119, 181)" }} />
+                    <FaInstagram style={{ background: "rgb(217, 28, 172)" }} />
+                    <TfiYoutube style={{ background: "rgb(204, 24, 30)" }} />
+                  </SocialIcons>
+                </Content>
+              </Card>
+            ))}
+          </div>
+        </AgentGridContainer>
       </WrapperContainer>
     </>
   );

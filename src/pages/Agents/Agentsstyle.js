@@ -6,7 +6,7 @@ export const AgentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-    box-sizing: border-box;
+  box-sizing: border-box;
 
   .imageContainer {
     width: 100%;
@@ -90,7 +90,8 @@ export const SearchagentConatiner = styled.div`
       font-size: 18px;
       font-weight: 600;
       line-height: 24px;
-      font-family: "Open Sans", serif;margin:0;
+      font-family: "Open Sans", serif;
+      margin: 0;
       padding: 0;
     }
   }
@@ -136,12 +137,12 @@ export const SearchagentConatiner = styled.div`
   }
   .ButtonDiv {
     display: flex;
-    width: 90%;
+    width: 80%;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 10px;
     margin: 20px 0px;
-    padding: 10px 18px;
+    padding: 15px 18px;
     background-color: var(--primary-button);
     color: white;
     border: none;
@@ -187,9 +188,9 @@ export const customSelectStyles = {
     color: "rgb(33, 37, 41)",
     fontFamily: '"Open Sans", sans-serif',
     display: "flex",
-    alignItems: "center",  // ✅ added
-    height: "60px",        // ✅ match control height
-    lineHeight: "60px",    // ✅ for vertical centering
+    alignItems: "center", // ✅ added
+    height: "60px", // ✅ match control height
+    lineHeight: "60px", // ✅ for vertical centering
   }),
 
   placeholder: (provided) => ({
@@ -198,9 +199,9 @@ export const customSelectStyles = {
     color: "#999",
     fontFamily: '"Open Sans", sans-serif',
     display: "flex",
-    alignItems: "center",  // ✅ added
-    height: "60px",        // ✅ match control height
-    lineHeight: "60px",    // ✅ vertical centering
+    alignItems: "center", // ✅ added
+    height: "60px", // ✅ match control height
+    lineHeight: "60px", // ✅ vertical centering
   }),
 
   option: (provided, state) => ({
@@ -211,16 +212,15 @@ export const customSelectStyles = {
     fontFamily: '"Open Sans", sans-serif',
     cursor: "pointer",
     display: "flex",
-    alignItems: "center",  // ✅ ensures centered options
-    height: "40px",        // ✅ adjust based on design
-    lineHeight: "40px",    // ✅ vertical centering
+    alignItems: "center", // ✅ ensures centered options
+    height: "40px", // ✅ adjust based on design
+    lineHeight: "40px", // ✅ vertical centering
   }),
 
   indicatorSeparator: () => ({
     display: "none",
   }),
 };
-
 
 export const Subheading = styled.div`
   width: 100%;
@@ -282,8 +282,10 @@ export const PropertyCetagoriesContainer = styled.div`
     }
 
     .property-count {
-      display: block;
-      float: right;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       height: 26px;
       width: 26px;
       text-align: center;
@@ -291,7 +293,7 @@ export const PropertyCetagoriesContainer = styled.div`
       line-height: 16px;
       font-weight: bold;
       border-radius: 4px;
-      padding: 6px 0px;
+      padding: 6px;
       color: white;
       background-color: var(--primary-button);
     }
