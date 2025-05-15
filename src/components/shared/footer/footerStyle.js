@@ -1,10 +1,10 @@
 import styled from "styled-components";
-
+import footerpgImage from '../../../assets/Images/Contactbg.jpg'
 export const FooterContainer = styled.footer`
   position: relative;
   color: white;
   padding-top: 3rem;
-  background: url('https://wallsproperty.netlify.app/images/bg.jpg') no-repeat center center/cover;
+  background: url(${footerpgImage}) no-repeat center center/cover;
   z-index: 1;
   overflow: hidden;
 
