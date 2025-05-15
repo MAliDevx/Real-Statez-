@@ -62,7 +62,7 @@ export const ContactUsFormContainer = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
-      margin-bottom: 30px;
+      /* margin-bottom: 30px; */
       margin-top: 25px;
     }
 
@@ -70,6 +70,13 @@ export const ContactUsFormContainer = styled.div`
       display: flex;
       flex-direction: column;
       margin-bottom: 36px;
+.error {
+  color: red;
+  font-size: 0.75rem;
+  margin-top: 4px;
+          font-family: "Open Sans", serif;
+
+}
 
       label {
         font-size: 16px;
@@ -139,7 +146,7 @@ export const InfoBox = styled.div`
   span {
     font-size: 14px;
     display: flex;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
     font-family: "Open Sans", sans-serif;
     font-weight: 500;
   }
@@ -158,7 +165,7 @@ export const InfoItem = styled.div`
 `;
 export const LocationItemDiv = styled.div`
   display: flex;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
   align-items: center;
   gap: 40px;
   / &:last-child {
@@ -169,9 +176,9 @@ export const LocationItemDiv = styled.div`
     align-items: center;
     justify-content: center;
     border: 1px solid var(--border-color);
-    padding: 6px;
-    width: 40px;
-    height: 40px;
+    padding: 12px;
+    /* width: 40px;
+    height: 40px; */
     text-align: center;
     line-height: 40px;
     font-size: 18px;
@@ -220,7 +227,7 @@ export const SocialIconDiv = styled.div`
 
     border: 1px solid var(--border-color);
     /* padding: 6px; */
-    margin-top: 13px;
+    margin-top: 15px;
     border-radius: 4px;
     font-size: 17.5px;
     font-weight: 600;
