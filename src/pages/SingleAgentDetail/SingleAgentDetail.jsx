@@ -189,13 +189,13 @@ const SingleAgentDetail = () => {
                   <InfoRow><FaPhoneAlt /> <span>Mobile:</span> <span>{agent.mobile}</span></InfoRow>
                   <InfoRow><FaFax /> <span>Fax:</span> <span>{agent.fax}</span></InfoRow>
                   <InfoRow><FaEnvelope /> <span>Email:</span> <span>{agent.email}</span></InfoRow>
-                  <SocialIcons>
-                    <FaFacebookF />
-                    <FaTwitter />
-                    <FaLinkedinIn />
-                    <FaInstagram />
-                    <TfiYoutube />
-                  </SocialIcons>
+             <SocialIcons>
+                       <FaFacebookF style={{background:'rgb(59, 89, 153)',}} />
+                       <FaTwitter style={{background:'rgb(85, 172, 238)',}} />
+                       <FaLinkedinIn style={{background:'rgb(0, 119, 181)',}} />
+                       <FaInstagram style={{background:'rgb(217, 28, 172)',}} />
+                       <TfiYoutube style={{background:'rgb(204, 24, 30)',}} />
+                     </SocialIcons>
                 </Content>
               </Card>
             </StyledAgentDetail>
