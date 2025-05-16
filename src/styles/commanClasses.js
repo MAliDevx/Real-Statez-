@@ -6,7 +6,8 @@ export const DividerWithText = styled.div`
   justify-content: center;
   text-align: center;
   width: 100%;
-  margin: 0;
+  /* height: auto;
+  margin: 0; */
 
   &::before,
   &::after {
