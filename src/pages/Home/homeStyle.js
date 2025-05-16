@@ -20,6 +20,7 @@ export const SwiperStyles = createGlobalStyle`
   }
   .mySwiper {
     height: 93vh;
+    margin-top: -70px;
   }
 `;
 

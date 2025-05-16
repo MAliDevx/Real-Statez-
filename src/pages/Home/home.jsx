@@ -33,11 +33,10 @@ const HomePage = () => {
   return (
     <>
       <SwiperStyles />
-      <Swiper     modules={[Navigation, Autoplay]}
+      <Swiper     modules={[Navigation]}
         navigation
-        loop={true}
         className="mySwiper"
-        autoplay={{ delay: 3000 }}>
+      >
         {slides.map((slide, index) => (
           <StyledSwiperSlide key={index}>
             <SlideContainer image={slide.image}>
