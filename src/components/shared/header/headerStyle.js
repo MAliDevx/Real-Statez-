@@ -13,6 +13,7 @@ export const HeaderContainer = styled.header`
   box-shadow: ${({ scrolled }) =>
     scrolled ? "0 2px 5px rgba(0, 0, 0, 0.1)" : "none"};
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* height: 100vh; */
 `;
 
 export const Logo = styled.div`
@@ -108,8 +109,10 @@ export const MobileMenu = styled.div`
   /* border-radius: 8px; */
   display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   flex-direction: column;
-  gap: 15px;
+  gap: 50px;
   z-index: 2000;
+  height: 100vh;
+
 
   @media (min-width: 577px) {
     display: none;
