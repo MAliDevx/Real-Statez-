@@ -5,11 +5,14 @@ export const SwiperStyles = createGlobalStyle`
   .swiper-button-prev {
     color: white !important;
     background-color: #9A9A9B;
-    padding: 10px;
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
+    padding: 6px;
+    width: 20px;
+    height: 20px;
     font-weight: bold;
+    &:hover{
+      background-color: rgba(0, 0, 0, 0.5);
+      color: blue;
+    }
   }
   .swiper-button-next::after,
   .swiper-button-prev::after {

@@ -23,7 +23,7 @@ function FooterPage() {
       <FooterWrapper>
         <Column>
           <Logo>
-            <img src={footerlogo} alt="Logo" width={140} height={40} />
+            <img src={footerlogo} alt="Logo"  width={140} height={40} />
 
           </Logo>
           <p>

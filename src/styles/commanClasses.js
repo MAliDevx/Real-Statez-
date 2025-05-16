@@ -209,3 +209,22 @@ export const Button = styled.div`
           cursor: pointer;
           transition: background-color 0.3s ease;
 `
+
+export const ScrollTop = styled.div`
+          position: fixed;
+          bottom: 20px;
+          right: 22px;
+          color: white !important;
+    background-color: #9A9A9B;
+    padding: 6px;
+    width: 25px;
+    font-size:20px;
+    height: 20px;
+    font-weight: bold;
+    display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 99;
+   cursor: pointer;
+
+`
