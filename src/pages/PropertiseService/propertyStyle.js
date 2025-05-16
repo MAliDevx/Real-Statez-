@@ -28,7 +28,7 @@ export const FilterContainer = styled.div`
   background: white;
   z-index: 10;
   overflow-x: visible;
-  top: -100px;
+  top: -20px;
 
   .css-13cymwt-control {
     height: 50px;
