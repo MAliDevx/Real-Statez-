@@ -9,7 +9,8 @@ import PublicRoutes from "./routes/public.routes";
 import { FaAngleUp } from "react-icons/fa6";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { ScrollTop } from "./styles/commanClasses";
+ScrollTop
 function App() {
   const [visible, setVisible] = useState(false);
 
@@ -36,26 +37,9 @@ function App() {
     <>
           <ToastContainer   autoClose={2000} position="top-right" style={{ zIndex: 99999 }} />
 
-      <button
-        onClick={scrollToTop}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '22px',
-          color: '#fff',
-          border: 'none',
-          padding: '5px 8px',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          zIndex: 1000,
-          backgroundColor: '#9A9A9B',
-          fontWeight: 'bold',
-          fontSize:'20px'
-
-        }}
-      >
+      <ScrollTop onClick={scrollToTop}>
         <FaAngleUp />
-      </button>
+      </ScrollTop>
       <Header />
       <GlobalStyling/>
       <PublicRoutes />

@@ -81,8 +81,7 @@ export const Logo = styled.div`
 
   img {
     margin-right: 10px;
-    width: 40px;
-    height: auto;
+
   }
 
   h3 {

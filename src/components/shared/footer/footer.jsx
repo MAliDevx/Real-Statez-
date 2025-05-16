@@ -1,5 +1,5 @@
 import React from "react";
-import footerlogo from '../../../assets/Images/logo-blue-stiky.png'
+import footerlogo from '../../../assets/Images/logo-white-footer.png'
 import {
   FooterContainer,
   FooterWrapper,
@@ -23,7 +23,7 @@ function FooterPage() {
       <FooterWrapper>
         <Column>
           <Logo>
-            <img src={footerlogo} alt="Logo" width="140" />
+            <img src={footerlogo} alt="Logo"  width={140} height={40} />
 
           </Logo>
           <p>
