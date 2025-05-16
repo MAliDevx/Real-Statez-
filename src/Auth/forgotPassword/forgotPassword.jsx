@@ -47,7 +47,7 @@ if(newPassword == null){
       return;
     }
 
-    navigate("/");
+    navigate("/login");
     showSuccessToast("Password updated successfully!");
   };
 

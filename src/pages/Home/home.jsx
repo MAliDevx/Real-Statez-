@@ -1,7 +1,7 @@
 // HomePage.js
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { SwiperStyles, AnimatedHeading, StyledSwiperSlide, SlideContainer, SlideOverlay, SlideContent } from './homeStyle';
@@ -33,7 +33,11 @@ const HomePage = () => {
   return (
     <>
       <SwiperStyles />
-      <Swiper modules={[Navigation]} navigation loop className="mySwiper">
+      <Swiper     modules={[Navigation, Autoplay]}
+        navigation
+        loop={true}
+        className="mySwiper"
+        autoplay={{ delay: 3000 }}>
         {slides.map((slide, index) => (
           <StyledSwiperSlide key={index}>
             <SlideContainer image={slide.image}>
