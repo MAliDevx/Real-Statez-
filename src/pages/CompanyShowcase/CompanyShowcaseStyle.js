@@ -125,6 +125,9 @@ export const FeedBackProfile = styled.div`
 
 export const LastestNews = styled.div`
 width: 85%;
+@media (max-width:768px) {
+  width: 95%;
+}
 `
 export const CardBox = styled.div`
 display: flex;
@@ -133,12 +136,23 @@ justify-content:center;
 gap: 20px;
 width: 100%;
 margin-top: 30px;
+@media (max-width:768px) {
+flex-wrap: wrap;
+/* justify-content: flex-start; */
+
+}
+@media (max-width:480px) {
+flex-direction: column;
+
+}
+
 `
+
 export const RequestQuotes = styled.section`
   display: flex;
-  justify-content: center; /* Center the inner container */
+  justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #423592  0%, #0892F7 100%);
+  background: linear-gradient(to right, #423592 0%, #0892F7 100%);
   padding: 2rem 0rem;
   color: white;
   width: 100%;
@@ -149,6 +163,16 @@ export const RequestQuotes = styled.section`
     justify-content: space-between;
     align-items: center;
     width: 85%;
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      width: 90%;
+    }
   }
 
   .leftSide {
@@ -159,18 +183,40 @@ export const RequestQuotes = styled.section`
       font-size: 27px;
       text-transform: uppercase;
 
+      @media (max-width: 768px) {
+        font-size: 22px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 18px;
+      }
     }
 
     p {
       margin: 0;
       font-size: 15px;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 13px;
+      }
     }
   }
 
   .rightSide {
     flex-shrink: 0;
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
   }
 `;
+
 
 
   

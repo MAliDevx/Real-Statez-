@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthPageLayout, FormCard } from "./OTPStyle";
+import { AuthPageLayout, FormCard, OtpInputStyles } from "./OTPStyle";
 import OtpInput from "react-otp-input";
 import { showSuccessToast, showErrorToast } from "../../components/shared/toaster/toaster";
-
 
 const OtpVerify = () => {
   const [otp, setOtp] = useState('');
@@ -21,7 +20,7 @@ const OtpVerify = () => {
     }
 
     console.log("OTP entered:", otp); 
-    showSuccessToast('Verified OTP')
+    showSuccessToast('Verified OTP');
     navigate("/reset-password");
   };
 
@@ -33,33 +32,19 @@ const OtpVerify = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="otp-input-wrapper">
+          <OtpInputStyles>
             <OtpInput
               value={otp}
               onChange={setOtp}
               numInputs={5}
               isInputNum={true}
               renderSeparator={<span>-</span>}
-              renderInput={(props) => (
-                <input
-                  {...props}
-                  inputMode="numeric"
-                />
-              )}
-              inputStyle={{
-                width: '2.5em',
-                height: '2.5em',
-                fontSize: '1.2rem',
-                margin: '0 0.5em',
-                textAlign: 'center',
-                border: '1px solid #ccc',
-                outline: 'none',
-              }}
+              renderInput={(props) => <input {...props} inputMode="numeric" />}
             />
-          </div>
+          </OtpInputStyles>
 
           {error && (
-            <div style={{ color: "red", marginTop: "1em" }}>{error}</div>
+            <div style={{ color: "red", marginTop: "1em", textAlign: "center" }}>{error}</div>
           )}
 
           <button type="submit" className="btn-primary-full">
@@ -68,12 +53,7 @@ const OtpVerify = () => {
 
           <div className="sign-up">
             Didn't receive OTP?
-            <a
-              onClick={() => alert("Resending OTP...")}
-              style={{ cursor: "pointer", marginLeft: "0.3em", color: "blue" }}
-            >
-              Resend
-            </a>
+            <a onClick={() => alert("Resending OTP...")}>Resend</a>
           </div>
         </form>
       </FormCard>

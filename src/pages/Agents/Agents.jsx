@@ -232,7 +232,7 @@ const Agents = () => {
           </PropertyCetagoriesContainer>
 
           <PropertyAttachmentDiv>
-            <div>
+            <div className="attachment-container" >
               <Heading>Property Attachments</Heading>
               <div className="button-container">
                 <div className="button-div">

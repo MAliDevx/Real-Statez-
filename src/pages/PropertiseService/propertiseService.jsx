@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { FaSearch } from 'react-icons/fa';
@@ -170,7 +170,28 @@ const PropertyFilter = () => {
     }
   ];
   
-  
+     const [showCard, setCard] = useState(3);
+
+
+useEffect(() => {
+  const updateCardCount = () => {
+    const width = window.innerWidth;
+
+    if (width <= 480) {
+      setCard(1);
+    } else if (width <= 768) {
+      setCard(2);
+    } else {
+      setCard(3);
+    }
+  };
+
+  updateCardCount(); // Run once on mount
+  window.addEventListener("resize", updateCardCount); // Run on resize
+
+  return () => window.removeEventListener("resize", updateCardCount); // Cleanup
+}, []);
+
 
   return (
     <OuterContainer>
@@ -213,7 +234,7 @@ const PropertyFilter = () => {
 <CarouselWrapper>
       <Swiper
      modules={[Pagination, Autoplay]}
-  slidesPerView={2}          
+  slidesPerView={showCard}          
   slidesPerGroup={2}        
   spaceBetween={20}
   loop={true}
@@ -277,7 +298,7 @@ const PropertyFilter = () => {
 <CarouselWrapper>
       <Swiper
      modules={[Pagination, Autoplay]}
-  slidesPerView={2}          
+  slidesPerView={showCard}          
   slidesPerGroup={2}        
   spaceBetween={20}
   loop={true}

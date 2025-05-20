@@ -28,7 +28,7 @@ export const DividerWithText = styled.div`
 
 
 export const CarouselWrapper = styled.div`
-  width: 85%;
+  width: 100%;
   margin: 40px auto;
   position: relative;
 
