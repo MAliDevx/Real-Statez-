@@ -132,7 +132,7 @@ const SinglePropertyDetail = () => {
                 {showFull ? "Show Less" : "Show More"}
               </Button>
             </div>
-            <div className="details-container" style={{ display: 'flex', gap: '20px' }}>
+            <div className="details-container">
   {/* Property Details Box */}
   <div className="box" style={{ flex: 1 }}>
     <h2>Property Details</h2>

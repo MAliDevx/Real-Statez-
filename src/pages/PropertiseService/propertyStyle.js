@@ -11,6 +11,10 @@ export const FilteredContent = styled.div`
   padding: 2rem;
   text-align: center;
   padding-top: 90px;
+  @media (max-width:768px) {
+    position: relative;
+    top: 430px;
+  }
 
 `;
 

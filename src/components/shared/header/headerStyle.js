@@ -33,7 +33,8 @@ export const NavLinks = styled.nav`
 
 export const NavLink = styled.a`
   text-decoration: none;
-  color: ${({ scrolled }) => (scrolled ? "#333" : "#ddd")};
+  color: ${({ scrolled, active }) =>
+    active ? "#007bff" : scrolled ? "#333" : "#ddd"};
   font-weight: 600;
   transition: all 0.3s ease;
   position: relative;
@@ -42,25 +43,26 @@ export const NavLink = styled.a`
   text-transform: uppercase;
   cursor: pointer;
 
-  &:hover {
-    color: #007bff;
-  }
-
   &::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 0%;
+    width: ${({ active }) => (active ? "100%" : "0%")};
     height: 2px;
     background-color: #007bff;
     transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: #007bff;
   }
 
   &:hover::after {
     width: 100%;
   }
 `;
+
 
 export const LoginButtonWrapper = styled.div`
   @media (max-width: 576px) {

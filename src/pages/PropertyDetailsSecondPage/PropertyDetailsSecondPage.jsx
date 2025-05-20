@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { PropertDetailsSecondPage,FilteredContent,RequestQuotes,InnerContainer } from "./PropertyDetailsStyleSecondPage";
 import { FaBuilding ,FaAmbulance ,FaChevronRight} from "react-icons/fa";
 import { IoLocationSharp, } from "react-icons/io5";
@@ -154,9 +154,32 @@ import { useNavigate } from 'react-router-dom';
 
     }
   ];
+ 
+
 const SecondSinglePropertyDetail = () => {
     const navigate = useNavigate()
-  
+     const [showCard, setCard] = useState(3);
+
+
+useEffect(() => {
+  const updateCardCount = () => {
+    const width = window.innerWidth;
+
+    if (width <= 480) {
+      setCard(1);
+    } else if (width <= 768) {
+      setCard(2);
+    } else {
+      setCard(3);
+    }
+  };
+
+  updateCardCount(); // Run once on mount
+  window.addEventListener("resize", updateCardCount); // Run on resize
+
+  return () => window.removeEventListener("resize", updateCardCount); // Cleanup
+}, []);
+
   const embedMapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28874.844362470565!2d70.31237521421528!3d28.41356746208927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39375d0045d4fb37%3A0x9a95cea972638cf5!2sAl%20Batha!5e0!3m2!1sen!2s!4v1715612400000!5m2!1sen!2s";
 
   return (
@@ -209,10 +232,10 @@ const SecondSinglePropertyDetail = () => {
 </div>
 <FilteredContent >
 <h2>Similar Properties</h2>
-<CarouselWrapper style={{width:'100%'}}>
+<CarouselWrapper>
       <Swiper
      modules={[Pagination, Autoplay]}
-  slidesPerView={3}          
+  slidesPerView={showCard}          
   slidesPerGroup={2}        
   spaceBetween={20}
   loop={true}
