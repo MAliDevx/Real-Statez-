@@ -223,16 +223,17 @@ const PropertyListing = () => {
             />
           </Filterbox>
         </div>
-        <div className="icon-container">
-          <FaThList
-            className={`icons ${activeView === "list" ? "active" : ""}`}
-            onClick={() => setActiveView("list")}
-          />
-          <IoGridSharp
-            className={`icons ${activeView === "grid" ? "active" : ""}`}
-            onClick={() => setActiveView("grid")}
-          />
-        </div>
+       <div className="icon-container">
+  <FaThList
+    className={`icons list-icon ${activeView === "list" ? "active" : ""}`}
+    onClick={() => setActiveView("list")}
+  />
+  <IoGridSharp
+    className={`icons ${activeView === "grid" ? "active" : ""}`}
+    onClick={() => setActiveView("grid")}
+  />
+</div>
+
       </PropertyFilterdiv>
       {/* Conditional rendering based on activeView */}
       {activeView === "grid" && (

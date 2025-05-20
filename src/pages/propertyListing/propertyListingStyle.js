@@ -14,6 +14,10 @@ export const PropertyListingContainer = styled.div`
     justify-content: center;
     margin-bottom: 150px;
     background-color: var(--background-color);
+    @media (max-width:768px) {
+          margin-bottom: 70px;
+
+    }
   }
 
   .propertyname-heading {
@@ -60,12 +64,18 @@ export const PropertyFilterdiv = styled.div`
   justify-content: space-between;
   border: 1px solid var(--border-color);
   padding: 10px 15px;
-  margin-top:50px;
+  margin-top:130px;
+
+  @media (max-width:786px) {
+    margin-top: 540px;
+  }
+
   .filter-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+
     span {
       font-family: "Open Sans", sans-serif;
       font-size: 14px;
@@ -74,13 +84,12 @@ export const PropertyFilterdiv = styled.div`
       margin-right: 5px;
     }
   }
+
   .icon-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* More natural icon alignment */
+    justify-content: flex-start;
     border: 1px solid var(--border-color);
-    /* padding: 0px 10px; */
-    /* border-radius: 4px; */
   }
 
   .icons {
@@ -91,14 +100,20 @@ export const PropertyFilterdiv = styled.div`
     height: 20px;
     font-size: 16px;
     transition: all 0.2s ease;
-    /* border-radius: 4px; */
   }
 
   .icons.active {
     background-color: var(--primary-button);
     color: var(--white-color);
   }
+
+  .list-icon {
+    @media (max-width: 380px) {
+      display: none;
+    }
+  }
 `;
+
 export const Filterbox = styled.div`
 
   color: var(--subheading-color);
@@ -133,5 +148,16 @@ export const GridContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 82.5%;
-    margin: 29px auto
+    margin: 29px auto;
+    @media (max-width:786px) {
+      width: 90%;
+          grid-template-columns: repeat(2, 1fr);
+          /* margin-top: 450px; */
+
+    }
+    @media (max-width:480px) {
+      width: 95%;
+          grid-template-columns: repeat(1, 1fr);
+
+    }
 `;

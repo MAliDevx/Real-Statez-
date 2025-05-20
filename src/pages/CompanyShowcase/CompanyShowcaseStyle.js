@@ -1,28 +1,35 @@
 import styled from "styled-components";
 
-
 export const MainContainer = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
 export const PartnersSection = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--background-light-gray);
-height: 300px;
-width: 100%;
+  flex-direction: column;
+  height: 300px;
+  width: 100%;
 
-
-
+  @media (max-width: 768px) {
+    margin-top: 400px;
+    height: auto;
+    padding: 30px 0px;
+  }
 
   #partnersLogos {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 30px;
     align-items: center;
     flex-wrap: wrap;
     margin: 0 auto;
     width: 90%;
-    margin-left: 84px;
+ 
   }
 
   .partners__logo {
@@ -39,20 +46,22 @@ width: 100%;
 `;
 
 export const Para = styled.div`
-    color: var(--gray);
-    font-size: 16px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 30px;
-    line-height: 1.5px;
-    `
+  color: var(--gray);
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 30px;
+  text-align: center;
+  margin-bottom: 10px;
+  /* line-height: 1.5px; */
+`;
 export const PeopleFeedBack = styled.div`
   background-color: var(--white);
-/* height: 300px; */
-width: 100%;
-.partners__description{
+  /* height: 300px; */
+  width: 100%;
+  .partners__description {
     color: var(--gray);
     font-size: 16px;
     width: 100%;
@@ -61,9 +70,8 @@ width: 100%;
     align-items: center;
     margin: 0 auto 30px;
     line-height: 1.5px;
-
-}
-`
+  }
+`;
 export const FeedBackProfile = styled.div`
   display: flex;
   justify-content: space-between;
@@ -98,9 +106,8 @@ export const FeedBackProfile = styled.div`
     text-align: left;
     padding: 12px;
     background-color: var(--white-color);
-    border-radius:4px;
+    border-radius: 4px;
     border: 1px solid #f4f4f4;
-
   }
 
   p {
@@ -124,35 +131,32 @@ export const FeedBackProfile = styled.div`
 `;
 
 export const LastestNews = styled.div`
-width: 85%;
-@media (max-width:768px) {
-  width: 95%;
-}
-`
+  width: 85%;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+`;
 export const CardBox = styled.div`
-display: flex;
-align-items: center;
-justify-content:center;
-gap: 20px;
-width: 100%;
-margin-top: 30px;
-@media (max-width:768px) {
-flex-wrap: wrap;
-/* justify-content: flex-start; */
-
-}
-@media (max-width:480px) {
-flex-direction: column;
-
-}
-
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    /* justify-content: flex-start; */
+  }
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
 
 export const RequestQuotes = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #423592 0%, #0892F7 100%);
+  background: linear-gradient(to right, #423592 0%, #0892f7 100%);
   padding: 2rem 0rem;
   color: white;
   width: 100%;
@@ -216,7 +220,3 @@ export const RequestQuotes = styled.section`
     }
   }
 `;
-
-
-
-  

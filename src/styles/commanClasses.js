@@ -48,29 +48,37 @@ export const CarouselWrapper = styled.div`
     background: #007bff;
   }
 `;
-
 export const Card = styled.div`
   position: relative;
   border: 1px solid #ddd;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-cursor: pointer;
+  margin: 0px 8px;
+  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-&:hover {
+  &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
+
+  .latast-card-container {
+    width: 33%;
+
+    @media (max-width: 768px) {
+      width: 50%;
+    }
+  }
+
   .isForSale {
-    color: black;
     position: absolute;
     right: 10px;
     top: 10px;
     border: 0;
     outline: none;
     padding: 6px 8px;
-    background-color:var(--large-text);
+    background-color: var(--large-text);
     color: white;
   }
 
@@ -92,48 +100,50 @@ cursor: pointer;
   }
 
   .property-profile {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 9px 20px;
-  border-top: 1px solid var(--light-gray);
-  figure{
-    margin: 0;
-    border: 1px solid var(--light-gray);
-    border-radius: 50%;
-    padding: 4px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-  }
-  &__info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+    padding: 9px 20px;
+    border-top: 1px solid var(--light-gray);
 
-  &__image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+    figure {
+      margin: 0;
+      border: 1px solid var(--light-gray);
+      border-radius: 50%;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-  &__name {
-    font-weight: normal;
-    color: var(--gray);
-    margin: 0;
-    font-size: 15px;
-  }
+    &__info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  &__price {
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--large-text);
-  }
-}
+    &__image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
+    &__name {
+      font-weight: normal;
+      color: var(--gray);
+      margin: 0;
+      font-size: 15px;
+    }
+
+    &__price {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--large-text);
+    }
+  }
 `;
+
 
 export const CardImg = styled.img`
   width: 100%;
