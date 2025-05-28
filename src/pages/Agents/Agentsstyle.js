@@ -18,11 +18,15 @@ export const AgentContainer = styled.div`
     color: var(--white-color);
 
     h2 {
-      font-family: "Open Sans", serif;
       margin-bottom: 10px;
       text-transform: capitalize;
       font-size: 32px;
       font-weight: 700;
+
+      @media (max-width: 768px) {
+        font-size: 24px;
+        text-align: center;
+      }
     }
   }
 
@@ -33,18 +37,30 @@ export const AgentContainer = styled.div`
 
     span {
       font-size: 16px;
-      font-family: "Open Sans", sans-serif;
       text-transform: capitalize;
       font-weight: 400;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        text-align: center;
+      }
     }
   }
 `;
+
 export const WrapperContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   gap: 40px;
+  flex-wrap: wrap;
+
+  @media (max-width: 1024px) {
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const AgentGridContainer = styled.div`
   width: 50%;
@@ -52,26 +68,58 @@ export const AgentGridContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 50px;
+
+  @media (max-width: 1024px) {
+    width: 80%;
+    margin-top: -50px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
   .grid-container {
     display: grid;
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
     margin: 50px 0px;
-    /* Space between columns and rows */
-    align-items: start; /* optional – aligns items vertically */
+
+    @media (max-width: 768px) {
+      width: 90%;
+      /* grid-template-columns: 1fr; */
+      gap: 40px;
+    }
+    @media (max-width: 480px) {
+      width: 90%;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
   }
 `;
 export const PropertyContainerMaindiv = styled.div`
   width: 25%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 30px;
   margin-top: 100px;
   margin-bottom: 50px;
   top: 70px;
   position: sticky !important;
+
+  @media (max-width: 1024px) {
+    width: 80%;
+    position: static !important;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
+
 export const SearchagentConatiner = styled.div`
   width: 100%;
   border: 1px solid var(--border-color);
@@ -90,7 +138,6 @@ export const SearchagentConatiner = styled.div`
       font-size: 18px;
       font-weight: 600;
       line-height: 24px;
-      font-family: "Open Sans", serif;
       margin: 0;
       padding: 0;
     }
@@ -112,7 +159,6 @@ export const SearchagentConatiner = styled.div`
     padding: 15px;
     box-sizing: border-box;
     label {
-      font-family: "Open Sans", sans-serif;
       font-weight: 500;
       font-size: 16px;
       color: rgb(33, 37, 41);
@@ -238,7 +284,6 @@ export const Heading = styled.h4`
   padding: 20px 0px;
   margin: 0;
   /* border-bottom: 1px solid var(--border-color); */
-  font-family: "Open Sans", serif;
 `;
 
 export const PropertyCetagoriesContainer = styled.div`
@@ -270,7 +315,6 @@ export const PropertyCetagoriesContainer = styled.div`
       text-transform: capitalize;
       letter-spacing: 0.3px;
       line-height: 26px;
-      font-family: "Open Sans", sans-serif;
       text-decoration: none;
       transition: transform 0.3s ease, color 0.3s ease;
       transform: translateX(0);
@@ -302,7 +346,12 @@ export const PropertyCetagoriesContainer = styled.div`
 export const PropertyAttachmentDiv = styled.div`
   width: 100%;
   text-align: center;
-
+  .attachment-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
   .button-container {
     width: 100%;
     display: flex;
@@ -327,10 +376,9 @@ export const PropertyAttachmentDiv = styled.div`
     text-transform: capitalize;
     letter-spacing: 0.3px;
     line-height: 26px;
-    padding: 15px 20px;
+    padding: 15px 15px;
     margin: -1px 0px 0px;
-    font-family: "Open Sans", sans-serif;
-
+    box-sizing: border-box;
     /* Hover effect */
     &:hover {
       background-color: var(--primary-button);
@@ -353,6 +401,7 @@ export const PropertyAttachmentDiv = styled.div`
 
   button {
     background-color: transparent;
+    /* width: 100%; */
     border: 0;
     outline: none;
     cursor: pointer;
@@ -364,16 +413,19 @@ export const PropertyAttachmentDiv = styled.div`
 `;
 
 export const Card = styled.div`
-  /* width: 300px; */
   border: 1px solid #e0e0e0;
   flex-wrap: wrap;
   overflow: hidden;
   background: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-&:hover {
+  &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
@@ -398,7 +450,6 @@ export const Badge = styled.div`
   letter-spacing: 1px;
   font-size: 14px;
   color: rgb(255, 255, 255);
-  font-family: "Open Sans", sans-serif;
   padding: 3px 6px;
 `;
 
@@ -407,7 +458,6 @@ export const Content = styled.div`
 `;
 
 export const Name = styled.h3`
-  font-family: "Open Sans", serif;
   font-size: 18px;
   color: black;
   margin: 5px 0px;
@@ -416,7 +466,6 @@ export const Name = styled.h3`
 
 export const Title = styled.p`
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
   font-weight: 500;
   color: #495057;
   margin-bottom: 13px;
@@ -432,7 +481,6 @@ export const InfoRow = styled.div`
   font-size: 14px;
   margin-bottom: 15px;
   color: #002247;
-  font-family: "Open Sans", sans-serif;
   font-weight: 400;
   line-height: 1.5;
   transition: background-color 0.3s ease;

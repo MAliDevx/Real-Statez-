@@ -37,24 +37,37 @@ const Header = () => {
       <Logo>
         <img src={navlogo} alt="Logo" />
       </Logo>
+<NavLinks>
+  <NavLink
+    scrolled={scrolled}
+    active={location.pathname === "/"}
+    onClick={() => handleNavigate("")}
+  >
+    Home
+  </NavLink>
+  <NavLink
+    scrolled={scrolled}
+    active={location.pathname === "/property-listing"}
+    onClick={() => handleNavigate("/property-listing")}
+  >
+    Property
+  </NavLink>
+  <NavLink
+    scrolled={scrolled}
+    active={location.pathname === "/agents"}
+    onClick={() => handleNavigate("/agents")}
+  >
+    Agents
+  </NavLink>
+  <NavLink
+    scrolled={scrolled}
+    active={location.pathname === "/contact"}
+    onClick={() => handleNavigate("/contact")}
+  >
+    Contact
+  </NavLink>
+</NavLinks>
 
-      <NavLinks>
-        <NavLink scrolled={scrolled} onClick={() => handleNavigate("")}>
-          Home
-        </NavLink>
-        <NavLink
-          scrolled={scrolled}
-          onClick={() => handleNavigate("/property-listing")}
-        >
-          Property
-        </NavLink>
-        <NavLink scrolled={scrolled} onClick={() => handleNavigate("/agents")}>
-          Agents
-        </NavLink>
-        <NavLink scrolled={scrolled} onClick={() => handleNavigate("/contact")}>
-          Contact
-        </NavLink>
-      </NavLinks>
 
       <LoginButtonWrapper>
         <LoginButton onClick={() => handleNavigate("/login")} scrolled={scrolled}>

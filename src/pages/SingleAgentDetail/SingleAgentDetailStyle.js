@@ -31,7 +31,6 @@ export const SingleAgentHeadingContainer = styled.div`
 
     span {
       font-size: 16px;
-      font-family: "Open Sans", sans-serif;
       text-transform: capitalize;
       font-weight: 400;
     }
@@ -55,7 +54,12 @@ export const StyledAgentInnerContainer = styled.div`
   gap: 50px;
   margin: 70px 0px;
     position: relative !important; /* ✅ Add this */
-
+@media (max-width:768px) {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  
+}
   /* align-items: center; */
 `;
 
@@ -65,11 +69,15 @@ export const AgentDetailContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   /* margin: 100px 0px; */
+  @media (max-width:768px) {
+    width: 85%;
+  }
 `;
 
 export const SingleAgentDetail = styled.div`
   width: 100%;
   display: flex;
+
 
   /* margin: 100px 0px; */
   .grid-container {
@@ -92,12 +100,18 @@ export const Card = styled.div`
   /* max-width: 700px; */
   width: 100%;
   height: fit-content;
+    @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 export const ImageWrapper = styled.div`
   position: relative;
   width: 50%;
   cursor: pointer;
+    @media (max-width: 480px) {
+  width: 100%;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -117,7 +131,6 @@ export const Badge = styled.div`
   letter-spacing: 1px;
   font-size: 14px;
   color: rgb(255, 255, 255);
-  font-family: "Open Sans", sans-serif;
   padding: 3px 6px;
 `;
 
@@ -126,7 +139,6 @@ export const Content = styled.div`
 `;
 
 export const Name = styled.h3`
-  font-family: "Open Sans", serif;
   font-size: 18px;
   color: black;
   margin: 5px 0px;
@@ -135,7 +147,6 @@ export const Name = styled.h3`
 
 export const Title = styled.p`
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
   font-weight: 500;
   color: #495057;
   margin-bottom: 13px;
@@ -151,7 +162,6 @@ export const InfoRow = styled.div`
   font-size: 14px;
   margin-bottom: 15px;
   color: #002247;
-  font-family: "Open Sans", sans-serif;
   font-weight: 400;
   line-height: 1.5;
   transition: background-color 0.3s ease;
@@ -277,6 +287,7 @@ export const TabsButtonContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 30px;
+    box-sizing: border-box;
   }
 `;
 
@@ -297,13 +308,19 @@ export const CardContainer = styled.div`
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
+    @media (max-width: 480px) {
+    flex-direction: column;
+  }
 `;
 
 export const ImageContainer = styled.div`
   position: relative;
   width: 40%;
   height: auto;
-  overflow: hidden; 
+  overflow: hidden;
+    @media (max-width: 480px) {
+  width: 100%;
+  } 
 
   img {
     width: 100%;
@@ -358,6 +375,9 @@ export const InfoSection = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 20px 15px;
+    @media (max-width: 480px) {
+  width: 100%;
+  }
 `;
 
 export const Tag = styled.span`
@@ -400,7 +420,6 @@ export const DetailRow = styled.div`
     flex-direction: column;
     gap: 10px;
     text-align: center;
-    font-family: "Open Sans", sans-serif;
     text-transform: capitalize;
     font-weight: 500;
     font-size: 14px;
@@ -423,6 +442,11 @@ export const RightSection = styled.div`
   gap: 15px;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  @media (max-width:480px) {
+    width: 100%;
+    /* flex-direction: row; */
+  }
 `;
 
 export const AgentCircle = styled.div`
@@ -461,7 +485,13 @@ export const PropertyContainerMaindiv = styled.div`
   gap: 30px;
   position: sticky;
   top: 70px;
-  align-self: flex-start !important; /* ✅ important inside flex */
+  /* align-self: flex-start !important; */
+  @media (max-width:768px) {
+    width: 85%;
+    position: static !important;
+    align-items: center;
+
+  } /* ✅ important inside flex */
 `;
 
 export const SearchagentConatiner = styled.div`
@@ -482,7 +512,6 @@ export const SearchagentConatiner = styled.div`
       font-size: 18px;
       font-weight: 600;
       line-height: 24px;
-      font-family: "Open Sans", serif;
       margin: 0;
       padding: 0;
     }
@@ -504,7 +533,6 @@ export const SearchagentConatiner = styled.div`
     padding: 15px;
     box-sizing: border-box;
     label {
-      font-family: "Open Sans", sans-serif;
       font-weight: 500;
       font-size: 16px;
       color: rgb(33, 37, 41);
@@ -615,7 +643,6 @@ export const PropertyCetagoriesContainer = styled.div`
       text-transform: capitalize;
       letter-spacing: 0.3px;
       line-height: 26px;
-      font-family: "Open Sans", sans-serif;
       text-decoration: none;
       transition: transform 0.3s ease, color 0.3s ease;
       transform: translateX(0);
@@ -655,7 +682,7 @@ export const PropertyAttachmentDiv = styled.div`
   justify-content: center;
 
   .button-container {
-    width: 85%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -680,7 +707,8 @@ export const PropertyAttachmentDiv = styled.div`
     line-height: 26px;
     padding: 15px 20px;
     margin: -1px 0px 0px;
-    font-family: "Open Sans", sans-serif;
+    box-sizing: border-box;
+
 
     /* Hover effect */
     &:hover {
