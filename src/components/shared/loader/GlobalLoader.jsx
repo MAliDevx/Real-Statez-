@@ -1,6 +1,6 @@
 import React from "react";
-import { Audio, Triangle } from "react-loader-spinner";
-import { useLoading } from "../../../Context/LoadingContext";
+import { Triangle } from "react-loader-spinner";
+import { useLoading } from "../../../context/loadingContext";
 
 const GlobalLoader = () => {
   const { loading } = useLoading();

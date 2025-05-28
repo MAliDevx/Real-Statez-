@@ -10,21 +10,11 @@ import {
   MapPlaceholder,
   LocationItemDiv,
 } from "./ContactStyle";
-import {
-  FaClock,
-  FaMapMarkerAlt,
-  FaPhone,
-  FaEnvelope,
-  FaGlobe,
-} from "react-icons/fa";
-import { IoHome } from "react-icons/io5";
-import { IoCall } from "react-icons/io5";
-import { FaGlobeAsia } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa6";
-import { FaTwitter } from "react-icons/fa";
-import { FaTelegram } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa6";
-import { FaWhatsapp } from "react-icons/fa6";
+
+import { IoHome ,IoCall} from "react-icons/io5";
+import { FaFacebookF,FaLinkedin,FaWhatsapp } from "react-icons/fa6";
+import { FaTwitter , FaTelegram , FaGlobeAsia,FaEnvelope} from "react-icons/fa";
+
 
 function Contact() {
   return (

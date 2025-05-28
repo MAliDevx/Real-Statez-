@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import axios from "../api/axios"; // custom axios instance
-import { showSuccessToast, showErrorToast } from "../components/shared/toaster/toaster";
+import axios from "../api/axios"; 
+import { showSuccessToast, showErrorToast } from "../components/shared/toaster/Toaster";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
