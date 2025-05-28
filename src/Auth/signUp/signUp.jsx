@@ -3,8 +3,9 @@ import { AuthPageLayout, FormCard } from "./signUpStyle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { showSuccessToast, showErrorToast } from "../../components/shared/toaster/toaster";
-
+import { useAuth } from "../../Context/AuthContext";
 const SignUp = () => {
+    const { register } = useAuth(); 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -13,7 +14,7 @@ const SignUp = () => {
     firstName: "",
     lastName: "",
     email: "",
-    gender: "",
+    // gender: "",
     city: "",
     country: "",
     password: "",
@@ -37,7 +38,7 @@ const SignUp = () => {
     if (!formData.email.trim()) newErrors.email = "Email required";
     else if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email format";
 
-    if (!formData.gender) newErrors.gender = "Gender required";
+    // if (!formData.gender) newErrors.gender = "Gender required";
     if (!formData.city.trim()) newErrors.city = "City required";
     if (!formData.country) newErrors.country = "Country required";
 
@@ -51,20 +52,31 @@ const SignUp = () => {
     return newErrors;
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    const newErrors = validate();    
+    const newErrors = validate();
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       showErrorToast("Please enter all input fields");
       return;
-    }else{
-        showSuccessToast("Account created successfully!");
-        console.log(formData);
-        navigate("/");
     }
-    } 
+
+    const apiData = {
+      name: `${formData.firstName} ${formData.lastName}`,
+
+      // fname: formData.firstName,
+      //  lname:formData.lastName,
+      email: formData.email,
+      city: formData.city,
+      country: formData.country,
+      password: formData.password,
+      phone:'89888888888',
+      firmId: "60d21b4667d0d8992e610c85"
+    };
+
+    register(apiData); 
+  };
   
 
   const errorClass = (field) => errors[field] ? "error-border" : "";
@@ -120,7 +132,7 @@ const SignUp = () => {
           </div>
 
           {/* Gender */}
-          <div>
+          {/* <div>
             <label>Gender</label>
             <div style={{ display: "flex", gap: "1em", marginTop: "0.5em" }}>
               {["male", "female", "other"].map((g) => (
@@ -135,7 +147,7 @@ const SignUp = () => {
                 </label>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* City and Country */}
           <div className="form-row" id="location">

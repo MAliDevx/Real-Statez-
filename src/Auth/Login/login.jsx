@@ -3,26 +3,34 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AuthPageLayout, FormCard } from "./loginStyle";
 import { showSuccessToast, showErrorToast } from "../../components/shared/toaster/toaster";
+import { useAuth } from "../../Context/AuthContext";
 
 const AuthLogin = () => {
+  const {login} = useAuth()
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('')
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
   const handleLogin = (e) => {
-    e.preventDefault(); // <-- prevents page refresh
+    e.preventDefault()
   
-    if (!username || !password) {
+    if (!email || !password) {
         setError('Please fill in all fields')
       showErrorToast("Please fill in all fields");
     } else {
-      showSuccessToast('Testing Toaster...');
+      
+     const apiData = {
+        email,
+        password,
+        logAs:'user'
+      };
+
+    login(apiData); 
       setError('')
-      navigate('/');
     }
   };
 
@@ -42,13 +50,13 @@ const AuthLogin = () => {
               <label htmlFor="username">Username</label>
               <div className="field-wrap">
                 <input
-                  type="text"
+                  type="email"
                   className={`${error ? "error-input" : ""}`}
                   id="username"
-                  placeholder="Enter your username"
+                  placeholder="Enter your email"
                   required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>

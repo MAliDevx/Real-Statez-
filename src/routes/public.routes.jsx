@@ -4,14 +4,15 @@ import HomePage from "../pages/Home/home";
 import Contact from "../pages/Contact/Contact";
 import SinglePropertyDetail from "../pages/PropertyDetails/PropertyDetails";
 import AuthLogin from "../Auth/Login/login";
-import ResetPassword from "../Auth/forgotPassword/forgotPassword";
+import ResetPassword from "../Auth/ForgotPassword/forgotPassword";
 import VerifyEmail from "../Auth/EmailVerify/verifyEmail";
 import OtpVerify from "../Auth/OTP/OTP";
 import SignUp from "../Auth/signUp/signUp";
 import Agents from "../pages/Agents/Agents";
 import SingleAgentDetail from "../pages/SingleAgentDetail/SingleAgentDetail";
 import NotFoundPage from "../components/shared/pageNotFound/pageNotFount";
-NotFoundPage
+import Verification from "../Auth/Verification/mailVerification";
+
 const PublicRoutes = () => {
   return (
     <Routes>
@@ -24,9 +25,11 @@ const PublicRoutes = () => {
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/otp-verification" element={<OtpVerify />} />
       <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/agents" element={<Agents />} />
-<Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
-<Route path="*" element={<NotFoundPage />} />
+      <Route path="/agents" element={<Agents />} />
+      <Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
+      <Route path="/verification" element={<Verification />} />
+      <Route path="*" element={<NotFoundPage />} />
+
     </Routes>
   )
 }

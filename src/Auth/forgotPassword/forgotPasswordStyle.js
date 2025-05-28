@@ -11,7 +11,7 @@ export const AuthPageLayout = styled.div`
 export const FormCard = styled.div`
   padding: 2rem;
   border-radius: 12px;
-  width: 70%;
+  width: 50%;
   background-color: #ffffff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
@@ -25,10 +25,6 @@ export const FormCard = styled.div`
     padding: 1.5rem;
   }
 
-  @media (max-width: 480px) {
-    width: 100%;
-    padding: 1.2rem;
-  }
 
   .form-title {
     text-align: center;
