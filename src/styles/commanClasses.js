@@ -28,7 +28,7 @@ export const DividerWithText = styled.div`
 
 
 export const CarouselWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   margin: 40px auto;
   position: relative;
 
@@ -72,6 +72,7 @@ cursor: pointer;
     padding: 6px 8px;
     background-color:var(--large-text);
     color: white;
+    text-transform: capitalize;
   }
 
   .property-feature {

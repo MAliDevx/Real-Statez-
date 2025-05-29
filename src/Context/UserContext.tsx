@@ -1,5 +1,4 @@
-// src/context/UserContext.js
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import API from '../api/axios';
 
 export const UserContext = createContext();
@@ -9,8 +8,9 @@ const UserProvider = ({ children }) => {
 
   const fetchAllPropertise = async () => {
     const res = await API.get('/property/view-properties');
-    setUsers(res.data);
-    return res.data;
+  const propertyArray = res.data.data || []; // ← fix here
+  setUsers(propertyArray);
+  return propertyArray;
   };
 
   const getUserById = async (id) => {
@@ -33,21 +33,19 @@ const UserProvider = ({ children }) => {
     return res.data;
   };
 
-  // useEffect(() => {
-  //   fetchUsers(); 
-  // }, []);
-
   return (
     <UserContext.Provider value={{
       fetchAllPropertise,
       getUserById,
       createUser,
       updateUser,
-      deleteUser
+      deleteUser,
     }}>
       {children}
     </UserContext.Provider>
   );
 };
+
+export const useUserContext = () => React.useContext(UserContext);
 
 export default UserProvider;

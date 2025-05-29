@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthPageLayout, FormCard } from "./VerifyEmailStyle";
-import { showSuccessToast, showErrorToast } from "../../../components/shared/toaster/Toaster";
+
+import { useAuth } from "../../../Context/AuthContext";
 
 const VerifyEmail = () => {
+  const { resetPassword } = useAuth()
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -13,26 +15,33 @@ const VerifyEmail = () => {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!email) {
-      setError("Email is required");
-      showErrorToast('Email is required')
-      return;
-    }
+  if (!email) {
+    setError("Email is required");
+    return;
+  }
 
-    if (!validateEmail(email)) {
-      setError("Invalid email format");
-      showErrorToast('Invalid email format')
+  if (!validateEmail(email)) {
+    setError("Invalid email format");
+    return;
+  }
 
-      return;
-    }
+  setError("");
 
-    setError("");
-    showSuccessToast('Verified Check email')
-    navigate("/otp-verification");
+  const payload = {
+    email: email,
+    logAs: 'user', 
   };
+
+  try {
+    const res = await resetPassword(payload); 
+    localStorage.setItem("isResetPassword", "true"); 
+  } catch (err) {
+  }
+};
+
 
   return (
     <AuthPageLayout>

@@ -11,7 +11,8 @@ import SignUp from "../Pages/auth/sign-up/signUp";
 import Agents from "../pages/agent-page/agents/Agents";
 import SingleAgentDetail from "../pages/agent-page/single-agent-detail/SingleAgentDetail";
 import NotFoundPage from "../components/shared/page-not-found/PageNotFount";
-import Verification from "../Pages/auth/email-verify/verifyEmail";
+import ResetPasswordVerification from "../Pages/auth/verification/ResetPasswordVerification";
+import RegistrationVerification from "../Pages/auth/verification/RegistrationVerification";
 
 const PublicRoutes = () => {
   return (
@@ -27,7 +28,9 @@ const PublicRoutes = () => {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/agents" element={<Agents />} />
       <Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
-      <Route path="/verification" element={<Verification />} />
+      <Route path="/registration-verification" element={<RegistrationVerification />} />
+      <Route path="/reset-password-verification" element={<ResetPasswordVerification />} />
+
       <Route path="*" element={<NotFoundPage />} />
 
     </Routes>

@@ -15,20 +15,24 @@ const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post("/auth/register", userData);
       showSuccessToast("Check Email");
-      navigate("/");
+      // return response.data
+      // navigate("/");
     } catch (err) {
       showErrorToast("Registration failed");
     }
   };
-  const emailVerificaion = async (userData) => {
-    try {
-      const response = await axios.post("/auth/verify", userData);
-      showSuccessToast("Email Verified");
-      navigate("/login");
-    } catch (err) {
-      showErrorToast("verification failed");
-    }
-  };
+const emailVerificaion = async (userData) => {
+  try {
+    const response = await axios.post("/auth/verify", userData);
+    showSuccessToast("Email Verified");
+    return response.data; 
+  } catch (err) {
+    showErrorToast("Otp Expired Verify again");
+    return { success: false }; 
+  }
+};
+
+
 
   const login = async (credentials) => {
     try {
@@ -47,15 +51,14 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     setAuthUser(null);
     showSuccessToast("Logged out successfully!");
-    navigate("/login");
   };
 
   const resetPassword = async (email) => {
     try {
-      await axios.post("/auth/reset-password", { email });
+      await axios.post("/auth/forget-password", email );
       showSuccessToast("Password reset link sent to email.");
     } catch (err) {
-      showErrorToast(err.response?.data?.message || "Reset failed");
+      showErrorToast("Reset failed");
     }
   };
 

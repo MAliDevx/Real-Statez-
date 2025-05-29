@@ -10,16 +10,15 @@ export const AuthPageLayout = styled.div`
 export const FormCard = styled.div`
   padding: 2em;
   border-radius: 12px;
-  /* width: min(95%, 400px); */
-  width: 60%;
+  width: 40%;
   background-color: #ffffff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-@media (min-width: 768px) {
-    width: 70%;
+@media (max-width: 768px) {
+    width: 50%;
 
 }
-@media (min-width: 480px) {
-    width: 80%;
+@media (max-width: 480px) {
+    width: 60%;
 
 }
   .form-title {
