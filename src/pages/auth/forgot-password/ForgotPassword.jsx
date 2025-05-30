@@ -1,8 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AuthPageLayout, FormCard } from "./ForgotPasswordStyle";
 import { showSuccessToast, showErrorToast } from "../../../components/shared/toaster/Toaster";
+import { useLocation} from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+import axios from "axios"; 
+
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -10,46 +14,60 @@ const ResetPassword = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
-
+  const { changePassword ,emailVerificaion} = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
 
-  // Refs to focus on error
+  const queryParams = new URLSearchParams(location.search);
+  const email = queryParams.get("email",);
+  const otp = queryParams.get("otp");
+
   const newPasswordRef = useState(null);
   const confirmPasswordRef = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
-    console.log(newPassword);
-    
-if(newPassword == null){
-    setError("Enter Password.");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
 
-}
-    if (!newPassword) {
-      setError("Please enter a new password.");
-      showErrorToast("Please enter a new password.");
-      newPasswordRef.current.focus();
-      return;
-    }
+  if (!newPassword) {
+    setError("Please enter a new password.");
+    showErrorToast("Please enter a new password.");
+    newPasswordRef.current.focus();
+    return;
+  }
 
-    if (!confirmPassword) {
-      setError("Please confirm your password.");
-      showErrorToast("Please confirm your password.");
-      confirmPasswordRef.current.focus();
-      return;
-    }
+  if (!confirmPassword) {
+    setError("Please confirm your password.");
+    showErrorToast("Please confirm your password.");
+    confirmPasswordRef.current.focus();
+    return;
+  }
 
-    if (newPassword !== confirmPassword) {
-      setError("Passwords do not match.");
-      showErrorToast("Passwords do not match.");
-      confirmPasswordRef.current.focus();
-      return;
-    }
+  if (newPassword !== confirmPassword) {
+    setError("Passwords do not match.");
+    showErrorToast("Passwords do not match.");
+    confirmPasswordRef.current.focus();
+    return;
+  }
 
-    navigate("/login");
-    showSuccessToast("Password updated successfully!");
+  const payload = {
+    logAs: 'user',
+    email: email,
+    newPassword: newPassword,
+    token: otp
   };
+
+  try {
+    const res = await changePassword(payload);
+    console.log(res);
+    navigate("/");
+  } catch (error) {
+   navigate('/verify-email')
+
+
+  }
+};
+
 
   return (
     <AuthPageLayout>

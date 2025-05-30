@@ -11,7 +11,7 @@ import SignUp from "../Pages/auth/sign-up/signUp";
 import Agents from "../pages/agent-page/agents/Agents";
 import SingleAgentDetail from "../pages/agent-page/single-agent-detail/SingleAgentDetail";
 import NotFoundPage from "../components/shared/page-not-found/PageNotFount";
-import ResetPasswordVerification from "../Pages/auth/verification/ResetPasswordVerification";
+// import ResetPasswordVerification from "../Pages/auth/verification/ResetPasswordVerification";
 import RegistrationVerification from "../Pages/auth/verification/RegistrationVerification";
 
 const PublicRoutes = () => {
@@ -22,14 +22,14 @@ const PublicRoutes = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/propertydetails/:id" element={<SinglePropertyDetail />} />
       <Route path="/login" element={<AuthLogin />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/reset-password-verification" element={<ResetPassword />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/otp-verification" element={<OtpVerify />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/agents" element={<Agents />} />
       <Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
       <Route path="/registration-verification" element={<RegistrationVerification />} />
-      <Route path="/reset-password-verification" element={<ResetPasswordVerification />} />
+      {/* <Route path="/reset-password-verification" element={<ResetPasswordVerification />} /> */}
 
       <Route path="*" element={<NotFoundPage />} />
 

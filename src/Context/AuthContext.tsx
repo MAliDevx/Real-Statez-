@@ -14,9 +14,7 @@ const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const response = await axios.post("/auth/register", userData);
-      showSuccessToast("Check Email");
-      // return response.data
-      // navigate("/");
+      showSuccessToast("Verifiy your email address");
     } catch (err) {
       showErrorToast("Registration failed");
     }
@@ -62,8 +60,17 @@ const emailVerificaion = async (userData) => {
     }
   };
 
+  const changePassword = async (credentials) => {
+    try {
+      await axios.post("/auth/reset-password", credentials );
+      showSuccessToast("password reset successfully .");
+    } catch (err) {
+      showErrorToast("Otp Failed  verify your email again");
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ register,emailVerificaion, login, logout, resetPassword, authUser }}>
+    <AuthContext.Provider value={{ register,emailVerificaion, login, logout, resetPassword, authUser,changePassword }}>
       {children}
     </AuthContext.Provider>
   );
