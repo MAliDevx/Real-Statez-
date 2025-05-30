@@ -1,50 +1,71 @@
 import "./App.css";
-import React, {useState, useEffect} from "react";
-import FooterPage from "./components/shared/footer/footer";
-import Header from "./components/shared/header/header";
-import HomePage from "./pages/Home/home";
-import GlobalStyling from "./styles/globalStyling";
-import PropertyFilter from "./pages/PropertiseService/propertiseService";
-import PublicRoutes from "./routes/public.routes";
+import React, { useEffect, useState } from "react";
+import FooterPage from "./components/shared/footer/Footer";
+import Header from "./components/shared/header/Header";
+import PublicRoutes from "./routes/Public.routes";
 import { FaAngleUp } from "react-icons/fa6";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ScrollTop } from "./styles/commanClasses";
-ScrollTop
-function App() {
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ScrollTop } from "./styles/CommanClasses";
+import AuthProvider from "./Context/AuthContext";
+import UserProvider from "./context/UserContext";
+import GlobalStyling from "./styles/GlobalStyling";
+import { LoadingProvider, useLoading } from "./Context/LoadingContext";
+import { setLoadingHandler } from "./api/axios";
+import GlobalLoader from "./Components/shared/loader/GlobalLoader"; 
+
+function AppWrapper() {
+  const { setLoading } = useLoading();
   const [visible, setVisible] = useState(false);
 
+  useEffect(() => {
+    setLoadingHandler(setLoading);
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
   const toggleVisibility = () => {
-    if (window.scrollY > 300) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
+    setVisible(window.scrollY > 300);
   };
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
   return (
     <>
-          <ToastContainer   autoClose={2000} position="top-right" style={{ zIndex: 99999 }} />
+      <ToastContainer
+        autoClose={2000}
+        position="top-right"
+        style={{ zIndex: 99999 }}
+      />
 
-      <ScrollTop onClick={scrollToTop}>
+      <ScrollTop onClick={scrollToTop} style={{ display: visible ? "flex" : "none" }}>
         <FaAngleUp />
       </ScrollTop>
-      <Header />
-      <GlobalStyling/>
-      <PublicRoutes />
-      <FooterPage />
+
+      <GlobalLoader /> 
+
+      <AuthProvider>
+        <UserProvider>
+          <Header />
+          <GlobalStyling />
+          <PublicRoutes />
+          <FooterPage />
+        </UserProvider>
+      </AuthProvider>
     </>
+  );
+}
+
+function App() {
+  return (
+    <LoadingProvider>
+      <AppWrapper />
+    </LoadingProvider>
   );
 }
 

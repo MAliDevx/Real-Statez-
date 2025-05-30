@@ -13,7 +13,7 @@ import {
   Input,
   NavLink,
   SubscribeButton
-} from "./footerStyle.js";
+} from "./FooterStyle.js";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube, FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 import { TfiYoutube } from "react-icons/tfi";
 
