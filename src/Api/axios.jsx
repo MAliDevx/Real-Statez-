@@ -5,9 +5,12 @@ let setLoadingExternal = () => {};
 export const setLoadingHandler = (fn) => {
   setLoadingExternal = fn;
 };
+const localURL = "http://localhost:3000/api";
+const liveURL = "https://********/api"; 
+const isLive = false; 
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: isLive ? liveURL : localURL
 });
 
 API.interceptors.request.use(

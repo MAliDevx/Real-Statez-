@@ -52,7 +52,6 @@ setIsError(true);
   }, []);
 
   useEffect(() => {
-    console.log("Updated properties:", properties);
   }, [properties]);
 
   const navigate = useNavigate();
