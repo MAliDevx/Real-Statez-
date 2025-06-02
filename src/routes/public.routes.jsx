@@ -13,6 +13,7 @@ import SingleAgentDetail from "../pages/agent-page/single-agent-detail/SingleAge
 import NotFoundPage from "../components/shared/page-not-found/PageNotFount";
 // import ResetPasswordVerification from "../Pages/auth/verification/ResetPasswordVerification";
 import RegistrationVerification from "../Pages/auth/verification/RegistrationVerification";
+import UserProfile from "../Pages/profile/UserProfile.jsx";
 
 const PublicRoutes = () => {
   return (
@@ -29,7 +30,7 @@ const PublicRoutes = () => {
       <Route path="/agents" element={<Agents />} />
       <Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
       <Route path="/registration-verification" element={<RegistrationVerification />} />
-      {/* <Route path="/reset-password-verification" element={<ResetPasswordVerification />} /> */}
+      <Route path="/user-profile" element={<UserProfile />} />
 
       <Route path="*" element={<NotFoundPage />} />
 

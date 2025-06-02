@@ -69,12 +69,12 @@ const PropertyCard = ({ item, isError })  => {
         <div className="property-profile__info">
           <figure>
             <img
-              src={item.agencyId.image}
+              src={item.agencyId?.image}
               alt="Owner"
               className="property-profile__image"
             />
           </figure>
-          <p className="property-profile__name">{item.agencyId.name}</p>
+          <p className="property-profile__name">{item.agencyId?.name}</p>
         </div>
         <div className="property-profile__price">
           {item.price}.00

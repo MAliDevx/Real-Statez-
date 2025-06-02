@@ -32,7 +32,9 @@ const handleLogin = async (e) => {
   };
 
   try {
-    await login(apiData); 
+
+    await login(apiData);
+    window.dispatchEvent(new Event("login-success")); 
     setError("");
   } catch (err) {
 
