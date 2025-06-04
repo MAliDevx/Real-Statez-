@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PropertDetailsSecondPage,FilteredContent,RequestQuotes,InnerContainer } from "./PropertyDetailsStyleSecondPage";
-import { FaBuilding ,FaAmbulance ,FaChevronRight} from "react-icons/fa";
 import { IoLocationSharp, } from "react-icons/io5";
-import { DividerWithText,  CarouselWrapper,
+import {CarouselWrapper,
   Card,
   CardImg,
   CardBodyTop,
@@ -13,8 +12,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { MdLocationOn } from "react-icons/md";
-import { FaBath, FaBed, FaInbox , FaMap } from 'react-icons/fa';
+import { FaLocationDot } from "react-icons/fa6";
+import { FaBath, FaBed, FaInbox , FaMap,FaBuilding ,FaAmbulance ,FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 // import { FaChevronRight } from 'react-icons/fa';
 
@@ -252,7 +251,7 @@ useEffect(() => {
               <CardBodyTop>
                 <button className="isHouse">House</button>
                 <h4 className='property-name'>{item.name}</h4>
-                <p className='property-location'><MdLocationOn /> {item.location}</p>
+                <p className='property-location'><FaLocationDot /> {item.location}</p>
               </CardBodyTop>
               <CardBodyBottom>
                 <div className="bath-box">

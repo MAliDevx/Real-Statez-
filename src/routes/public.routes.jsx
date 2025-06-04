@@ -14,7 +14,7 @@ import NotFoundPage from "../components/shared/page-not-found/PageNotFount";
 // import ResetPasswordVerification from "../Pages/auth/verification/ResetPasswordVerification";
 import RegistrationVerification from "../Pages/auth/verification/RegistrationVerification";
 import UserProfile from "../Pages/profile/UserProfile.jsx";
-
+import FavoritePage from "../Pages/favorite-items/FavoritePage.jsx";
 const PublicRoutes = () => {
   return (
     <Routes>
@@ -31,6 +31,7 @@ const PublicRoutes = () => {
       <Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
       <Route path="/registration-verification" element={<RegistrationVerification />} />
       <Route path="/user-profile" element={<UserProfile />} />
+      <Route path="/favorite-items" element={<FavoritePage />} />
 
       <Route path="*" element={<NotFoundPage />} />
 

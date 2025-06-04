@@ -1,5 +1,5 @@
 import React from "react";
-import { Triangle } from "react-loader-spinner";
+import { Triangle,ThreeDots } from "react-loader-spinner";
 import { useLoading } from "../../../context/loadingContext";
 
 const GlobalLoader = () => {
@@ -9,13 +9,15 @@ const GlobalLoader = () => {
 
   return (
     <div className="global-loader-overlay">
-      <Triangle
-        height="90"
-        width="90"
-        color="var(--primary-button"
-        ariaLabel="triangle-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
+      <ThreeDots
+  visible={true}
+  height="100"
+  width="100"
+  color="var(--primary-button)"
+  radius="9"
+  ariaLabel="three-dots-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
       />
     </div>
   );

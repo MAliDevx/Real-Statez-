@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import {
   PropertyListingContainer,
   PropertyFilterdiv,
@@ -37,7 +37,6 @@ import { IoGridSharp } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { MdLocationOn } from "react-icons/md";
 import {
   CardContainer,
   ImageContainer,
@@ -53,10 +52,32 @@ import {
   Price,
 } from "../../agent-page/single-agent-detail/SingleAgentDetailStyle";
 import {useNavigate } from "react-router-dom";
+import { CardJSON } from "../../../healpers/Card-json";
+import { useUserContext } from "../../../context/UserContext";
+import PropertyCard from "../../../components/shared/cards/Cards";
 const PropertyListing = () => {
   const navigate = useNavigate()
   const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
   const [activeView, setActiveView] = useState("grid");
+  const { fetchAllPropertise } = useUserContext();
+  const [properties, setProperties] = useState([]);
+  const [isError, setIsError] = useState(false);
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const data = await fetchAllPropertise();
+
+        setProperties(data.data);
+        setIsError(false);
+      } catch {
+        setProperties([CardJSON, CardJSON, CardJSON]);
+        setIsError(true);
+      }
+    };
+    fetchProperties();
+  }, []);
+
+  useEffect(() => {}, [properties]);
 
   const statusOptions = [
     { value: "for-sale", label: "For Sale" },
@@ -88,75 +109,6 @@ const PropertyListing = () => {
     { value: "3", label: "3 Bathrooms" },
   ];
 
-  const listings = [
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Modern Villa",
-      location: "Los Angeles, CA",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: "Alice Johnson",
-      price: "$3,300",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Modern Villa",
-      location: "Los Angeles, CA",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: "Alice Johnson",
-      price: "$3,300",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Modern Villa",
-      location: "Los Angeles, CA",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: "Alice Johnson",
-      price: "$3,300",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Modern Villa",
-      location: "Los Angeles, CA",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: "Alice Johnson",
-      price: "$3,300",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Modern Villa",
-      location: "Los Angeles, CA",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: "Alice Johnson",
-      price: "$3,300",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Modern Villa",
-      location: "Los Angeles, CA",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: "Alice Johnson",
-      price: "$3,300",
-    },
-    //... other listings
-  ];
 
   return (
     <PropertyListingContainer>
@@ -237,82 +189,40 @@ const PropertyListing = () => {
       {/* Conditional rendering based on activeView */}
       {activeView === "grid" && (
         <GridContainer >
-                    
-
-
-        {listings.map((item, idx) => (
-<Card onClick={() => navigate(`/propertydetails/${item.id}`)}>
-          <button className='property-feature'>Featured</button>
-              <button className='isForSale'>For Sale</button>
-              <CardImg src={item.image} alt={item.name} />
-              <CardBodyTop>
-                <button className="isHouse">House</button>
-                <h4 className='property-name'>{item.name}</h4>
-                <p className='property-location'><MdLocationOn /> {item.location}</p>
-              </CardBodyTop>
-              <CardBodyBottom>
-                <div className="bath-box">
-                <div> Baths</div> <div className='bottom-box'><FaBath /> {item.baths}</div>
-                </div>
-                <div className="beds-box">
-                <div> Beds</div> <div className='bottom-box'><FaBed />{item.bedRooms}</div>
-                </div>
-                <div className="room-box">
-                <div> Rooms</div> <div className='bottom-box'><FaInbox  />{item.rooms}</div>
-                </div>
-                <div className="area-box">
-                <div> Area</div> <div className='bottom-box'><FaMap />{item.Area}</div>
-                </div>
-
-
-
-              </CardBodyBottom>
-<div className="property-profile">
-  <div className="property-profile__info">
-   <figure>
-   <img
-      src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
-      alt="Owner"
-      className="property-profile__image"
-    />
-   </figure>
-    <p className="property-profile__name">{item.ownerName}</p>
-  </div>
-  <div className="property-profile__price">{item.price}.00</div>
-</div>
-            </Card>
+        {properties.map((item, idx) => (
+                  <PropertyCard item={item} isError={isError} />
         ))}
         </GridContainer>
       )}
 
       {activeView === "list" && (
         <ListConatiner>
-                  {listings.map((property, index) => (
+                  {properties.map((property, index) => (
                     <CardContainer key={index}>
                       <ImageContainer>
-                        <img src={property.image} alt={property.title} />
-                        <SoldOutRibbon>Sold Out</SoldOutRibbon>
-                        <button>For Sale</button>
+                        <img src={property.image} alt={property.propertyType} />
+                        <SoldOutRibbon> {property.status}</SoldOutRibbon>
+                        <button>{property.purpose}</button>
                       </ImageContainer>
 
                       <InfoSection>
-                        <Tag>House</Tag>
+                        <Tag>{property.propertyType}</Tag>
                         <AgentTitle>{property.name}</AgentTitle>
                         <Location>
-                          <FaMapMarkerAlt size={12} style={{marginTop:'2px'}} /> {property.location}
+                          <FaMapMarkerAlt size={12} style={{marginTop:'2px'}} /> {property.fullAddress}
                         </Location>
 
                         <DetailRow>
-                          <p><span>Baths</span><span><FaBath /> {property.baths}</span></p>
-                          <p><span>Beds</span><span><FaBed /> {property.beds}</span></p>
+                          <p><span>Baths</span><span><FaBath /> {property.bathrooms}</span></p>
+                          <p><span>Beds</span><span><FaBed /> {property.bedrooms}</span></p>
                           <p><span>Rooms</span><span><FaInbox /> {property.rooms}</span></p>
                           <p><span>Area</span><span><FaMap /> {property.area} Sq Ft</span></p>
                         </DetailRow>
                       </InfoSection>
 
                       <RightSection>
-                        <AgentCircle>{property.agentInitial}</AgentCircle>
-                        <AgentName>{property.agentName}</AgentName>
+                        <AgentCircle src={property.agencyId?.image} />
+                        <AgentName>{property.agencyId?.name}</AgentName>
                         <Price>${property.price}</Price>
                       </RightSection>
                     </CardContainer>

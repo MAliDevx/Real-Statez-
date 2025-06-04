@@ -165,10 +165,16 @@ export const CardBodyTop = styled.div`
     color: #555;
     margin: 6px 0;
     text-transform: capitalize;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     font-size: 15px;
+  }
+  .add-fevorite{
+        display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
   .property-name {
     margin: 0;
@@ -197,7 +203,7 @@ text-align: start;
   }
   
 `;
-export const Button = styled.div`
+export const Button = styled.button`
 
           padding: 12px 24px;
           display:flex;

@@ -15,17 +15,11 @@ import {
 import {
   DividerWithText,
   CarouselWrapper,
-  Card,
-  CardImg,
-  CardBodyTop,
-  CardBodyBottom,
 } from "../../../styles/CommanClasses";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import { MdLocationOn } from "react-icons/md";
-import { FaBath, FaBed, FaInbox, FaMap } from "react-icons/fa";
 import CompanyShowCase from "../company-showcase/CompanyShowcase";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../context/UserContext";
@@ -88,104 +82,6 @@ setIsError(true);
     { value: "3", label: "3 Bathrooms" },
   ];
 
-  const listings = [
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Modern Villa",
-      location: "Los Angeles, CA",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: "Alice Johnson",
-      price: "$3,300",
-      id: "sdkjf8938432kjadlkajd",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery11.jpg",
-      name: "Urban Apartment",
-      location: "New York, NY",
-      rooms: 2,
-      bedRooms: 2,
-      baths: 1,
-      Area: "38 Sq Ft",
-      ownerName: "Michael Lee",
-      price: "$2,200",
-      id: "asdjask93823432jksd",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery17.jpg",
-      name: "Cozy Cottage",
-      location: "Nashville, TN",
-      rooms: 3,
-      bedRooms: 3,
-      baths: 2,
-      Area: "40 Sq Ft",
-      ownerName: "Samantha Brown",
-      price: "$2,800",
-      id: "adja3849jkdjsdlask",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery10.jpg",
-      name: "Luxury Loft",
-      location: "Chicago, IL",
-      rooms: 2,
-      bedRooms: 2,
-      baths: 2,
-      Area: "35 Sq Ft",
-      ownerName: "Daniel Green",
-      price: "$3,100",
-      id: "sdkjf8938432kjadlkajd",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery15.jpg",
-      name: "Beach House",
-      location: "Miami, FL",
-      rooms: 5,
-      bedRooms: 5,
-      baths: 4,
-      Area: "55 Sq Ft",
-      ownerName: "Olivia Martinez",
-      price: "$5,200",
-      id: "sdkjf8938432kjadlkajd",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery16.jpg",
-      name: "Penthouse",
-      location: "San Francisco, CA",
-      rooms: 3,
-      bedRooms: 3,
-      baths: 2,
-      Area: "48 Sq Ft",
-      ownerName: "Chris Evans",
-      price: "$4,700",
-      id: "sdkjf8938432kjadlkajd",
-    },
-    {
-      image: "https://picsum.photos/id/1027/600/300",
-      name: "Suburban Home",
-      location: "Dallas, TX",
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "50 Sq Ft",
-      ownerName: "Emma Watson",
-      price: "$3,600",
-      id: "sdkjf8938432kjadlkajd",
-    },
-    {
-      image: "https://wallsproperty.netlify.app/images/gallery18.jpg",
-      name: "Ranch House",
-      location: "Austin, TX",
-      rooms: 6,
-      bedRooms: 6,
-      baths: 5,
-      Area: "60 Sq Ft",
-      ownerName: "Liam Carter",
-      price: "$6,000",
-      id: "sdkjf8938432kjadlkajd",
-    },
-  ];
 
   const [showCard, setCard] = useState(3);
 
@@ -286,66 +182,17 @@ setIsError(true);
             autoplay={{ delay: 6000 }}
             pagination={{ clickable: true }}
           >
-            {listings.map((item, idx) => (
+            {properties.length === 0 ? (
+  <p>No cards found.</p>
+) : (
+            properties.map((item, idx) => (
               <SwiperSlide key={idx}>
-                <Card onClick={() => navigate(`/propertydetails/${item.id}`)}>
-                  <button className="property-feature">Featured</button>
-                  <button className="isForSale">For Sale</button>
-                  <CardImg src={item.image} alt={item.name} />
-                  <CardBodyTop>
-                    <button className="isHouse">House</button>
-                    <h4 className="property-name">{item.name}</h4>
-                    <p className="property-location">
-                      <MdLocationOn /> {item.location}
-                    </p>
-                  </CardBodyTop>
-                  <CardBodyBottom>
-                    <div className="bath-box">
-                      <div> Baths</div>{" "}
-                      <div className="bottom-box">
-                        <FaBath /> {item.baths}
-                      </div>
-                    </div>
-                    <div className="beds-box">
-                      <div> Beds</div>{" "}
-                      <div className="bottom-box">
-                        <FaBed />
-                        {item.bedRooms}
-                      </div>
-                    </div>
-                    <div className="room-box">
-                      <div> Rooms</div>{" "}
-                      <div className="bottom-box">
-                        <FaInbox />
-                        {item.rooms}
-                      </div>
-                    </div>
-                    <div className="area-box">
-                      <div> Area</div>{" "}
-                      <div className="bottom-box">
-                        <FaMap />
-                        {item.Area}
-                      </div>
-                    </div>
-                  </CardBodyBottom>
-                  <div className="property-profile">
-                    <div className="property-profile__info">
-                      <figure>
-                        <img
-                          src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
-                          alt="Owner"
-                          className="property-profile__image"
-                        />
-                      </figure>
-                      <p className="property-profile__name">{item.ownerName}</p>
-                    </div>
-                    <div className="property-profile__price">
-                      {item.price}.00
-                    </div>
-                  </div>
-                </Card>
+                <PropertyCard item={item} isError={isError} />
+                
               </SwiperSlide>
-            ))}
+            ))
+)}
+
           </Swiper>
         </CarouselWrapper>
       </FilteredContent>
