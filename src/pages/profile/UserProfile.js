@@ -13,8 +13,11 @@ export const StyledProfileWrapper = styled.div`
     background-position: center;
     border-radius: 10px;
   } */
-
-  .profile-image-container {
+.profile-header{
+      display: flex;
+    align-items: start;
+    justify-content: space-between;
+      .profile-image-container {
     position: relative;
     margin-top: -50px;
     display: flex;
@@ -58,6 +61,8 @@ export const StyledProfileWrapper = styled.div`
       display: none;
     }
   }
+}
+
 
   form {
     display: flex;
@@ -70,16 +75,23 @@ export const StyledProfileWrapper = styled.div`
       flex-direction: column;
 
       label {
-        margin-bottom: 6px;
-        font-weight: 500;
+     margin-bottom: 0.4em;
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
       }
 
       input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-        outline: none;
+
+            width: 100%;
+    box-sizing: border-box;
+    padding: 1em;
+    padding-right: 3em;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    outline: none;
+    transition: 0.3s ease;
+    border-radius: 4px;
 
       }
     }
@@ -93,20 +105,12 @@ export const StyledProfileWrapper = styled.div`
       }
     }
 
-    .submit-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      align-self: center;
-
-      &:hover {
-        background-color: #0056b3;
-      }
+    .button {
+   display: flex;
+   align-items: center;
+   justify-content: end;
+   gap: 20px;
+   
     }
 }
 p{

@@ -12,21 +12,16 @@ const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [userProfile, setUsersProfile] = useState([]);
 
-  const fetchAllPropertise = async () => {
-    const res = await API.get("/property/view-properties");
-    const propertyArray = res.data.data || [];
+  const fetchAllPropertise = async (page, limit) => {
+    const res = await API.get(`/property/view-properties?page=${page}&limit=${limit}`);
+    const propertyArray = res.data.data;
     setUsers(propertyArray);
     return propertyArray;
   };
-
-  const getUserById = async (id) => {
-    const res = await API.get(`/users/${id}`);
-    return res.data;
-  };
-
-  const updateUser = async (id, userData) => {
-    const res = await API.put(`/users/${id}`, userData);
-    return res.data;
+  const viewSingleProperty = async (id) => {
+    const res = await API.get(`/property/view-property/${id}`);
+    const propertyArray = res.data.data || [];
+    return propertyArray;
   };
 
   const fetchUserProfile = async () => {
@@ -35,6 +30,7 @@ const UserProvider = ({ children }) => {
     setUsersProfile(propertyArray);
     return propertyArray;
   };
+
 
   const updateProfile = async (userData) => {
     try {
@@ -45,6 +41,7 @@ const UserProvider = ({ children }) => {
       showErrorToast("Profile edit failed");
     }
   };
+
 
   const uploadfile = async (userData) => {
     try {
@@ -57,16 +54,54 @@ const UserProvider = ({ children }) => {
       showErrorToast("File uploaded failed");
     }
   };
+const addFevorite = async (userData) => {
+  try {
+    const response = await API.post("/favorite/add-favorite", userData);
+    return response;
+  } catch (err) {
+    if (err.response && err.response.status === 409) {
+      showErrorToast("Already in favorites");
+    } else if (err.response && err.response.status === 401) {
+      showErrorToast("Please Login First");
+    } else if (!err.response) {
+      showErrorToast("Please check your Internet connection.");
+    } else {
+      showErrorToast("Failed to add to favorites");
+    }
+
+    throw err;
+  }
+};
+
+const fetchAllFevorite = async (page, limit) => {
+  try{
+  const res = await API.get(`/favorite/view-favorites?page=${page}&limit=${limit}`);
+
+    const propertyArray = res.data;
+    setUsersProfile(propertyArray);
+    return propertyArray;
+  } catch (error) {
+  }
+};
+
+  const deleteFavorite = async (_id) => {
+    const res = await API.delete(`/favorite/delete-favorite/${_id}`);
+    const propertyArray = res.data.data || [];
+    setUsers(propertyArray);
+    return propertyArray;
+  };
 
   return (
     <UserContext.Provider
       value={{
         fetchAllPropertise,
-        getUserById,
         fetchUserProfile,
-        updateUser,
         updateProfile,
         uploadfile,
+        addFevorite,
+        fetchAllFevorite,
+        viewSingleProperty,
+        deleteFavorite
       }}
     >
       {children}

@@ -167,8 +167,22 @@ export const CardBodyTop = styled.div`
     text-transform: capitalize;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 15px;
+    .truncate-text {
+  display: inline-block; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 93%;            
+}
+
+  }
+  .add-fevorite{
+        display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
   .property-name {
     margin: 0;
@@ -197,7 +211,7 @@ text-align: start;
   }
   
 `;
-export const Button = styled.div`
+export const Button = styled.button`
 
           padding: 12px 24px;
           display:flex;
@@ -229,3 +243,25 @@ export const ScrollTop = styled.div`
    cursor: pointer;
 
 `
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+`;

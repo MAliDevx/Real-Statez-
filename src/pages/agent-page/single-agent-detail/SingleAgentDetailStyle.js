@@ -416,7 +416,7 @@ export const DetailRow = styled.div`
   align-items: center;
   p {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     flex-direction: column;
     gap: 10px;
@@ -451,7 +451,6 @@ export const RightSection = styled.div`
 `;
 
 export const AgentCircle = styled.div`
-  background-color: #ffce00;
   color: #222;
   font-weight: 700;
   border-radius: 50%;

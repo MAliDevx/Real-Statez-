@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaArrowLeft, FaSave } from "react-icons/fa";
 import { StyledProfileWrapper } from "./UserProfile";
 import { useUserContext } from "../../context/UserContext";
 import API from "../../api/axios";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Button } from "../../styles/CommanClasses";
+import { RiResetRightLine } from "react-icons/ri";
+
 function UserProfile() {
   const { fetchUserProfile, updateProfile, uploadfile } = useUserContext();
 
@@ -13,17 +17,28 @@ function UserProfile() {
     country: "",
     city: "",
     state: "",
-    email:'',
-    zipCode:''
+    email: "",
+    zipCode: "",
   });
 
   const [profileImage, setProfileImage] = useState(null);
   const [showImage, setShowImage] = useState(null);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
+    }));
+  };
+  const resetForm = () => {
+    setFormData((prev) => ({
+      name: "",
+      phoneNumber: "",
+      country: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      email: prev.email,
     }));
   };
 
@@ -40,8 +55,6 @@ function UserProfile() {
         const uploadedPath = response?.data?.data?.files?.[0]?.path;
 
         if (uploadedPath) {
-          console.log("API/uploadedPath",API/uploadedPath);
-          
           setProfileImage(uploadedPath);
         } else {
         }
@@ -67,10 +80,9 @@ function UserProfile() {
       });
 
       if (user.image) {
-        const image = `${API.defaults.baseURL}${user.image}`
-        setShowImage(image);        
-        setProfileImage(user.image);        
-
+        const image = `${API.defaults.baseURL}${user.image}`;
+        setShowImage(image);
+        setProfileImage(user.image);
       }
     } catch (error) {
       console.error("Error fetching user profile:", error);
@@ -81,7 +93,8 @@ function UserProfile() {
     fetchData();
   }, []);
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    event.preventDefault();
+    console.log("click");
 
     const payload = {
       name: formData.name,
@@ -97,60 +110,71 @@ function UserProfile() {
 
     try {
       const response = await updateProfile(payload);
-      fetchData()
-    } catch (error) {
-    }
+      fetchData();
+    } catch (error) {}
   };
 
   return (
     <StyledProfileWrapper>
       {/* <div className="top-banner" /> */}
-
-      <div className="profile-image-container">
-        <img
-          src={ showImage || "https://via.placeholder.com/100?text=User"}
-          className="profile-image"
-          alt="Profile"
-        />
-        <label htmlFor="profile-upload" className="upload-icon">
-          <FaPlus />
-        </label>
-        <input
-          id="profile-upload"
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-        />
-        <div className="userDetails">
-          <p className="userName">{formData.name || "User Name"}</p>
-          <p>{formData.email || "user@example.com"}</p>{" "}
+      <div className="profile-header">
+        <div className="profile-image-container">
+          <img
+            src={showImage || "https://via.placeholder.com/100?text=User"}
+            className="profile-image"
+            alt="Profile"
+          />
+          <label htmlFor="profile-upload" className="upload-icon">
+            <FaPlus />
+          </label>
+          <input
+            id="profile-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
+          <div className="userDetails">
+            <p className="userName">{formData.name || "User Name"}</p>
+            <p>{formData.email || "user@example.com"}</p>{" "}
+          </div>
         </div>
+        <Button
+          style={{
+            width: "100px",
+            padding: "10px",
+            backgroundColor: "#f0f0f0",
+            color: "#333",
+            border: "1px solid #ccc",
+          }}
+          onClick={() => navigate(-1)}
+        >
+          <FaArrowLeft style={{ marginRight: "5px" }} />
+          Back
+        </Button>
       </div>
 
-      <form onSubmit={handleSubmit}>
-                <div className="form-row">
-
-        <div className="form-group">
-          <label>Name</label>
-          <input
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-                <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            required
-          />
-          </div>
-          </div>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className="form-row">
-
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Phone Number</label>
+            <input
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="form-row">
           <div className="form-group">
             <label>Country</label>
             <input
@@ -161,14 +185,14 @@ function UserProfile() {
             />
           </div>
           <div className="form-group">
-          <label>State</label>
-          <input
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <label>State</label>
+            <input
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              required
+            />
+          </div>
         </div>
 
         <div className="form-row">
@@ -181,7 +205,7 @@ function UserProfile() {
               required
             />
           </div>
-                    <div className="form-group">
+          <div className="form-group">
             <label>Zip Code</label>
             <input
               name="zipCode"
@@ -191,10 +215,37 @@ function UserProfile() {
             />
           </div>
         </div>
+        <div className="button">
+          <Button
+            type="button"
+            style={{
+              width: "100px",
+              padding: "10px",
+              backgroundColor: "#f0f0f0",
+              color: "#333",
+              border: "1px solid #ccc",
+            }}
+            onClick={() => resetForm()}
+          >
+            <RiResetRightLine style={{ marginRight: "5px" }} />
+            Reset
+          </Button>
 
-        <button type="submit" className="submit-button">
-          Save Changes
-        </button>
+          <Button
+            type="submit"
+            style={{
+              width: "150px",
+              padding: "10px",
+              backgroundColor: "var(--primary-button)",
+              border:'1px solid transparent',
+              color: "white",
+              
+            }}
+          >
+            <FaSave style={{ marginRight: "5px" }} />
+            Save Changes
+          </Button>
+        </div>
       </form>
     </StyledProfileWrapper>
   );

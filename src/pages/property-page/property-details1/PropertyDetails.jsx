@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { SwiperStyles, PropertDetails,InnerBox } from "./PropertyDetailsStyle";
+import {
+  SwiperStyles,
+  PropertDetails,
+  InnerBox,
+  SliderContainer,
+} from "./PropertyDetailsStyle";
 import { FaExchangeAlt, FaPrint } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
 import { Button } from "../../../styles/CommanClasses";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp, FaLocationDot } from "react-icons/fa6";
 import SecondSinglePropertyDetail from "../Property-details2/propertyDetailsSecondPage";
+import { useParams } from "react-router-dom";
+import { useUserContext } from "../../../context/UserContext";
+
+import {
+  FaBath,
+  FaBed,
+  FaInbox,
+  FaMap,
+  FaRegHeart,
+  FaHeart,
+  FaTrashAlt,
+} from "react-icons/fa";
+import API from "../../../api/axios";
 
 const slides = [
   {
@@ -21,20 +39,7 @@ const slides = [
     image: "https://wallsproperty.netlify.app/images/bg19.jpg",
   },
 ];
-const features = {
-  features: [
-    { name: "Air Conditioning" },
-    { name: "Swimming Pool" },
-    { name: "Central Heating" },
-    { name: "Pets Allow" },
-    { name: "Alarm" },
-    { name: "Gym" },
-    { name: "Window Covering" },
-    { name: "Free WiFi" },
-    { name: "Car Parking" },
-    { name: "Sp & Massage " },
-  ],
-};
+
 const floors = [
   {
     name: "1st Floor",
@@ -60,9 +65,49 @@ const floors = [
 ];
 
 const SinglePropertyDetail = () => {
-  const fullText = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas ab, quisquam debitis magni cum itaque libero odio praesentium possimus unde accusamus? At eius, laudantium in, nam quo soluta maiores molestias commodi quod similique distinctio quia temporibus cupiditate? Neque nesciunt numquam laboriosam eligendi vero voluptas modi a ipsum illum exercitationem, cumque fugit totam eos quidem! Qui blanditiis corrupti aperiam asperiores. A animi provident beatae? In accusantium tempore quia deleniti explicabo? Reiciendis, in. Reiciendis natus quod nisi doloremque odio adipisci eaque quaerat inventore quisquam perspiciatis, at fugiat nesciunt doloribus debitis ullam voluptas illo accusamus mollitia vero, vitae nihil minus cum. Sapiente quos voluptatem, consequatur aspernatur est consequuntur atque non dignissimos veritatis id minus repudiandae nemo soluta? Harum assumenda dignissimos quia animi! Commodi veniam unde dignissimos ad perspiciatis veritatis, cum ut? Fuga id inventore odit, fugit, libero placeat, consectetur ipsam nobis fugiat voluptatem neque. Quia at facilis fuga in tenetur enim minus corrupti, asperiores quaerat reprehenderit exercitationem nulla ratione nemo nostrum necessitatibus, reiciendis qui quo, perspiciatis porro voluptates optio laboriosam provident ut. Fuga incidunt maiores ad necessitatibus harum soluta repellendus officia ab expedita at perspiciatis quos, iure consequatur sapiente libero ipsum! Officiis minus aut corporis hic quis nihil, ducimus similique earum fuga voluptate! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi adipisci totam assumenda dolorem laudantium? Debitis cupiditate aspernatur nam praesentium commodi repellat dolore? Reiciendis, sit distinctio. Voluptatem excepturi id quos numquam officia! Placeat, omnis iste, consequatur beatae corrupti commodi suscipit modi at, ullam quod accusamus atque maxime soluta? Aut, delectus eveniet?`;
+  const [currentIndex, setCurrentIndex] = useState(0);
   const videoId = "Y9XdoRTwBPg";
   const [showFull, setShowFull] = useState(false);
+  const { id } = useParams();
+  const { viewSingleProperty } = useUserContext();
+  const [property, setProperties] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [images, setImages] = useState([]);
+
+  const handleSlideChange = (swiper) => {
+    console.log(swiper)
+    setCurrentIndex(swiper.realIndex||0);
+  };
+
+  let currentSlide = images[currentIndex];
+  let baseUrl = API.defaults.baseURL;
+  const nextSlide = images[currentIndex + 1];
+
+    const ViewProperty = async () => {
+      try {
+        const data = await viewSingleProperty(id);
+
+        setProperties(data.property);
+        setImages(data.property.images);
+        setIsError(false);
+        return data
+;
+      } catch {
+        set
+        Properties([CardJSON, CardJSON, CardJSON]);
+        setIsError(true);
+         return null; 
+      }
+    };
+  useEffect(() => {
+
+    ViewProperty();
+  }, []);
+
+  useEffect(() => {}, [property]);
+  useEffect(() => {
+    console.log("Updated images here ", images);
+  }, [images]);
 
   const toggleText = () => {
     setShowFull(!showFull);
@@ -75,159 +120,244 @@ const SinglePropertyDetail = () => {
   };
 
   const getTrimmedText = (text, wordCount = 100) => {
-    const words = text.split(" ");
-    return words.slice(0, wordCount).join(" ") + "...";
+    // const words = text?.split(" ");
+    // return words.slice(0, wordCount).join(" ") + "...";
   };
+  const price = property.price || 0;
+  const discount = property.discount || 0;
 
+  const discountedPrice = price - (price * discount) / 100;
   return (
     <>
       <SwiperStyles />
       <PropertDetails>
-      <InnerBox>
-        <div className="propertHeading">
-          <div className="innerContainer">
-            <div className="left-side">
-              <h2>Luxury Family Home</h2>
-              <p>166 welling street, collingwood, vic 3066</p>
+        <InnerBox>
+          <h1>Single Property Detail</h1>
+          <SliderContainer>
+            {images.length > 0 && (
+
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              navigation
+              loop={true}
+              autoplay={{ delay: 2500 }}
+              className="mySwiper slider-left"
+              onSlideChange={handleSlideChange}
+            >
+              {images.map((slide, index) => (
+                <SwiperSlide key={index}>
+                  <div
+                    style={{
+                      backgroundImage: `url(${baseUrl}${slide})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  ></div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+)}
+
+            <div className="slider-right">
+              <div className="top-box">
+                <div
+                  className="preview-image"
+                  style={{
+                    backgroundImage: `url(${baseUrl}${nextSlide})`,
+                  }}
+                ></div>
+              </div>
+
+              <div className="bottom-box">
+                <div
+                  className="first-image"
+                  style={{
+                    backgroundImage: `url(${baseUrl}${currentSlide})`,
+                  }}
+                >
+                  <div className="overlay-text">
+                    {currentIndex + 1} / {slides.length}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="right-side">
-              <h2>$13.000/mo</h2>
-              <div className="icons">
-                <FaExchangeAlt />
-                <FaPrint />
-                <MdOutlineFavorite />
+          </SliderContainer>
+          <div className="propertyHeader">
+            <div className="headerContainer">
+              <div className="leftSection">
+                <h2 className="name">{property.name || "--"}</h2>
+                <div className="price">
+                  <div className="price-after-discount">
+                    ${discountedPrice.toFixed(2)}
+                  </div>
+                  <div className="actual-price">
+                    <span className="discount">{property.discount}% OFF</span>
+                    <span className="original-price">${price.toFixed(2)}</span>
+                  </div>
+                </div>
+
+                <p className="address">
+                  <FaLocationDot />
+                  <span>{property.fullAddress || "-- -- --"}</span>
+                </p>
+                <div className="features">
+                  <span className="feature">
+                    <FaBed className="property-icon" />
+                    {property.bedrooms || "0"} Beds
+                  </span>
+                  <span className="feature">
+                    <FaBath className="property-icon" />
+                    {property.bathrooms || "0"} Baths
+                  </span>
+                  <span className="feature">
+                    <FaInbox className="property-icon" />
+                    {property.rooms || "00"} rooms
+                  </span>
+                  <span className="feature">
+                    <FaMap className="property-icon" />
+                    {property.area || "00"} Sq Ft
+                  </span>
+                  <span
+                    className={`status-badge ${
+                      property.status?.toLowerCase() || "available"
+                    }`}
+                  >
+                    {property.status || "--"}
+                  </span>
+
+                  {property.status == "available" && (
+                    <span
+                      className={`purpose-badge ${
+                        property.purpose?.toLowerCase() || "rent"
+                      }`}
+                    >
+                      For {property.purpose || "--"}
+                    </span>
+                  )}
+                </div>
+              </div>
+              {/* ,
+  ,
+  FaInbox,
+  FaMap,
+  FaRegHeart,
+  FaHeart,
+  FaTrashAlt, */}
+              <div className="rightSection">
+                {/* <button className="purchaseButton">Purchase this Property</button> */}
+                <div className="actionIcons">
+                  {/* <FaExchangeAlt className="icon" />
+        <FaPrint className="icon" /> */}
+                  <FaRegHeart className="icon" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          navigation
-          loop={true}
-          autoplay={{ delay: 2500 }}
-          className="mySwiper"
-          style={{ height: "93vh" }}
-        >
-          {slides.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <div
-                style={{
-                  position: "relative",
-                  backgroundImage: `url(${slide.image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  width: "100%",
-                  height: "100%",
-                }}
-              ></div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className="property-details-container">
-          <div className="description">
-            <h2>Description</h2>
-            <div className="description-text">
-              <p>{showFull ? fullText : getTrimmedText(fullText, 150)}</p>
-              <Button className="Show-more" onClick={toggleText}>
-                {showFull ? "Show Less" : "Show More"}
-              </Button>
-            </div>
-            <div className="details-container">
-  {/* Property Details Box */}
-  <div className="box" style={{ flex: 1 }}>
-    <h2>Property Details</h2>
-    <div className="property-details">
-      <div className="right-side-details">
-        <div className="detail-item"><span className="detail-label">Property ID:</span><span className="detail-value">RV151</span></div>
-        <div className="detail-item"><span className="detail-label">Price:</span><span className="detail-value price">$484,400</span></div>
-        <div className="detail-item"><span className="detail-label">Property Size:</span><span className="detail-value">1466 Sq Ft</span></div>
-        <div className="detail-item"><span className="detail-label">Bedrooms:</span><span className="detail-value">4</span></div>
-        <div className="detail-item"><span className="detail-label">Bathrooms:</span><span className="detail-value">2</span></div>
-      </div>
-      <div className="left-side-details">
-        <div className="detail-item"><span className="detail-label">Garage:</span><span className="detail-value">1</span></div>
-        <div className="detail-item"><span className="detail-label">Garage Size:</span><span className="detail-value">458 SqFt</span></div>
-        <div className="detail-item"><span className="detail-label">Year Built:</span><span className="detail-value">2019-01-09</span></div>
-        <div className="detail-item"><span className="detail-label">Property Type:</span><span className="detail-value">Full Family Home</span></div>
-        <div className="detail-item"><span className="detail-label">Property Status:</span><span className="detail-value">For rent</span></div>
-      </div>
-    </div>
-  </div>
-
-  {/* Features Box */}
-  <div className="box" style={{ flex: 1 }}>
-    <h2 >Features</h2>
-    <div className="propert-features">
-              {features.features.map((amenity, index) => (
-                <div className="features-item" key={index}>
-                  <label className="custom-checkbox">
-                    <input type="checkbox" checked="true" readOnly />
-                    <span className="checkmark"></span>
-                    {amenity.name}
-                  </label>
-                </div>
-              ))}
-            </div>
-  </div>
-</div>
-
-
-
-            <h2>Floors</h2>
-            <div className="floor-features">
-              {floors.map((floor, index) => (
-                <div key={index}>
-                  <div
-                    className={`floor-drop-downs ${
-                      openIndexes === index ? "active" : ""
-                    }`}
-                    onClick={() => handleDropDown(index)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <p>
-                      <span className="floor-name">{floor.name}</span>{" "}
-                      <span className="floor-size">{floor.size}</span>
-                    </p>
-                    <p>
-                      {openIndexes === index ? <FaAngleUp /> : <FaAngleDown />}
-                    </p>
+          <div className="property-details-container">
+            <div className="description">
+              <h2>Description</h2>
+              <div className="description-text">
+                <p>
+                  {property.description
+                    ? property.description
+                    : getTrimmedText(property.description, 150)}
+                </p>
+                {/* <Button className="Show-more" onClick={toggleText}>
+                {property.description ? "Show Less" : "Show More"}
+              </Button> */}
+              </div>
+              <div className="details-container">
+                                <div className="box" style={{ flex: 1 }}>
+                  <h2>Features</h2>
+                  <div className="propert-features">
+                    {property?.facilities?.map((facility, index) => (
+                      <div className="features-item" key={index}>
+                        <label className="custom-checkbox">
+                          <input type="checkbox" checked="true" readOnly />
+                          <span className="checkmark"></span>
+                          {facility}
+                        </label>
+                      </div>
+                    ))}
                   </div>
+                </div>
+                                <div className="box" style={{ flex: 1 }}>
+                    <h2>Amenities</h2>
+                  <div className="propert-features">
+                    {property?.amenities?.map((amenity, index) => (
+                      <div className="features-item" key={index}>
+                        <label className="custom-checkbox">
+                          <input type="checkbox" checked="true" readOnly />
+                          <span className="checkmark"></span>
+                          {amenity}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-                  {openIndexes === index && (
-                    <div className="floor-details-wrapper">
-                      <img src={floor.img} alt="" style={{ width: "100%", height:'70vh' }} />
-                      <p>{floor.details}</p>
+              <h2>Floors</h2>
+              <div className="floor-features">
+                {floors.map((floor, index) => (
+                  <div key={index}>
+                    <div
+                      className={`floor-drop-downs ${
+                        openIndexes === index ? "active" : ""
+                      }`}
+                      onClick={() => handleDropDown(index)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <p>
+                        <span className="floor-name">{floor.name}</span>{" "}
+                        <span className="floor-size">{floor.size}</span>
+                      </p>
+                      <p>
+                        {openIndexes === index ? (
+                          <FaAngleUp />
+                        ) : (
+                          <FaAngleDown />
+                        )}
+                      </p>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <h2>Property Video </h2>
-            <div
-              className="video-container"
-              style={{ position: "relative", width: "100%"}}
-            >
-              <a
-                href={`https://www.youtube.com/watch?v=${videoId}`}
-                target="_blank"
-                rel="noopener noreferrer"
+
+                    {openIndexes === index && (
+                      <div className="floor-details-wrapper">
+                        <img
+                          src={floor.img}
+                          alt=""
+                          style={{ width: "100%", height: "70vh" }}
+                        />
+                        <p>{floor.details}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <h2>Property Video </h2>
+              <div
+                className="video-container"
+                style={{ position: "relative", width: "100%" }}
               >
-                <img
-                  src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-                  alt="Video thumbnail"
-                  style={{ width: "100%", cursor: "pointer" }}
-                />
-                <div
- className="video-button"
+                <a
+                  href={`https://www.youtube.com/watch?v=${videoId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  ▶
-                </div>
-              </a>
+                  <img
+                    src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                    alt="Video thumbnail"
+                    style={{ width: "100%", cursor: "pointer" }}
+                  />
+                  <div className="video-button">▶</div>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </InnerBox>
-      <SecondSinglePropertyDetail />
+        </InnerBox>
+        <SecondSinglePropertyDetail ViewProperty={ViewProperty} />
       </PropertDetails>
     </>
   );

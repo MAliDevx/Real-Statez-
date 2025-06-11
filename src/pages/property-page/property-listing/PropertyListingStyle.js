@@ -60,7 +60,7 @@ export const PropertyFilterdiv = styled.div`
   justify-content: space-between;
   border: 1px solid var(--border-color);
   padding: 10px 15px;
-  margin-top:50px;
+  margin-top:200px;
   .filter-container {
     display: flex;
     align-items: center;
@@ -81,6 +81,7 @@ export const PropertyFilterdiv = styled.div`
     border: 1px solid var(--border-color);
     /* padding: 0px 10px; */
     /* border-radius: 4px; */
+    /* height: 200px; */
   }
 
   .icons {

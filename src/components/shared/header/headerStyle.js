@@ -65,6 +65,10 @@ export const NavLink = styled.a`
 
 
 export const LoginButtonWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
   @media (max-width: 576px) {
     display: none;
   }
@@ -157,7 +161,7 @@ export  const ProfileImage = styled.div`
 export  const DropdownMenu = styled.div`
   position: absolute;
   top: 50px;
-  right: 0;
+  right: -130px;
   background: white;
   border: 1px solid #ccc;
   border-radius: 6px;

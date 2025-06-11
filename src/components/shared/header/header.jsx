@@ -13,18 +13,33 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "./headerStyle";
-import { FaSignInAlt, FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaSignInAlt, FaBars, FaTimes, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import navlogo from "../../../assets/Images/logo-blue-stiky.png";
+import { useUserContext } from "../../../context/UserContext.jsx";
+import API from "../../../api/axios";
 
 const Header = () => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [token, setToken] = useState('');
+  const [image, setImage] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef();
+  const { fetchUserProfile } = useUserContext();
 
+  const getUserProfile = async () =>{
+      const response = await fetchUserProfile();
+      console.log('header response ', response.data);
+      const profile = response.data
+            if (profile.image) {
+        const image = `${API.defaults.baseURL}${profile.image}`
+        setImage(image);        
+
+      }
+
+  }
 useEffect(() => {
   const updateToken = () => {
     const storedToken = localStorage.getItem("token");
@@ -32,6 +47,7 @@ useEffect(() => {
   };
 
   updateToken();
+  getUserProfile()
 
   window.addEventListener("login-success", updateToken);
 
@@ -58,7 +74,6 @@ useEffect(() => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Navigate function
   const handleNavigate = (path) => {
     navigate(path);
     setMenuOpen(false);
@@ -111,9 +126,10 @@ useEffect(() => {
 
       {/* Login or Profile */}
       <LoginButtonWrapper ref={dropdownRef}>
+       <FaRegHeart onClick={()=>navigate('/favorite-items')} style={{ color: "grey", cursor: "pointer", fontSize:'25px' }} />
         {token ? (
           <ProfileImage onClick={() => setDropdownOpen(!dropdownOpen)} scrolled={scrolled}>
-            <img src={navlogo} alt="" />
+            <img src={image} alt="" />
             {dropdownOpen && (
               <DropdownMenu>
                 <DropdownItem onClick={() => handleNavigate("/user-profile")}>Profile</DropdownItem>

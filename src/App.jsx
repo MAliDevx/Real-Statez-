@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import FooterPage from "./components/shared/footer/Footer";
+import FooterPage from "./components/shared/footer/Footer.jsx";
 import Header from "./components/shared/header/Header";
 import PublicRoutes from "./routes/Public.routes";
 import { FaAngleUp } from "react-icons/fa6";

@@ -158,7 +158,9 @@ const CompanyShowCase = () => {
       </PeopleFeedBack>
 
       {/* Latest News Section */}
-      <LastestNews>
+
+      {/* News post , this section will be add latter  */}
+      {/* <LastestNews>
         <DividerWithText style={{ padding: "20px 0px 27px 0px" }}>
           <span>Latest News Post</span>
         </DividerWithText>
@@ -203,7 +205,7 @@ const CompanyShowCase = () => {
             </Card>
           ))}
         </CardBox>
-      </LastestNews>
+      </LastestNews> */}
 
       {/* Request Quote Section */}
       <RequestQuotes>
