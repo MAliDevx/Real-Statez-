@@ -39,20 +39,7 @@ const slides = [
     image: "https://wallsproperty.netlify.app/images/bg19.jpg",
   },
 ];
-const features = {
-  features: [
-    { name: "Air Conditioning" },
-    { name: "Swimming Pool" },
-    { name: "Central Heating" },
-    { name: "Pets Allow" },
-    { name: "Alarm" },
-    { name: "Gym" },
-    { name: "Window Covering" },
-    { name: "Free WiFi" },
-    { name: "Car Parking" },
-    { name: "Sp & Massage " },
-  ],
-};
+
 const floors = [
   {
     name: "1st Floor",
@@ -96,21 +83,24 @@ const SinglePropertyDetail = () => {
   let baseUrl = API.defaults.baseURL;
   const nextSlide = images[currentIndex + 1];
 
-
-  useEffect(() => {
     const ViewProperty = async () => {
       try {
         const data = await viewSingleProperty(id);
-        console.log("data", data);
 
-        setProperties(data);
-        setImages(data.images);
+        setProperties(data.property);
+        setImages(data.property.images);
         setIsError(false);
+        return data
+;
       } catch {
-        setProperties([CardJSON, CardJSON, CardJSON]);
+        set
+        Properties([CardJSON, CardJSON, CardJSON]);
         setIsError(true);
+         return null; 
       }
     };
+  useEffect(() => {
+
     ViewProperty();
   }, []);
 
@@ -279,75 +269,29 @@ const SinglePropertyDetail = () => {
               </Button> */}
               </div>
               <div className="details-container">
-                <div className="box" style={{ flex: 1 }}>
-                  <h2>Property Details</h2>
-                  <div className="property-details">
-                    <div className="right-side-details">
-                      <div className="detail-item">
-                        <span className="detail-label">Property ID:</span>
-                        <span className="detail-value">RV151</span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Price:</span>
-                        <span className="detail-value price">
-                          ${property.price}
-                        </span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Property Size:</span>
-                        <span className="detail-value">
-                          {property.area} Sq Ft
-                        </span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Bedrooms:</span>
-                        <span className="detail-value">
-                          {property.bedrooms}
-                        </span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Bathrooms:</span>
-                        <span className="detail-value">
-                          {property.bathrooms}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="left-side-details">
-                      <div className="detail-item">
-                        <span className="detail-label">Garage:</span>
-                        <span className="detail-value">1</span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Garage Size:</span>
-                        <span className="detail-value">458 SqFt</span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Year Built:</span>
-                        <span className="detail-value">2019-01-09</span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Property Type:</span>
-                        <span className="detail-value">
-                          {property.propertyType}
-                        </span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Property Status:</span>
-                        <span className="detail-value">{property.status}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="box" style={{ flex: 1 }}>
+                                <div className="box" style={{ flex: 1 }}>
                   <h2>Features</h2>
                   <div className="propert-features">
-                    {features.features.map((amenity, index) => (
+                    {property?.facilities?.map((facility, index) => (
                       <div className="features-item" key={index}>
                         <label className="custom-checkbox">
                           <input type="checkbox" checked="true" readOnly />
                           <span className="checkmark"></span>
-                          {amenity.name}
+                          {facility}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                                <div className="box" style={{ flex: 1 }}>
+                    <h2>Amenities</h2>
+                  <div className="propert-features">
+                    {property?.amenities?.map((amenity, index) => (
+                      <div className="features-item" key={index}>
+                        <label className="custom-checkbox">
+                          <input type="checkbox" checked="true" readOnly />
+                          <span className="checkmark"></span>
+                          {amenity}
                         </label>
                       </div>
                     ))}
@@ -413,7 +357,7 @@ const SinglePropertyDetail = () => {
             </div>
           </div>
         </InnerBox>
-        <SecondSinglePropertyDetail />
+        <SecondSinglePropertyDetail ViewProperty={ViewProperty} />
       </PropertDetails>
     </>
   );

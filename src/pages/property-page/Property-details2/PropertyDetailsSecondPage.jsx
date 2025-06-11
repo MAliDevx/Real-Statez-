@@ -15,8 +15,8 @@ import 'swiper/css/pagination';
 import { FaLocationDot } from "react-icons/fa6";
 import { FaBath, FaBed, FaInbox , FaMap,FaBuilding ,FaAmbulance ,FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-// import { FaChevronRight } from 'react-icons/fa';
-
+import PropertyCard from "../../../components/shared/cards/Cards";
+import { CardJSON } from '../../../healpers/Card-json';
   const education = [
     {
       name: "Eladia's Kids",
@@ -46,121 +46,29 @@ import { useNavigate } from 'react-router-dom';
     }
   ]
 
-
-  const listings = [
-    {
-      image: 'https://wallsproperty.netlify.app/images/gallery17.jpg',
-      name: 'Modern Villa',
-      location: 'Los Angeles, CA',
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "43 Sq Ft",
-      ownerName: 'Alice Johnson',
-      price: "$3,300",
-      id:"sdkjf8938432kjadlkajd"
-
-    },
-    {
-      image: 'https://wallsproperty.netlify.app/images/gallery11.jpg',
-      name: 'Urban Apartment',
-      location: 'New York, NY',
-      rooms: 2,
-      bedRooms: 2,
-      baths: 1,
-      Area: "38 Sq Ft",
-      ownerName: 'Michael Lee',
-      price: "$2,200",
-      id:"asdjask93823432jksd"
-
-    },
-    {
-      image: 'https://wallsproperty.netlify.app/images/gallery17.jpg',
-      name: 'Cozy Cottage',
-      location: 'Nashville, TN',
-      rooms: 3,
-      bedRooms: 3,
-      baths: 2,
-      Area: "40 Sq Ft",
-      ownerName: 'Samantha Brown',
-      price: "$2,800",
-      id:"adja3849jkdjsdlask"
-
-    },
-    {
-      image: 'https://wallsproperty.netlify.app/images/gallery10.jpg',
-      name: 'Luxury Loft',
-      location: 'Chicago, IL',
-      rooms: 2,
-      bedRooms: 2,
-      baths: 2,
-      Area: "35 Sq Ft",
-      ownerName: 'Daniel Green',
-      price: "$3,100",
-      id:"sdkjf8938432kjadlkajd"
-
-    },
-    {
-      image: 'https://wallsproperty.netlify.app/images/gallery15.jpg',
-      name: 'Beach House',
-      location: 'Miami, FL',
-      rooms: 5,
-      bedRooms: 5,
-      baths: 4,
-      Area: "55 Sq Ft",
-      ownerName: 'Olivia Martinez',
-      price: "$5,200",
-      id:"sdkjf8938432kjadlkajd"
-
-    },
-    {
-      image: 'https://wallsproperty.netlify.app/images/gallery16.jpg',
-      name: 'Penthouse',
-      location: 'San Francisco, CA',
-      rooms: 3,
-      bedRooms: 3,
-      baths: 2,
-      Area: "48 Sq Ft",
-      ownerName: 'Chris Evans',
-      price: "$4,700",
-      id:"sdkjf8938432kjadlkajd"
-
-    },
-    {
-      image: 'https://picsum.photos/id/1027/600/300',
-      name: 'Suburban Home',
-      location: 'Dallas, TX',
-      rooms: 4,
-      bedRooms: 4,
-      baths: 3,
-      Area: "50 Sq Ft",
-      ownerName: 'Emma Watson',
-      price: "$3,600",
-      id:"sdkjf8938432kjadlkajd"
-
-    },
-    {
-      image: 'https://wallsproperty.netlify.app/images/gallery18.jpg',
-      name: 'Ranch House',
-      location: 'Austin, TX',
-      rooms: 6,
-      bedRooms: 6,
-      baths: 5,
-      Area: "60 Sq Ft",
-      ownerName: 'Liam Carter',
-      price: "$6,000",
-      id:"sdkjf8938432kjadlkajd"
-
-    }
-  ];
  
 
-const SecondSinglePropertyDetail = () => {
+const SecondSinglePropertyDetail = ({ViewProperty}) => {
     const navigate = useNavigate()
      const [showCard, setCard] = useState(3);
-
+     const [propertyData, setpropertyData] = useState([]);
+     const [isError, setIsError] = useState(false);
+     
+const fetchData = async () => {
+  try{
+  const data = await ViewProperty(); 
+  const similarPropertise = data.similarProperties
+  setpropertyData(similarPropertise)
+  setIsError(false)
+  console.log("similarProperties", similarPropertise); 
+  }catch(error){
+   setProperties([CardJSON, CardJSON, CardJSON]);
+   setIsError(true);
+  }
+};
 
 useEffect(() => {
+  fetchData()
   const updateCardCount = () => {
     const width = window.innerWidth;
 
@@ -173,17 +81,24 @@ useEffect(() => {
     }
   };
 
-  updateCardCount(); // Run once on mount
-  window.addEventListener("resize", updateCardCount); // Run on resize
+  updateCardCount(); 
+  window.addEventListener("resize", updateCardCount); 
 
-  return () => window.removeEventListener("resize", updateCardCount); // Cleanup
-}, []);
+  return () => window.removeEventListener("resize", updateCardCount);
+}, [])
 
-  const embedMapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28874.844362470565!2d70.31237521421528!3d28.41356746208927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39375d0045d4fb37%3A0x9a95cea972638cf5!2sAl%20Batha!5e0!3m2!1sen!2s!4v1715612400000!5m2!1sen!2s";
+
+const lat = propertyData?.location?.coordinates?.lat;
+const lng = propertyData?.location?.coordinates?.long;
+
+const embedMapUrl = `https://www.google.com/maps?q=${lat},${lng}&hl=es;&output=embed`;
+
+
 
   return (
     <PropertDetailsSecondPage>
 <InnerContainer>
+
 <h2 className="location-heading">Location</h2>
       <iframe
         src={embedMapUrl}
@@ -231,7 +146,7 @@ useEffect(() => {
 </div>
 <FilteredContent >
 <h2>Similar Properties</h2>
-<CarouselWrapper>
+<CarouselWrapper style={{width:'100%'}}>
       <Swiper
      modules={[Pagination, Autoplay]}
   slidesPerView={showCard}          
@@ -241,51 +156,16 @@ useEffect(() => {
   autoplay={{ delay: 6000 }}
   pagination={{ clickable: true }}
       >
-
-        {listings.map((item, idx) => (
-          <SwiperSlide key={idx}>
-<Card onClick={() => navigate(`/propertydetails/${item.id}`)}>
-<button className='property-feature'>Featured</button>
-              <button className='isForSale'>For Sale</button>
-              <CardImg src={item.image} alt={item.name} />
-              <CardBodyTop>
-                <button className="isHouse">House</button>
-                <h4 className='property-name'>{item.name}</h4>
-                <p className='property-location'><FaLocationDot /> {item.location}</p>
-              </CardBodyTop>
-              <CardBodyBottom>
-                <div className="bath-box">
-                <div> Baths</div> <div className='bottom-box'><FaBath /> {item.baths}</div>
-                </div>
-                <div className="beds-box">
-                <div> Beds</div> <div className='bottom-box'><FaBed />{item.bedRooms}</div>
-                </div>
-                <div className="room-box">
-                <div> Rooms</div> <div className='bottom-box'><FaInbox  />{item.rooms}</div>
-                </div>
-                <div className="area-box">
-                <div> Area</div> <div className='bottom-box'><FaMap />{item.Area}</div>
-                </div>
-
-
-
-              </CardBodyBottom>
-<div className="property-profile">
-  <div className="property-profile__info">
-   <figure>
-   <img
-      src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
-      alt="Owner"
-      className="property-profile__image"
-    />
-   </figure>
-    <p className="property-profile__name">{item.ownerName}</p>
-  </div>
-  <div className="property-profile__price">{item.price}.00</div>
-</div>
-            </Card>
-          </SwiperSlide>
-        ))}
+            {propertyData === 0 ? (
+  <p>No cards found.</p>
+) : (
+            propertyData.map((item, idx) => (
+              <SwiperSlide key={idx}>
+                <PropertyCard item={item} isError={isError} />
+                
+              </SwiperSlide>
+            ))
+)}
       </Swiper>
     </CarouselWrapper>
 </FilteredContent>

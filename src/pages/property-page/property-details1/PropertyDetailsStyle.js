@@ -259,7 +259,7 @@ export const PropertDetails = styled.div`
       gap: 20px;
     }
 
-    .property-details {
+    /* .property-details {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -273,9 +273,9 @@ export const PropertDetails = styled.div`
       @media (max-width:768px) {
         align-items: baseline;
       }
-    }
+    } */
 
-    .detail-item {
+    /* .detail-item {
       margin-bottom: 4px;
     }
 
@@ -289,7 +289,7 @@ export const PropertDetails = styled.div`
     .detail-value {
       display: inline-block;
       color: var(--gray);
-    }
+    } */
 
     .propert-features {
       display: flex;
@@ -428,11 +428,11 @@ export const PropertDetails = styled.div`
         flex-direction: column;
       }
 
-      .property-details {
+      /* .property-details {
         flex-direction: column;
         gap: 12px;
         padding: 12px;
-      }
+      } */
 
       .propert-features {
         flex-direction: column;
@@ -467,10 +467,10 @@ export const PropertDetails = styled.div`
         padding: 1.5rem 0rem 1rem 0rem;
       }
 
-      .property-details {
+      /* .property-details {
         flex-direction: column;
         padding: 10px;
-      }
+      } */
 
       .propert-features {
         padding: 10px;

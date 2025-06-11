@@ -105,7 +105,7 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
             )}
           </div>
           <div className="property-location">
-            <FaLocationDot /> <span>{item?.fullAddress}</span>
+            <FaLocationDot /> <span  className="truncate-text">{item?.fullAddress}</span>
           </div>
         </CardBodyTop>
       )}

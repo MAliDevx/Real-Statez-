@@ -18,10 +18,7 @@ import {
   OuterContainer,
 } from "../../home-Page/propertise-service/PropertyStyle";
 import { 
-  Card,
-  CardImg,
-  CardBodyTop,
-  CardBodyBottom
+Pagination
  } from '../../../styles/CommanClasses';
 import {
   FaPaperPlane,
@@ -62,22 +59,32 @@ const PropertyListing = () => {
   const { fetchAllPropertise } = useUserContext();
   const [properties, setProperties] = useState([]);
   const [isError, setIsError] = useState(false);
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const data = await fetchAllPropertise();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalCount, setTotalCount] = useState(0);
+    const limit = 3;
+  
+    const totalPages = Math.ceil(totalCount / limit);
 
-        setProperties(data.data);
-        setIsError(false);
-      } catch {
-        setProperties([CardJSON, CardJSON, CardJSON]);
-        setIsError(true);
-      }
-    };
-    fetchProperties();
-  }, []);
 
-  useEffect(() => {}, [properties]);
+useEffect(() => {
+  const fetchProperties = async () => {
+    try {
+      const data = await fetchAllPropertise(currentPage, limit);
+      console.log("Success data is here", data);
+      setProperties(data.data);
+      setIsError(false);
+      setTotalCount(data.pagination.total);
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+      setIsError(true);
+      setProperties([CardJSON, CardJSON, CardJSON]);
+      setTotalCount(3);
+    }
+  };
+
+  fetchProperties();
+}, [currentPage]);
+
 
   const statusOptions = [
     { value: "for-sale", label: "For Sale" },
@@ -109,7 +116,20 @@ const PropertyListing = () => {
     { value: "3", label: "3 Bathrooms" },
   ];
 
+  useEffect(() => {
+  }, [currentPage]);
 
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
   return (
     <PropertyListingContainer>
       <div className="property-heading-box">
@@ -190,7 +210,7 @@ const PropertyListing = () => {
       {activeView === "grid" && (
         <GridContainer >
         {properties.map((item, idx) => (
-                  <PropertyCard item={item} isError={isError} />
+                  <PropertyCard  key={item.id || idx} item={item} isError={isError} />
         ))}
         </GridContainer>
       )}
@@ -221,14 +241,31 @@ const PropertyListing = () => {
                       </InfoSection>
 
                       <RightSection>
-                        <AgentCircle src={property.agencyId?.image} />
-                        <AgentName>{property.agencyId?.name}</AgentName>
+                        <AgentCircle src={property.agencyImage} />
+                        <AgentName>{property.agencyName}</AgentName>
                         <Price>${property.price}</Price>
                       </RightSection>
                     </CardContainer>
                   ))}
         </ListConatiner>
       )}
+              <Pagination>
+                <button 
+                  onClick={handlePrevious} 
+                  disabled={currentPage === 1}
+                >
+                  ← Previous
+                </button>
+                <span>
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button 
+                  onClick={handleNext} 
+                  disabled={currentPage === totalPages}
+                >
+                  Next →
+                </button>
+              </Pagination>
     </PropertyListingContainer>
   );
 };

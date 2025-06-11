@@ -26,9 +26,10 @@ export const Header = styled.div`
 `;
 
 export const CardGrid = styled.div`
-  display: grid;
-  gap: 25px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+display: grid;
+gap: 25px;
+grid-template-columns: repeat(3, 1fr);
+
 `;
 
 export const NoFavorites = styled.p`
@@ -38,25 +39,5 @@ export const NoFavorites = styled.p`
   margin-top: 40px;
 `;
 
-export const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 2rem;
 
-  button {
-    padding: 8px 16px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-  }
-`;
 

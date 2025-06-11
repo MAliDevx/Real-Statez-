@@ -12,8 +12,8 @@ const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [userProfile, setUsersProfile] = useState([]);
 
-  const fetchAllPropertise = async () => {
-    const res = await API.get("/property/view-properties");
+  const fetchAllPropertise = async (page, limit) => {
+    const res = await API.get(`/property/view-properties?page=${page}&limit=${limit}`);
     const propertyArray = res.data.data;
     setUsers(propertyArray);
     return propertyArray;
@@ -59,8 +59,10 @@ const addFevorite = async (userData) => {
     const response = await API.post("/favorite/add-favorite", userData);
     return response;
   } catch (err) {
-    if (err.status === 409) {
+    if (err.response && err.response.status === 409) {
       showErrorToast("Already in favorites");
+    } else if (err.response && err.response.status === 401) {
+      showErrorToast("Please Login First");
     } else if (!err.response) {
       showErrorToast("Please check your Internet connection.");
     } else {
@@ -70,7 +72,8 @@ const addFevorite = async (userData) => {
     throw err;
   }
 };
-const fetchAllFevorite = async (page = 1, limit = 6) => {
+
+const fetchAllFevorite = async (page, limit) => {
   try{
   const res = await API.get(`/favorite/view-favorites?page=${page}&limit=${limit}`);
 
@@ -78,7 +81,6 @@ const fetchAllFevorite = async (page = 1, limit = 6) => {
     setUsersProfile(propertyArray);
     return propertyArray;
   } catch (error) {
-    console.error("Error fetching favorites:", error);
   }
 };
 

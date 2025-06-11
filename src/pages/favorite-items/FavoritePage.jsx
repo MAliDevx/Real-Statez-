@@ -6,9 +6,9 @@ import {
   Header,
   CardGrid,
   NoFavorites,
-  Pagination,
 } from "./FavoritePageStyle";
 import { CardJSON } from "../../healpers/card-json";
+import { Pagination } from "../../styles/CommanClasses";
 
 const FavoritePage = () => {
   const { fetchAllFevorite } = useUserContext();
@@ -16,7 +16,7 @@ const FavoritePage = () => {
   const [isError, setIsError] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const limit = 6;
+  const limit = 9;
   const [isFavoritePage, setFavoritePage] = useState(false)
 
   const totalPages = Math.ceil(totalCount / limit);
@@ -33,18 +33,14 @@ const FavoritePage = () => {
           setTotalCount(0);
         }
         setIsError(false);
-        // setFavoritePage(false);
       } catch (err) {
         setIsError(true);
-        
         setFavorites([CardJSON, CardJSON, CardJSON]);
         setTotalCount(3); 
       }
     };
   useEffect(() => {
-
-
-    fetchProperties();
+  fetchProperties();
   }, [currentPage,isFavoritePage]);
 
   const handleNext = () => {
