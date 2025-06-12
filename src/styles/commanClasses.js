@@ -13,7 +13,7 @@ export const DividerWithText = styled.div`
   &::after {
     content: "";
     flex: .1;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-color);
     margin: 0 ;
   }
 
@@ -260,8 +260,9 @@ export const Pagination = styled.div`
     cursor: pointer;
 
     &:disabled {
-      background-color: #ccc;
+      background-color: var(--border-color);
       cursor: not-allowed;
     }
   }
 `;
+

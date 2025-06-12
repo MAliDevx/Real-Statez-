@@ -23,7 +23,7 @@ export const PropertDetailsSecondPage = styled.div`
 
       .facilities-box {
         flex: 1;
-        border: 1px solid #ccc;
+        border: 1px solid var(--border-color);
         padding: 15px;
         border-radius: 8px;
         background-color: var(--background-light-gray);
@@ -92,6 +92,7 @@ export const PropertDetailsSecondPage = styled.div`
           align-items: center;
           gap: 5px;
           color: var(--primary-button);
+          width: 65px;
 
           svg {
             font-size: 14px;
@@ -107,7 +108,13 @@ export const InnerContainer = styled.div`
   width: 85%;
   display: block;
   margin: 0 auto;
-
+iframe {
+  width: 100%;
+  object-fit: cover;
+      border: 0px;
+    border-radius: 10px;
+    overflow: hidden;
+}
   @media (max-width: 768px) {
     width: 90%;
   }

@@ -144,7 +144,7 @@ function UserProfile() {
             padding: "10px",
             backgroundColor: "#f0f0f0",
             color: "#333",
-            border: "1px solid #ccc",
+            border: "1px solid var(--border-color)",
           }}
           onClick={() => navigate(-1)}
         >
@@ -223,7 +223,7 @@ function UserProfile() {
               padding: "10px",
               backgroundColor: "#f0f0f0",
               color: "#333",
-              border: "1px solid #ccc",
+              border: "1px solid var(--border-color)",
             }}
             onClick={() => resetForm()}
           >

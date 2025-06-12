@@ -74,7 +74,7 @@ export const FormCard = styled.div`
         box-sizing: border-box;
         padding: 1em;
         padding-right: 3em;
-        border: 1px solid #ccc;
+        border: 1px solid var(--border-color);
         font-size: 0.95rem;
         outline: none;
         transition: 0.3s ease;

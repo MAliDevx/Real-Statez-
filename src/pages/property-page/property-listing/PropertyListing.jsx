@@ -61,7 +61,7 @@ const PropertyListing = () => {
   const [isError, setIsError] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalCount, setTotalCount] = useState(0);
-    const limit = 3;
+    const limit = 9;
   
     const totalPages = Math.ceil(totalCount / limit);
 
@@ -70,7 +70,6 @@ useEffect(() => {
   const fetchProperties = async () => {
     try {
       const data = await fetchAllPropertise(currentPage, limit);
-      console.log("Success data is here", data);
       setProperties(data.data);
       setIsError(false);
       setTotalCount(data.pagination.total);
@@ -249,6 +248,7 @@ useEffect(() => {
                   ))}
         </ListConatiner>
       )}
+      {totalPages > 1 && (
               <Pagination>
                 <button 
                   onClick={handlePrevious} 
@@ -266,6 +266,7 @@ useEffect(() => {
                   Next →
                 </button>
               </Pagination>
+      )}
     </PropertyListingContainer>
   );
 };

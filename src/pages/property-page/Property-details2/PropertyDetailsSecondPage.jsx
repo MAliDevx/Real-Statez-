@@ -53,11 +53,13 @@ const SecondSinglePropertyDetail = ({ViewProperty}) => {
      const [showCard, setCard] = useState(3);
      const [propertyData, setpropertyData] = useState([]);
      const [isError, setIsError] = useState(false);
+     const [nearBy, setNearBy] = useState([])
      
 const fetchData = async () => {
   try{
-  const data = await ViewProperty(); 
+  const data = await ViewProperty();   
   const similarPropertise = data.similarProperties
+  setNearBy(data.property)
   setpropertyData(similarPropertise)
   setIsError(false)
   console.log("similarProperties", similarPropertise); 
@@ -112,19 +114,21 @@ const embedMapUrl = `https://www.google.com/maps?q=${lat},${lng}&hl=es;&output=e
 
 <div className="education-facilities">
   <h2>What's Nearby</h2>
+  {nearBy.nearby && nearBy.nearby.length >= 2 && (
   <div className="facilities-container">
       <div className="facilities-box">
       <div className="facilities-heading">
         <FaBuilding />
         <h3>Education</h3>
       </div>
-      {education.map((item, index) => (
-
+    {nearBy.nearby[0]?.places.map((item, index) => (
       <div className="facilities-list" key={index}>
         <div className="name">{item.name}</div>
-        <div className="location"><IoLocationSharp />{item.distance}</div>
+        <div className="location">
+          <IoLocationSharp /> {item.distanceKm} km
+        </div>
       </div>
-       ))}
+    ))}
     </div>
    
 
@@ -133,16 +137,18 @@ const embedMapUrl = `https://www.google.com/maps?q=${lat},${lng}&hl=es;&output=e
         <FaAmbulance  />
         <h3>Health & Medical</h3>
       </div>
-      {health_and_medical.map((data, index)=>(
+          {nearBy.nearby[1]?.places.map((item, index) => (
       <div className="facilities-list" key={index}>
-        <div className="name">{data.name}</div>
-        <div className="location"><IoLocationSharp /> {data.distance}</div>
-     
+        <div className="name">{item.name}</div>
+        <div className="location">
+          <IoLocationSharp /> {item.distanceKm} km
+        </div>
       </div>
-       ))}
+    ))}
     </div>
 
   </div>
+  )}
 </div>
 <FilteredContent >
 <h2>Similar Properties</h2>

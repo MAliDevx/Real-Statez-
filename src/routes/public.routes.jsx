@@ -1,4 +1,4 @@
-import {Routes, Route } from "react-router-dom";
+import {Routes, Route, useLocation } from "react-router-dom";
 import PropertyListing from "../Pages/property-page/property-listing/PropertyListing";
 import HomePage from "../Pages/home-Page/home/home";
 import Contact from "../Pages/Contact/Contact";
@@ -15,7 +15,14 @@ import NotFoundPage from "../components/shared/page-not-found/PageNotFount";
 import RegistrationVerification from "../Pages/auth/verification/RegistrationVerification";
 import UserProfile from "../Pages/profile/UserProfile.jsx";
 import FavoritePage from "../Pages/favorite-items/FavoritePage.jsx";
+import { useEffect } from "react";
 const PublicRoutes = () => {
+    const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />

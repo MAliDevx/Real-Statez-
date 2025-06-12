@@ -16,6 +16,11 @@ const AuthProvider = ({ children }) => {
       const response = await axios.post("/auth/register", userData);
       showSuccessToast("Verifiy your email address");
     } catch (err) {
+      if(err.status === 409){
+              showErrorToast("Email already exist ");
+              return
+
+      }      
       showErrorToast("Registration failed");
     }
   };

@@ -18,14 +18,14 @@ export const SingleAgentHeadingContainer = styled.div`
     background: url(${backgroundImg}) center/cover no-repeat;
     color: var(--white-color);
 
-    h2 {
+    /* h2 {
       text-transform: capitalize;
       font-size: 32px;
       font-weight: 700;
-    }
+    } */
   }
 
-  .textContainer {
+  /* .textContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,7 +35,7 @@ export const SingleAgentHeadingContainer = styled.div`
       text-transform: capitalize;
       font-weight: 400;
     }
-  }
+  } */
 `;
 
 export const AgentContentMainContainer = styled.div`
@@ -109,6 +109,7 @@ export const Card = styled.div`
 export const ImageWrapper = styled.div`
   position: relative;
   width: 50%;
+  object-fit: cover;
   cursor: pointer;
     @media (max-width: 480px) {
   width: 100%;
@@ -116,8 +117,6 @@ export const ImageWrapper = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    /* display: block; */
   }
 `;
 
@@ -181,44 +180,6 @@ export const InfoRow = styled.div`
   }
 `;
 
-export const SocialIcons = styled.div`
-  display: flex;
-  gap: 8px;
-  font-size: 20px;
-  margin-top: 1rem;
-
-  svg {
-    color: var(--white-color);
-    padding: 3px;
-    border-radius: 0;
-    font-size: 20px;
-    cursor: pointer;
-
-    &:hover {
-      background: transparent !important;
-    }
-  }
-
-  svg:nth-child(1):hover {
-    color: rgb(59, 89, 153);
-  }
-
-  svg:nth-child(2):hover {
-    color: rgb(85, 172, 238);
-  }
-
-  svg:nth-child(3):hover {
-    color: rgb(0, 119, 181);
-  }
-
-  svg:nth-child(4):hover {
-    color: rgb(217, 28, 172);
-  }
-
-  svg:nth-child(5):hover {
-    color: rgb(204, 24, 30);
-  }
-`;
 export const TabsButtonContainer = styled.div`
   width: 100%;
   display: flex;
@@ -326,11 +287,10 @@ export const ImageContainer = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease; /* Smooth transition */
+    transition: transform 0.3s ease; 
 
     &:hover {
-      transform: scale(1.05); /* Zoom in slightly */
+      transform: scale(1.05); 
     }
   }
 

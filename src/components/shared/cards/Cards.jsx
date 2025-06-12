@@ -35,7 +35,6 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
 
     try {
       if (isFavorite || item.isFavorite) {
-        console.log("item id", item._id);
         await deleteFavorite(item._id);
 
         setIsFavorite(false);
@@ -58,7 +57,6 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
   };
   const image = `${API.defaults.baseURL}${item?.images?.[0]}`;
 
-  console.log("card image is here", image);
 
   return (
     <Card onClick={() => navigate(`/propertydetails/${item._id}`)}>

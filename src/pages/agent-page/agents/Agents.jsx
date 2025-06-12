@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import Select from "react-select";
-// import agentsiamge from "../../assets/Images/team7.jpg";
-// import agentsiamge1 from "../../assets/Images/team11.jpg";
-// import agentsiamge2 from "../../assets/Images/team12.jpg";
-// import agentsiamge3 from "../../assets/Images/team13.jpg";
 import agentsiamge from "../../../assets/Images/team7.jpg";
 import agentsiamge1 from "../../../assets/Images/team11.jpg";
 import agentsiamge2 from "../../../assets/Images/team12.jpg";
@@ -26,8 +22,6 @@ import {
   Name,
   Title,
   InfoRow,
-  Email,
-  SocialIcons,
 } from "./AgentsStyle";
 
 import {
@@ -35,17 +29,9 @@ import {
   FaRegFilePdf,
   FaRegFileWord,
   FaPhoneAlt,
-  FaFax,
   FaEnvelope,
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-  FaYoutube,
   FaBuilding,
 } from "react-icons/fa";
-
-import { TfiYoutube } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
 
 const Agents = () => {
@@ -276,20 +262,9 @@ const Agents = () => {
                     <span>{agent.mobile}</span>
                   </InfoRow>
                   <InfoRow>
-                    <FaFax /> <span>Fax:</span> <span>{agent.fax}</span>
-                  </InfoRow>
-                  <InfoRow>
                     <FaEnvelope /> <span>Email:</span>{" "}
                     <span>{agent.email}</span>
                   </InfoRow>
-
-                  <SocialIcons>
-                    <FaFacebookF style={{ background: "rgb(59, 89, 153)" }} />
-                    <FaTwitter style={{ background: "rgb(85, 172, 238)" }} />
-                    <FaLinkedinIn style={{ background: "rgb(0, 119, 181)" }} />
-                    <FaInstagram style={{ background: "rgb(217, 28, 172)" }} />
-                    <TfiYoutube style={{ background: "rgb(204, 24, 30)" }} />
-                  </SocialIcons>
                 </Content>
               </Card>
             ))}
