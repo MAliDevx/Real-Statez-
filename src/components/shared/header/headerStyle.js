@@ -163,7 +163,7 @@ export  const DropdownMenu = styled.div`
   top: 50px;
   right: -130px;
   background: white;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.5em;
   width: 150px;

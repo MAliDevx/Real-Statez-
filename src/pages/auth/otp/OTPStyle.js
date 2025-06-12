@@ -92,7 +92,7 @@ export const OtpInputStyles = styled.div`
     font-size: 1.2rem;
     margin: 0 0.4em;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     outline: none;
     border-radius: 6px;
 

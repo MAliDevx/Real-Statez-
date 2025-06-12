@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import {
@@ -9,9 +8,6 @@ import {
 } from "react-icons/fa";
 import { TfiYoutube } from "react-icons/tfi";
 import agentImage from '../../../assets/Images/team12.jpg';
-import agentImage1 from '../../../assets/Images/team12.jpg'; 
-// import agentImage from '../../assets/Images/team12.jpg';
-// import agentImage1 from '../../assets/Images/team12.jpg'; 
 
 import {
   SingleAgentHeadingContainer,
@@ -25,7 +21,6 @@ import {
   Name,
   Title,
   InfoRow,
-  SocialIcons,
   Card,
   Heading,
   PropertyCetagoriesContainer,
@@ -49,15 +44,14 @@ import {
 } from "./SingleAgentDetailStyle";
 
 const SingleAgentDetail = () => {
-  const { id } = useParams();
   const [showFull, setShowFull] = useState(false);
   const [agent, setAgent] = useState(null);
   const [properties, setProperties] = useState([]);
   const [propertyCategories, setPropertyCategories] = useState([]);
 
-  // Static mock data
-  const agentList = [
-    {
+  useEffect(() => {
+    // Static agent data
+    const staticAgent = {
       id: "1",
       name: "Sarah Lee",
       title: "Rental Agent",
@@ -68,91 +62,59 @@ const SingleAgentDetail = () => {
       image: agentImage,
       listings: 10,
       experience: 8,
-    },
-    {
-      id: "2",
-      name: "John Smith",
-      title: "Sales Agent",
-      office: "789 123 456",
-      mobile: "789 123 456",
-      fax: "456 123",
-      email: "john@property.com",
-      image: agentImage1,
-      listings: 5,
-      experience: 5,
-    }
-  ];
+    };
 
-  const allProperties = [
-    {
-      id: 1,
-      agentId: "1",
-      title: "Luxury Apartment with City View",
-      image: agentImage,
-      location: "Downtown, Cityville",
-      baths: 2,
-      beds: 3,
-      rooms: 4,
-      area: 2500,
-      price: 400000,
-      status: "sold",
-      purpose: "For Sale",
-      type: "Apartment",
-      agentName: "Sarah Lee",
-      agentInitial: "S"
-    },
-    {
-      id: 2,
-      agentId: "2",
-      title: "Cozy Suburban House",
-      image: agentImage1,
-      location: "Suburbs, Cityville",
-      baths: 1,
-      beds: 2,
-      rooms: 3,
-      area: 1800,
-      price: 250000,
-      status: "available",
-      purpose: "For Rent",
-      type: "House",
-      agentName: "John Smith",
-      agentInitial: "J"
-    },
-    {
-      id: 3,
-      agentId: "2",
-      title: "Cozy Suburban House",
-      image: agentImage1,
-      location: "Suburbs, Cityville",
-      baths: 1,
-      beds: 2,
-      rooms: 3,
-      area: 1800,
-      price: 250000,
-      status: "available",
-      purpose: "For Rent",
-      type: "House",
-      agentName: "John Smith",
-      agentInitial: "J"
-    }
-  ];
+    // Static properties data
+    const staticProperties = [
+      {
+        id: 1,
+        agentId: "1",
+        title: "Luxury Apartment with City View",
+        image: agentImage,
+        location: "Downtown, Cityville",
+        baths: 2,
+        beds: 3,
+        rooms: 4,
+        area: 2500,
+        price: 400000,
+        status: "sold",
+        purpose: "For Sale",
+        type: "Apartment",
+        agentName: "Sarah Lee",
+        agentInitial: "S"
+      },
+      {
+        id: 2,
+        agentId: "1",
+        title: "Modern Studio Apartment",
+        image: agentImage,
+        location: "Midtown, Cityville",
+        baths: 1,
+        beds: 1,
+        rooms: 2,
+        area: 1200,
+        price: 250000,
+        status: "available",
+        purpose: "For Rent",
+        type: "Apartment",
+        agentName: "Sarah Lee",
+        agentInitial: "S"
+      }
+    ];
 
-  useEffect(() => {
-    const foundAgent = agentList.find((agent) => agent.id === id);
-    setAgent(foundAgent);
-
-    const agentProperties = allProperties.filter((prop) => prop.agentId === id);
-    setProperties(agentProperties);
-
-    const categories = agentProperties.reduce((acc, prop) => {
+    // Static property categories
+    const categories = staticProperties.reduce((acc, prop) => {
       acc[prop.type] = (acc[prop.type] || 0) + 1;
       return acc;
     }, {});
     const formattedCategories = Object.entries(categories).map(([name, count]) => ({ name, count }));
-    setPropertyCategories(formattedCategories);
-  }, [id]);
 
-  if (!agent) return <div>Agent not found</div>;
+    setAgent(staticAgent);
+    setProperties(staticProperties);
+    setPropertyCategories(formattedCategories);
+  }, []);
+
+  if (!agent) return <div>Loading...</div>;
 
   const agentDescription = [
     `${agent.name} is a top-rated ${agent.title.toLowerCase()} with over ${agent.listings} listings.`,
@@ -165,12 +127,7 @@ const SingleAgentDetail = () => {
     <>
       <SingleAgentHeadingContainer>
         <div className="imageContainer">
-          <div className="textContainer">
-            <h2>Agent Detail</h2>
-            <div className="breadcrumb">
-              <span>Home</span> / <span>Agents</span> / <span>{agent.name}</span>
-            </div>
-          </div>
+
         </div>
       </SingleAgentHeadingContainer>
 
@@ -188,15 +145,8 @@ const SingleAgentDetail = () => {
                   <Title>{agent.title}</Title>
                   <InfoRow><FaBuilding /> <span>Office:</span> <span>{agent.office}</span></InfoRow>
                   <InfoRow><FaPhoneAlt /> <span>Mobile:</span> <span>{agent.mobile}</span></InfoRow>
-                  <InfoRow><FaFax /> <span>Fax:</span> <span>{agent.fax}</span></InfoRow>
                   <InfoRow><FaEnvelope /> <span>Email:</span> <span>{agent.email}</span></InfoRow>
-             <SocialIcons>
-                       <FaFacebookF style={{background:'rgb(59, 89, 153)',}} />
-                       <FaTwitter style={{background:'rgb(85, 172, 238)',}} />
-                       <FaLinkedinIn style={{background:'rgb(0, 119, 181)',}} />
-                       <FaInstagram style={{background:'rgb(217, 28, 172)',}} />
-                       <TfiYoutube style={{background:'rgb(204, 24, 30)',}} />
-                     </SocialIcons>
+                  
                 </Content>
               </Card>
             </StyledAgentDetail>

@@ -499,44 +499,4 @@ export const InfoRow = styled.div`
   }
 `;
 
-export const Email = styled.a`
-  color: #000;
-  text-decoration: none;
-`;
 
-export const SocialIcons = styled.div`
-  display: flex;
-  gap: 8px;
-  font-size: 20px;
-  margin-top: 1rem;
-
-  svg {
-    color: var(--white-color);
-    padding: 3px;
-    border-radius: 0;
-    font-size: 20px;
-    cursor: pointer;
-
-    &:hover {
-      background: transparent !important;
-    }
-  }
-  svg:nth-child(1):hover {
-    color: rgb(59, 89, 153);
-  }
-
-  svg:nth-child(2):hover {
-    color: rgb(85, 172, 238);
-  }
-
-  svg:nth-child(3):hover {
-    color: rgb(0, 119, 181);
-  }
-  svg:nth-child(4):hover {
-    color: rgb(217, 28, 172);
-  }
-
-  svg:nth-child(5):hover {
-    color: rgb(204, 24, 30);
-  }
-`;
