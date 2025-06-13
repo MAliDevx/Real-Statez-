@@ -55,7 +55,7 @@ export const PropertyListingContainer = styled.div`
   }
 `;
 export const PropertyFilterdiv = styled.div`
-  width: 80%;
+  width: 82.5%;
   display: flex;
   justify-content: space-between;
   border: 1px solid var(--border-color);
@@ -133,6 +133,6 @@ export const GridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    width: 82.5%;
+    width: 85%;
     margin: 29px auto
 `;

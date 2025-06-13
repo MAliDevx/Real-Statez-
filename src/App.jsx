@@ -13,7 +13,7 @@ import GlobalStyling from "./styles/GlobalStyling";
 import { LoadingProvider, useLoading } from "./Context/LoadingContext";
 import { setLoadingHandler } from "./api/axios";
 import GlobalLoader from "./Components/shared/loader/GlobalLoader"; 
-
+import AgentProvider from "./context/AgentContext.jsx";
 function AppWrapper() {
   const { setLoading } = useLoading();
   const [visible, setVisible] = useState(false);
@@ -51,10 +51,12 @@ function AppWrapper() {
 
       <AuthProvider>
         <UserProvider>
+        <AgentProvider>
           <Header />
           <GlobalStyling />
           <PublicRoutes />
           <FooterPage />
+        </AgentProvider>
         </UserProvider>
       </AuthProvider>
     </>

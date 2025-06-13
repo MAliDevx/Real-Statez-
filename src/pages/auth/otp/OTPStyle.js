@@ -11,7 +11,6 @@ export const AuthPageLayout = styled.div`
 
 export const FormCard = styled.div`
   padding: 2em;
-  border-radius: 12px;
   width: 100%;
   max-width: 400px;
   background-color: #ffffff;
@@ -40,7 +39,6 @@ export const FormCard = styled.div`
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 12px;
-    border-radius: 6px;
   }
 
   .btn-primary-full:hover {
@@ -94,7 +92,6 @@ export const OtpInputStyles = styled.div`
     text-align: center;
     border: 1px solid var(--border-color);
     outline: none;
-    border-radius: 6px;
 
 
     &:focus {
