@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import {
@@ -8,7 +8,6 @@ import {
 } from "react-icons/fa";
 import { TfiYoutube } from "react-icons/tfi";
 import agentImage from '../../../assets/Images/team12.jpg';
-
 import {
   SingleAgentHeadingContainer,
   AgentContentMainContainer,
@@ -42,13 +41,24 @@ import {
   AgentName,
   Price,
 } from "./SingleAgentDetailStyle";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { useAgentContext } from "../../../context/AgentContext";
+import API from "../../../api/axios";
 const SingleAgentDetail = () => {
   const [showFull, setShowFull] = useState(false);
   const [agent, setAgent] = useState(null);
   const [properties, setProperties] = useState([]);
   const [propertyCategories, setPropertyCategories] = useState([]);
+  const { id } = useParams()
+ const {getSingleAgent} = useAgentContext();
+ const [SingleAgent, setSingleAgnet] = useState([])
+ const [agentProperties, setAgnetProperties] = useState([])
+   const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
 
+const navigate = useNavigate()
   useEffect(() => {
     // Static agent data
     const staticAgent = {
@@ -114,6 +124,32 @@ const SingleAgentDetail = () => {
     setPropertyCategories(formattedCategories);
   }, []);
 
+const getDataSingleAgent = async() =>{
+  const data = await getSingleAgent(id)
+setAgnetProperties(data.data.data.properties)
+  setSingleAgnet(data?.data?.data?.agent)
+  
+}
+
+useEffect(()=>{
+  getDataSingleAgent()
+},[])
+
+
+  const handleSubmit = () => {
+    const payload = {
+      fullName,
+      email,
+      phone,
+      message,
+      agentName: SingleAgent?.name || "Unknown Agent",
+    };
+
+    console.log("Contact Form Payload:", payload);
+
+  };
+
+
   if (!agent) return <div>Loading...</div>;
 
   const agentDescription = [
@@ -135,20 +171,23 @@ const SingleAgentDetail = () => {
         <StyledAgentInnerContainer>
           <AgentDetailContainer>
             <StyledAgentDetail>
-              <Card>
+            {/* {SingleAgent.map((item, index)=>( */}
+                           <Card >
                 <ImageWrapper>
-                  <img src={agent.image} alt={agent.name} />
-                  <Badge>{agent.listings} LISTING</Badge>
+                  <img src={`${API.defaults.baseURL}${SingleAgent.image}`} alt={SingleAgent.name} />
+                  {/* <Badge>{item.listings} LISTING</Badge> */}
                 </ImageWrapper>
                 <Content>
-                  <Name>{agent.name}</Name>
-                  <Title>{agent.title}</Title>
-                  <InfoRow><FaBuilding /> <span>Office:</span> <span>{agent.office}</span></InfoRow>
-                  <InfoRow><FaPhoneAlt /> <span>Mobile:</span> <span>{agent.mobile}</span></InfoRow>
-                  <InfoRow><FaEnvelope /> <span>Email:</span> <span>{agent.email}</span></InfoRow>
+                  <Name>{SingleAgent.name}</Name>
+                  <Title>{SingleAgent.name}</Title>
+                  <InfoRow><FaBuilding /> <span>Office:</span> <span>{SingleAgent.phone}</span></InfoRow>
+                  <InfoRow><FaPhoneAlt /> <span>Mobile:</span> <span>{SingleAgent.phone}</span></InfoRow>
+                  <InfoRow><FaEnvelope /> <span>Email:</span> <span>{SingleAgent.email}</span></InfoRow>
                   
                 </Content>
               </Card>
+            
+
             </StyledAgentDetail>
 
             <TabsButtonContainer>
@@ -174,32 +213,31 @@ const SingleAgentDetail = () => {
                 </TabPanel>
 
                 <TabPanel>
-                  {properties.map((property, index) => (
-                    <CardContainer key={index}>
+                  {agentProperties?.map((property, index) => (
+                    <CardContainer key={index} onClick={()=> navigate(`/propertydetails/${property._id}`)}>
                       <ImageContainer>
-                        <img src={property.image} alt={property.title} />
-                        {property.status === "sold" && <SoldOutRibbon>Sold Out</SoldOutRibbon>}
-                        <button>{property.purpose}</button>
+                        <img src={`${API.defaults.baseURL}${property?.images[0]}`} alt={property?.title} />
+                        <SoldOutRibbon>{property.status}</SoldOutRibbon>
+                        <button >For {property?.purpose}</button>
                       </ImageContainer>
-
                       <InfoSection>
-                        <Tag>{property.type}</Tag>
-                        <AgentTitle>{property.title}</AgentTitle>
+                        <Tag>{property?.propertyType}</Tag>
+                        <AgentTitle>{property.name}</AgentTitle>
                         <Location>
-                          <FaMapMarkerAlt size={12} style={{marginTop:'2px'}} /> {property.location}
+                          <FaMapMarkerAlt size={12} style={{marginTop:'2px'}} /> {property?.fullAddress}
                         </Location>
 
                         <DetailRow>
-                          <p><span>Baths</span><span><FaBath /> {property.baths}</span></p>
-                          <p><span>Beds</span><span><FaBed /> {property.beds}</span></p>
+                          <p><span>Baths</span><span><FaBath /> {property.bathrooms}</span></p>
+                          <p><span>Beds</span><span><FaBed /> {property.bedrooms}</span></p>
                           <p><span>Rooms</span><span><FaInbox /> {property.rooms}</span></p>
                           <p><span>Area</span><span><FaMap /> {property.area} Sq Ft</span></p>
                         </DetailRow>
                       </InfoSection>
 
                       <RightSection>
-                        <AgentCircle>{property.agentInitial}</AgentCircle>
-                        <AgentName>{property.agentName}</AgentName>
+                        {/* <AgentCircle>{property.agentInitial}</AgentCircle>
+                        <AgentName>{property.agentName}</AgentName> */}
                         <Price>${property.price}</Price>
                       </RightSection>
                     </CardContainer>
@@ -210,33 +248,64 @@ const SingleAgentDetail = () => {
           </AgentDetailContainer>
 
           <PropertyContainerMaindiv>
-            <SearchagentConatiner>
-              <div className="heading-container">
-                <Heading>Contact {agent.name}</Heading>
-              </div>
-              <div className="InputContainer">
-                <div className="lable-input-div">
-                  <label htmlFor="fullName">Full Name</label>
-                  <input id="fullName" type="text" placeholder="Enter your full name" />
-                </div>
-                <div className="lable-input-div">
-                  <label htmlFor="email">Email (Optional)</label>
-                  <input id="email" type="email" placeholder="Enter your email" />
-                </div>
-                <div className="lable-input-div">
-                  <label htmlFor="phone">Phone</label>
-                  <input id="phone" type="text" placeholder="Enter your phone" />
-                </div>
-                <div className="lable-input-div">
-                  <label htmlFor="message">Your Message</label>
-                  <textarea id="message" rows={4} placeholder="Enter your message" />
-                </div>
-              </div>
-              <div className="ButtonDiv">
-                <button type="button">Submit</button>
-                <FaPaperPlane />
-              </div>
-            </SearchagentConatiner>
+<SearchagentConatiner>
+      <div className="heading-container">
+        <Heading>Contact With {SingleAgent?.name}</Heading>
+      </div>
+
+      <div className="InputContainer">
+        <div className="lable-input-div">
+          <label htmlFor="fullName">Full Name</label>
+          <input
+            id="fullName"
+            type="text"
+            placeholder="Enter your full name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+        </div>
+
+        <div className="lable-input-div">
+          <label htmlFor="email">Email (Optional)</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className="lable-input-div">
+          <label htmlFor="phone">Phone</label>
+          <input
+            id="phone"
+            type="text"
+            placeholder="Enter your phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+
+        <div className="lable-input-div">
+          <label htmlFor="message">Your Message</label>
+          <textarea
+            id="message"
+            rows={4}
+            placeholder="Enter your message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="ButtonDiv" onClick={handleSubmit}>
+        <button type="button" >
+          Submit
+        </button>
+        <FaPaperPlane />
+      </div>
+    </SearchagentConatiner>
 
             <PropertyCetagoriesContainer>
               <Subheading><Heading>Categories Property</Heading></Subheading>

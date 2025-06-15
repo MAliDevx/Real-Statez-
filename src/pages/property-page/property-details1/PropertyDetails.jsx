@@ -346,6 +346,8 @@ const SinglePropertyDetail = () => {
                 </div>
               </div>
 
+              {/* This page definately add in future with the floor pricing of a appartment no one remove this code please  */}
+{/* 
               <h2>Floors</h2>
               {floors.map((floor, index) => (
                 <div key={index}>
@@ -372,7 +374,9 @@ const SinglePropertyDetail = () => {
                     </div>
                   )}
                 </div>
-              ))}
+              ))} */}
+
+              {/* here is it being end  */}
 
               <h2>Property Video </h2>
               <div className="video-container">

@@ -10,7 +10,6 @@ export const AuthPageLayout = styled.div`
 
 export const FormCard = styled.div`
   padding: 2rem;
-  border-radius: 12px;
   width: 70%;
   background-color: #ffffff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
@@ -79,7 +78,6 @@ export const FormCard = styled.div`
         font-size: 0.95rem;
         outline: none;
         transition: border-color 0.3s ease;
-        border-radius: 4px;
         box-sizing: border-box;
       }
 
@@ -149,7 +147,6 @@ export const FormCard = styled.div`
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
-    border-radius: 4px;
     transition: background-color 0.3s;
     margin-top: 1rem;
   }

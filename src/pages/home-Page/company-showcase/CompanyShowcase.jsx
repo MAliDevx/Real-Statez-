@@ -132,7 +132,6 @@ const CompanyShowCase = () => {
                 <Card
                   style={{
                     padding: "2rem",
-                    borderRadius: "4px",
                     border: "1px solid #f4f4f4",
                   }}
                 >

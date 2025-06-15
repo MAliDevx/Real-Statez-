@@ -8,15 +8,24 @@ import axios from "axios";
 
 export const AgentContext = createContext();
 
-const UserProvider = ({ children }) => {
+const AgentProvider = ({ children }) => {
 const getAllAgents = async() => {
-   const data = await API.get('')
+   const data = await API.get('/agent/view-agents')
+   console.log("agent data ", data);
+   return data 
+}
+
+const getSingleAgent = async (id) =>  {
+  const response = await API.get(`/agent/view-agent/${id}`)
+  return response
+
 }
 
   return (
     <AgentContext.Provider
       value={{
-        fetchAllAgents
+        getAllAgents,
+        getSingleAgent
       }}
     >
       {children}
@@ -26,4 +35,4 @@ const getAllAgents = async() => {
 
 export const useAgentContext = () => React.useContext(AgentContext);
 
-export default UserProvider;
+export default AgentProvider;

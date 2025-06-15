@@ -689,6 +689,7 @@ export const SliderContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+        opacity: 0.4;
 
         .overlay-text {
           color: white;

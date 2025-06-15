@@ -21,12 +21,12 @@ function Contact() {
     <>
       <ContactContainer>
         <div className="imageContainer">
-          <div className="textContainer">
+          {/* <div className="textContainer">
             <h2>Contact Us</h2>
             <div>
               <span>home </span> / <span>page</span> / <span>contact us</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </ContactContainer>
 

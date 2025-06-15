@@ -23,7 +23,7 @@ export const FilterContainer = styled.div`
   flex-direction: column;
   gap: 2rem;
   padding: 1rem;
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   position: absolute;
@@ -36,6 +36,7 @@ export const FilterContainer = styled.div`
 
   .css-13cymwt-control {
     height: 50px;
+    border-radius: 0px;
   }
 
   @media (max-width: 768px) {
@@ -56,6 +57,7 @@ export const FilterRow = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
+  justify-content: space-between;
 
   @media (max-width: 768px) {
     flex-direction: column;

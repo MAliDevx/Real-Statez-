@@ -87,7 +87,7 @@ cursor: pointer;
     text-transform: uppercase;
     transform: rotate(-45deg);
     transform-origin: left top;
-    z-index: 1;
+    z-index: 0;
     outline: none;
     border: 0;
   }
@@ -140,10 +140,10 @@ export const CardImg = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
-  transition: transform 0.3s ease; /* Smooth transition */
+  transition: transform 0.3s ease;
 
 &:hover {
-  transform: scale(1.05); /* Zoom in slightly */
+  transform: scale(1.05);
 }
 `;
 

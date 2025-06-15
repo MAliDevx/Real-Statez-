@@ -59,12 +59,9 @@ const handleSubmit = async (e) => {
 
   try {
     const res = await changePassword(payload);
-    console.log(res);
     navigate("/");
   } catch (error) {
    navigate('/verify-email')
-
-
   }
 };
 

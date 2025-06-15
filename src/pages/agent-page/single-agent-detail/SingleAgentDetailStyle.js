@@ -44,9 +44,7 @@ export const AgentContentMainContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: visible !important;
-  align-items: flex-start; /* ✅ Important to align to top */
-
-  /* ✅ Required for sticky to work */
+  align-items: flex-start;
 `;
 export const StyledAgentInnerContainer = styled.div`
   width: 80%;
@@ -54,14 +52,13 @@ export const StyledAgentInnerContainer = styled.div`
   justify-content: center;
   gap: 50px;
   margin: 70px 0px;
-    position: relative !important; /* ✅ Add this */
+    position: relative !important; 
 @media (max-width:768px) {
   flex-direction: column;
   align-items: center;
   width: 100%;
   
 }
-  /* align-items: center; */
 `;
 
 export const AgentDetailContainer = styled.div`
@@ -108,16 +105,18 @@ export const Card = styled.div`
 
 export const ImageWrapper = styled.div`
   position: relative;
-  width: 50%;
+  width: 40%;
+  height: 300px;
   object-fit: cover;
   cursor: pointer;
-    @media (max-width: 480px) {
-  width: 100%;
-  }
-  img {
+    img {
     width: 100%;
     height: 100%;
   }
+    @media (max-width: 480px) {
+  width: 100%;
+  }
+
 `;
 
 export const Badge = styled.div`
@@ -136,6 +135,11 @@ export const Badge = styled.div`
 
 export const Content = styled.div`
   padding: 10px 20px;
+  width: 60%;
+  display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
 `;
 
 export const Name = styled.h3`
@@ -184,7 +188,6 @@ export const TabsButtonContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   .TabButton-Container {
     display: flex;
     align-items: center;
@@ -194,7 +197,6 @@ export const TabsButtonContainer = styled.div`
     border: 1px solid var(--border-color);
     outline: none;
   }
-  /* Default tab button */
   .Tab-Button {
     font-size: 16px;
     font-weight: 600;
@@ -208,7 +210,6 @@ export const TabsButtonContainer = styled.div`
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Active (selected) tab */
   .Tab-Button.react-tabs__tab--selected {
     background-color: var(--primary-button);
     color: white;
@@ -220,7 +221,6 @@ export const TabsButtonContainer = styled.div`
     display: flex;
     border-top: 1px solid var(--border-color);
     flex-direction: column;
-    /* align-items: center; */
 
     p {
       font-size: 14px;
@@ -278,7 +278,7 @@ export const CardContainer = styled.div`
 export const ImageContainer = styled.div`
   position: relative;
   width: 40%;
-  height: auto;
+  height: 300px;
   overflow: hidden;
     @media (max-width: 480px) {
   width: 100%;
@@ -287,6 +287,7 @@ export const ImageContainer = styled.div`
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease; 
 
     &:hover {
@@ -304,6 +305,7 @@ export const ImageContainer = styled.div`
     background-color: var(--large-text);
     color: white;
     cursor: pointer;
+    text-transform: capitalize;
   }
 `;
 
@@ -499,10 +501,8 @@ export const SearchagentConatiner = styled.div`
       line-height: 1.5;
     }
     input {
-      height: 55px;
+      padding: 1rem;
       font-size: 16px;
-      /* padding: 0.75rem; */
-      padding: 0px 20px;
       border: 1px solid var(--border-color);
       font-weight: 400;
       outline: none;
@@ -624,7 +624,6 @@ export const PropertyCetagoriesContainer = styled.div`
       font-size: 16px;
       line-height: 16px;
       font-weight: bold;
-      border-radius: 4px;
       padding: 6px;
       color: white;
       background-color: var(--primary-button);

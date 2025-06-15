@@ -10,7 +10,6 @@ export const AuthPageLayout = styled.div`
 
 export const FormCard = styled.div`
   padding: 2em;
-  border-radius: 12px;
   width: 40%;
   background-color: #ffffff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);

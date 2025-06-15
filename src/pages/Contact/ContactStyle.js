@@ -32,20 +32,6 @@ export const ContactContainer = styled.div`
       }
     }
   }
-
-  .textContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-
-    span {
-      font-size: 16px;
-      text-transform: capitalize;
-      font-weight: 400;
-      text-align: center;
-    }
-  }
 `;
 
 export const ContactUsFormContainer = styled.div`

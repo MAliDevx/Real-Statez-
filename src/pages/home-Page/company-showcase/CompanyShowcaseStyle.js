@@ -72,7 +72,7 @@ export const FeedBackProfile = styled.div`
   top: -40px;
   padding: 10px 20px;
   margin: 0 auto;
-  width: 90%;
+  width: 85%;
 
   figure {
     margin: 0;
@@ -98,7 +98,6 @@ export const FeedBackProfile = styled.div`
     text-align: left;
     padding: 12px;
     background-color: var(--white-color);
-    border-radius:4px;
     border: 1px solid #f4f4f4;
 
   }
