@@ -9,16 +9,17 @@ import axios from "axios";
 export const AgentContext = createContext();
 
 const AgentProvider = ({ children }) => {
-const getAllAgents = async() => {
-   const data = await API.get('/agent/view-agents')
-   console.log("agent data ", data);
-   return data 
-}
+const getAllAgents = async (filters = {}) => {
+  const queryString = new URLSearchParams(filters).toString();
+  const data = await API.get(`/agent/view-agents?${queryString}`);
+  console.log("agent data", data);
+  return data;
+};
+
 
 const getSingleAgent = async (id) =>  {
   const response = await API.get(`/agent/view-agent/${id}`)
   return response
-
 }
 
   return (

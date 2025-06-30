@@ -32,12 +32,5 @@ grid-template-columns: repeat(3, 1fr);
 
 `;
 
-export const NoFavorites = styled.p`
-  text-align: center;
-  color: #999;
-  font-size: 1.2rem;
-  margin-top: 40px;
-`;
-
 
 

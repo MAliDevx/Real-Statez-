@@ -9,15 +9,23 @@ import axios from "axios";
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
-  const [userProfile, setUsersProfile] = useState([]);
+const fetchAllPropertise = async ({ page = 1, limit = 10, filters = {} } = {}) => {
+  try {
+    const query = new URLSearchParams({
+      page,
+      limit,
+      ...filters
+    }).toString();
 
-  const fetchAllPropertise = async (page, limit) => {
-    const res = await API.get(`/property/view-properties?page=${page}&limit=${limit}`);
+    const res = await API.get(`/property/view-properties?${query}`);
     const propertyArray = res.data.data;
-    setUsers(propertyArray);
     return propertyArray;
-  };
+  } catch (error) {
+    console.error("Error fetching properties:", error);
+    throw error;
+  }
+};
+
   const viewSingleProperty = async (id) => {
     const res = await API.get(`/property/view-property/${id}`);
     const propertyArray = res.data.data || [];
@@ -27,7 +35,6 @@ const UserProvider = ({ children }) => {
   const fetchUserProfile = async () => {
     const res = await API.get("/profile/view-profile");
     const propertyArray = res.data;
-    setUsersProfile(propertyArray);
     return propertyArray;
   };
 
@@ -57,7 +64,9 @@ const UserProvider = ({ children }) => {
 const addFevorite = async (userData) => {
   try {
     const response = await API.post("/favorite/add-favorite", userData);
+    showSuccessToast("Added Favorite");
     return response;
+
   } catch (err) {
     if (err.response && err.response.status === 409) {
       showErrorToast("Already in favorites");
@@ -76,9 +85,7 @@ const addFevorite = async (userData) => {
 const fetchAllFevorite = async (page, limit) => {
   try{
   const res = await API.get(`/favorite/view-favorites?page=${page}&limit=${limit}`);
-
     const propertyArray = res.data;
-    setUsersProfile(propertyArray);
     return propertyArray;
   } catch (error) {
   }
@@ -87,7 +94,8 @@ const fetchAllFevorite = async (page, limit) => {
   const deleteFavorite = async (_id) => {
     const res = await API.delete(`/favorite/delete-favorite/${_id}`);
     const propertyArray = res.data.data || [];
-    setUsers(propertyArray);
+    showErrorToast("Deleted sucessfully");
+
     return propertyArray;
   };
 

@@ -5,10 +5,10 @@ import {
   Wrapper,
   Header,
   CardGrid,
-  NoFavorites,
 } from "./FavoritePageStyle";
 import { CardJSON } from "../../healpers/card-json";
 import { Pagination } from "../../styles/CommanClasses";
+import DataNotFound from "../../components/shared/not-found";
 
 const FavoritePage = () => {
   const { fetchAllFevorite } = useUserContext();
@@ -61,12 +61,12 @@ const FavoritePage = () => {
         <h1>Your Favorite Properties</h1>
         <p>Explore all properties you've marked as favorite</p>
       </Header>
-
-      <CardGrid>
         {favorites.length === 0 ? (
-          <NoFavorites>No favorite properties found.</NoFavorites>
+          <DataNotFound message="No favorite property found" />
         ) : (
-          favorites.map((item) => (
+      <CardGrid>
+
+          {favorites.map((item) => (
             <PropertyCard
              fetchProperties={fetchProperties}
               key={item._id || item.propertyId?._id || Math.random()}
@@ -74,10 +74,10 @@ const FavoritePage = () => {
               isError={isError}
               isFavoritePage={isFavoritePage}
             />
-          ))
-        )}
+          ))}
+       
       </CardGrid>
-
+ )}
       {totalPages > 1 && (
         <Pagination>
           <button 

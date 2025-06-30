@@ -254,7 +254,8 @@ const SinglePropertyDetail = () => {
                 <div className="actionIcons">
                   {/* <FaExchangeAlt className="icon" />
         <FaPrint className="icon" /> */}
-                  <FaRegHeart className="icon" />
+                  {/* <FaRegHeart className="icon" /> */}
+                  <FaHeart style={{color:'red'}} className="icon" />
                 </div>
               </div>
             </div>

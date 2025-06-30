@@ -52,9 +52,10 @@ import {useNavigate } from "react-router-dom";
 import { CardJSON } from "../../../healpers/Card-json";
 import { useUserContext } from "../../../context/UserContext";
 import PropertyCard from "../../../components/shared/cards/Cards";
+import DataNotFound from "../../../components/shared/not-found";
 const PropertyListing = () => {
   const navigate = useNavigate()
-  const [priceRangeValue, setPriceRange] = useState([2000, 6000]);
+  const [priceRangeValue, setPriceRange] = useState([1000, 1000000]);
   const [activeView, setActiveView] = useState("grid");
   const { fetchAllPropertise } = useUserContext();
   const [properties, setProperties] = useState([]);
@@ -65,6 +66,13 @@ const PropertyListing = () => {
   
     const totalPages = Math.ceil(totalCount / limit);
 
+
+      const [status, setStatus] = useState(null);
+      const [type, setType] = useState(null);
+      const [area, setArea] = useState(null);
+      const [location, setLocation] = useState(null);
+      const [bedrooms, setBedrooms] = useState(null);
+      const [bathrooms, setBathrooms] = useState(null)    
 
 useEffect(() => {
   const fetchProperties = async () => {
@@ -86,14 +94,27 @@ useEffect(() => {
 
 
   const statusOptions = [
-    { value: "for-sale", label: "For Sale" },
-    { value: "for-rent", label: "For Rent" },
+    { value: "available", label: "Available" },
+    { value: "sold", label: "Sold" },
+    { value: "rented", label: "Rented" },
+    { value: "pending", label: "Pending" },
   ];
-  const typeOptions = [
-    { value: "house", label: "House" },
-    { value: "apartment", label: "Apartment" },
-    { value: "villa", label: "Villa" },
-  ];
+
+const typeOptions = [
+  { value: "apartment", label: "Apartment" },
+  { value: "house", label: "House" },
+  { value: "villa", label: "Villa" },
+  { value: "penthouse", label: "Penthouse" },
+  { value: "farmhouse", label: "Farmhouse" },
+  { value: "plot", label: "Plot" },
+  { value: "commercial", label: "Commercial" },
+  { value: "office", label: "Office" },
+  { value: "shop", label: "Shop" },
+  { value: "warehouse", label: "Warehouse" },
+  { value: "building", label: "Building" },
+  { value: "hostel", label: "Hostel" },
+];
+
   const areaOptions = [
     { value: "500", label: "500 sqft" },
     { value: "1000", label: "1000 sqft" },
@@ -129,6 +150,42 @@ useEffect(() => {
       setCurrentPage(prev => prev - 1);
     }
   };
+
+  const handleSearch = async () => {
+  const rawFilters = {
+    propertyStatus: status?.value || "",
+    propertyType: type?.value || "",
+    areaFrom: area?.value || "",
+    location: location?.value || "",
+    bedrooms: bedrooms?.value || "",
+    bathrooms: bathrooms?.value || "",
+    priceMin: priceRangeValue[0],
+    priceMax: priceRangeValue[1],
+  };
+
+  const cleanedFilters = Object.fromEntries(
+    Object.entries(rawFilters).filter(
+      ([key, value]) =>
+        value !== "" &&
+        value !== null &&
+        !(key.startsWith("price") && (value === 0 || value === undefined || value === null))
+    )
+  );
+
+  try {
+    const data = await fetchAllPropertise({
+      page: 1,
+      limit: 10,
+      filters: cleanedFilters,
+    });
+
+    setProperties(data.data);
+    setIsError(false);
+  } catch (err) {
+    setIsError(true);
+    setProperties([CardJSON, CardJSON, CardJSON]);
+  }
+};
   return (
     <PropertyListingContainer>
       <div className="property-heading-box">
@@ -142,39 +199,60 @@ useEffect(() => {
       </div>
 
       <OuterContainer style={{top:'45px'}}>
-        <FilterContainer style={{ boxShadow:'0 0 0px rgba(0, 0, 0, 0.2)'}}>
-          <FilterRow>
-            <StyledSelect
-              options={statusOptions}
-              placeholder="Property Status"
-            />
-            <StyledSelect options={typeOptions} placeholder="Property Type" />
-            <StyledSelect options={areaOptions} placeholder="Area From" />
-            <StyledSelect options={locationOptions} placeholder="Locations" />
-          </FilterRow>
-          <FilterRow>
-            <StyledSelect options={bedroomOptions} placeholder="Bedrooms" />
-            <StyledSelect options={bathroomOptions} placeholder="Bathrooms" />
-            <PriceRange>
-              <label>Price Range:</label>
-              <Slider
-                range
-                min={1000}
-                max={10000}
-                step={500}
-                defaultValue={priceRangeValue}
-                onChange={(value) => setPriceRange(value)}
-              />
-              <PriceValues>
-                <span>${priceRangeValue[0]}</span> -{" "}
-                <span>${priceRangeValue[1]}</span>
-              </PriceValues>
-            </PriceRange>
-            <SearchButton>
-              <FaSearch /> Search
-            </SearchButton>
-          </FilterRow>
-        </FilterContainer>
+ <FilterContainer>
+      <FilterRow>
+        <StyledSelect
+          options={statusOptions}
+          placeholder="Property Status"
+          onChange={setStatus}
+        />
+        <StyledSelect
+          options={typeOptions}
+          placeholder="Property Type"
+          onChange={setType}
+        />
+        <StyledSelect
+          options={areaOptions}
+          placeholder="Area"
+          onChange={setArea}
+        />
+        <StyledSelect
+          options={locationOptions}
+          placeholder="Locations"
+          onChange={setLocation}
+        />
+      </FilterRow>
+
+      <FilterRow>
+        <StyledSelect
+          options={bedroomOptions}
+          placeholder="Bedrooms"
+          onChange={setBedrooms}
+        />
+        <StyledSelect
+          options={bathroomOptions}
+          placeholder="Bathrooms"
+          onChange={setBathrooms}
+        />
+        <PriceRange>
+          <label>Price Range:</label>
+          <Slider
+            range
+            min={1000}
+            max={10000}
+            step={500}
+            defaultValue={priceRangeValue}
+            onChange={(value) => setPriceRange(value)}
+          />
+          <PriceValues>
+            <span>${priceRangeValue[0]}</span> - <span>${priceRangeValue[1]}</span>
+          </PriceValues>
+        </PriceRange>
+        <SearchButton onClick={handleSearch}>
+          Search <FaSearch />
+        </SearchButton>
+      </FilterRow>
+    </FilterContainer>
       </OuterContainer>
 
       <PropertyFilterdiv>
@@ -206,15 +284,23 @@ useEffect(() => {
         </div>
       </PropertyFilterdiv>
       {/* Conditional rendering based on activeView */}
-      {activeView === "grid" && (
-        <GridContainer >
-        {properties.map((item, idx) => (
-                  <PropertyCard  key={item.id || idx} item={item} isError={isError} />
-        ))}
-        </GridContainer>
-      )}
+{activeView === "grid" && (
+  properties.length === 0 ? (
+    <DataNotFound message="Property Not Found" />
+  ) : (
+    <GridContainer>
+      {properties.map((item, idx) => (
+        <PropertyCard key={item.id || idx} item={item} isError={isError} />
+      ))}
+    </GridContainer>
+  )
+)}
+
 
       {activeView === "list" && (
+          properties.length === 0 ? (
+    <DataNotFound message="Property Not Found" />
+  ) : (
         <ListConatiner>
                   {properties.map((property, index) => (
                     <CardContainer key={index}>
@@ -247,7 +333,8 @@ useEffect(() => {
                     </CardContainer>
                   ))}
         </ListConatiner>
-      )}
+      )
+    )}
       {totalPages > 1 && (
               <Pagination>
                 <button 

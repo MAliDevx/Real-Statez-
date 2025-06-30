@@ -55,7 +55,7 @@ export const PropertyListingContainer = styled.div`
   }
 `;
 export const PropertyFilterdiv = styled.div`
-  width: 82.5%;
+  width: 85%;
   display: flex;
   justify-content: space-between;
   border: 1px solid var(--border-color);
@@ -122,7 +122,7 @@ export const PropertyCardContainer = styled.div`
 `;
 
 export const ListConatiner = styled.div`
-    width: 83%;
+    width: 87%;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -13,7 +13,9 @@ export const FormCard = styled.div`
   width: 40%;
   background-color: #ffffff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-
+small{
+  color: red;
+}
   @media (max-width: 1024px) {
     width: 50%;
   }
@@ -42,10 +44,6 @@ export const FormCard = styled.div`
       padding: 10px 4px;
       outline: none;
       border: 1px solid var(--input-border);
-
-      &:focus {
-        outline: 1px solid #9cace9;
-      }
     }
 
     @media (max-width: 768px) {
