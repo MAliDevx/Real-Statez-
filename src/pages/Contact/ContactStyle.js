@@ -79,6 +79,11 @@ export const ContactUsFormContainer = styled.div`
       display: flex;
       flex-direction: column;
       margin-bottom: 36px;
+      .error-text {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
 @media (max-width: 768px) {
   margin-bottom: 10px;
 }
@@ -271,9 +276,8 @@ export const SocialIconDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--border-color);
+    /* border: 1px solid var(--border-color); */
     margin-top: 15px;
-    border-radius: 4px;
     font-size: 17.5px;
     font-weight: 600;
     cursor: pointer;
@@ -282,6 +286,15 @@ export const SocialIconDiv = styled.div`
     height: 40px;
     text-align: center;
     line-height: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+&:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    color: black;
+    background-color: var(--white-color) !important;
+    outline: 1px solid var(--border-color);
+  }
   }
 
   .SocialIcons.facebook {

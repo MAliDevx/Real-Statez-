@@ -17,13 +17,13 @@ import { FaSearch, FaPhoneAlt, FaEnvelope, FaBuilding } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAgentContext } from "../../../context/AgentContext";
 import API from "../../../api/axios";
+import DataNotFound from "../../../components/shared/not-found";
 
 const Agents = () => {
   const allCity = [
-    { name: "UK" },
-    { name: "Pakistan" },
-    { name: "UAE" },
-    { name: "Saudi Arabia" },
+    { value:"uk", name: "UK" },
+    { value:"pakistan",name: "Pakistan" },
+    {value:"uae", name: "UAE" },
   ];
   const allCatogery = [
     { name: "House" },
@@ -31,41 +31,56 @@ const Agents = () => {
     { name: "Bangla" },
     { name: "Plot" },
   ];
-  const [primaryAgent, setPrimaryAgent] = useState(null);
   const [city, setCity] = useState('');
   const [category, setCategory] = useState('');
   const navigate = useNavigate();
   const { getAllAgents } = useAgentContext();
   const [agents, setAgents] = useState([]);
+  const [formData, setFormData] = useState( {name: ""} );
+  const [inputError, setInputError] = useState(false)
 
-  useEffect(() => {
-    const fetchAgents = async () => {
+      const fetchAgents = async () => {
       const data = await getAllAgents();
       setAgents(data?.data?.data?.data || []);
     };
+  useEffect(() => {
     fetchAgents();
   }, []);
 
   const cityOptions = allCity.map((city) => ({
     label: city.name,
-    value: city.name,
+    value: city.value,
   }));
-  const categoryOptions = allCatogery.map((catogery) => ({
-    label: catogery.name,
-    value: catogery.name,
-  }));
+
   const handleCityChange = (selectedOption) => {
     if (selectedOption) {
       setCity(selectedOption.value);
-      console.log("Selected city:", selectedOption.value);
+
       
     }
   };
-  const handleCategoryChange = (selectedOption) => {
-    if (selectedOption) {
-      setCategory(selectedOption.value);
-    }
-  };
+
+const filterAgent = async() => {
+  if (!formData.name && !city) {
+    setInputError(true);
+    return;
+  }
+  
+  const filters = {}; 
+  
+  if (formData.name) {
+    filters.name = formData.name; 
+  }
+  
+  if (city) {
+    filters.city = city; 
+  }
+  
+  console.log("filters", filters);
+  const data = await getAllAgents(filters); 
+  setAgents(data?.data?.data?.data || []);
+  setInputError(false);
+};
 
   return (
     <>
@@ -77,17 +92,20 @@ const Agents = () => {
             <div className="heading-container">
               <h4>Find Agents</h4>
             </div>
-
-            {/* <div className="InputContainer"> */}
               <div className="lable-input-div">
                 <label htmlFor="agentName">Enter Agent Name</label>
-                <input
-                  id="agentName"
-                  type="text"
-                  placeholder="Enter agent name"
-                />
-
-                <label htmlFor="category">All Categories</label>
+           <input
+  id="agentName"
+  type="text"
+  placeholder="Enter agent name"
+  value={formData.name}
+  onChange={(e) =>
+    setFormData({ ...formData, name: e.target.value })
+  }
+  required
+/>
+ {inputError && <p className="error-text">One Field is required</p>}
+                {/* <label htmlFor="category">All Types</label>
                 <Select
                   id="category"
                   options={categoryOptions}
@@ -95,9 +113,10 @@ const Agents = () => {
                     (option) => option.value === categoryOptions
                   )}
                   onChange={handleCategoryChange}
-                  placeholder="All Categories"
+                  placeholder="All Types"
                   styles={customSelectStyles}
-                />
+                  required
+                /> */}
 
                 <label htmlFor="city">All Cities</label>
                 <Select
@@ -107,11 +126,15 @@ const Agents = () => {
                   onChange={handleCityChange}
                   placeholder="All Cities"
                   styles={customSelectStyles}
+                  required
+
                 />
+                 {inputError && <p className="error-text">One Field is required</p>}
+
               {/* </div> */}
             </div>
 
-            <div className="ButtonDiv">
+            <div className="ButtonDiv" onClick={filterAgent}>
               <button type="button">Search Agents</button>
               <FaSearch />
             </div>
@@ -119,7 +142,11 @@ const Agents = () => {
         </PropertyContainerMaindiv>
 
         <AgentGridContainer>
+                        {agents.length === 0 ? (
+    <DataNotFound message="Agnet Not Found" />
+  ) : (
           <div className="grid-container">
+
             {agents.map((agent) => (
               <Card
                 key={agent._id}
@@ -148,8 +175,10 @@ const Agents = () => {
                   </div>
                 </Content>
               </Card>
-            ))}
+  ))}
           </div>
+  )}
+
         </AgentGridContainer>
       </WrapperContainer>
     </>

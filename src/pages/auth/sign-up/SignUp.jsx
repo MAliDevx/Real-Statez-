@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { AuthPageLayout, FormCard } from "./signUpStyle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -7,92 +8,37 @@ import {
   showErrorToast,
 } from "../../../components/shared/toaster/Toaster";
 import { useAuth } from "../../../context/AuthContext";
+
 const SignUp = () => {
-  const { register } = useAuth();
+  const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    // gender: "",
-    city: "",
-    country: "",
-    password: "",
-    repeatPassword: "",
-    phoneNumber: "",
-    state: "",
-    zipCode: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
 
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" })); // Clear error on input
-  };
-
-  const validate = () => {
-    const newErrors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!formData.firstName.trim()) newErrors.firstName = "First name required";
-    if (!formData.lastName.trim()) newErrors.lastName = "Last name required";
-    if (!formData.email.trim()) newErrors.email = "Email required";
-    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = "Phone Number required";
-    // if (!formData.state.trim()) newErrors.email = "state Adress required";
-    if (!formData.zipCode.trim()) newErrors.zipCode = "Zip code required";
-    else if (!emailRegex.test(formData.email))
-      newErrors.email = "Invalid email format";
-
-    // if (!formData.gender) newErrors.gender = "Gender required";
-    if (!formData.city.trim()) newErrors.city = "City required";
-    if (!formData.country) newErrors.country = "Country required";
-
-    if (!formData.password) newErrors.password = "Password required";
-    else if (formData.password.length < 6)
-      newErrors.password = "Minimum 6 characters";
-
-    if (!formData.repeatPassword) newErrors.repeatPassword = "Repeat password";
-    else if (formData.password !== formData.repeatPassword)
-      newErrors.repeatPassword = "Passwords do not match";
-
-    return newErrors;
-  };
-
-  const handleSubmit = async (e) => {
-    console.log(formData);
-
-    e.preventDefault();
-    const newErrors = validate();
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      showErrorToast("Please enter all input fields");
-      return;
-    }
-
+  const onSubmit = (data) => {
     const apiData = {
-      name: `${formData.firstName} ${formData.lastName}`,
-      email: formData.email,
+      name: `${data.firstName} ${data.lastName}`,
+      email: data.email,
       address: {
-        state: formData.state,
-        zipCode: formData.zipCode,
-        city: formData.city,
-        country: formData.country,
+        state: data.state,
+        zipCode: data.zipCode,
+        city: data.city,
+        country: data.country,
       },
-      password: formData.password,
-      phone: "89888888888",
+      password: data.password,
+      phone: data.phoneNumber,
       firmId: "60d21b4667d0d8992e610c85",
     };
 
-    register(apiData);
+    registerUser(apiData);
   };
-
-  const errorClass = (field) => (errors[field] ? "error-border" : "");
 
   return (
     <AuthPageLayout>
@@ -101,82 +47,77 @@ const SignUp = () => {
           <h3>Create your account</h3>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          {/* Row 1: First and Last Name */}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* First & Last Name */}
           <div className="form-row">
             <div className="input-field">
-              <label htmlFor="firstName">First Name</label>
+              <label>First Name</label>
               <input
-                type="text"
-                id="firstName"
-                name="firstName"
+                {...register("firstName", { required: "First name required" })}
+                className={errors.firstName ? "error-border" : ""}
                 placeholder="First name"
-                className={errorClass("firstName")}
-                value={formData.firstName}
-                onChange={handleChange}
               />
+              {errors.firstName && <small>{errors.firstName.message}</small>}
             </div>
+
             <div className="input-field">
-              <label htmlFor="lastName">Last Name</label>
+              <label>Last Name</label>
               <input
-                type="text"
-                id="lastName"
-                name="lastName"
+                {...register("lastName")}
                 placeholder="Last name"
-                className={errorClass("lastName")}
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="input-field">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                className={errorClass("email")}
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="input-field">
-              <label htmlFor="lastName">Phone No</label>
-              <input
-                type="number"
-                id="lastName"
-                name="phoneNumber"
-                placeholder="Enter Phone "
-                className={errorClass("phoneNumber")}
-                value={formData.phoneNumber}
-                onChange={handleChange}
               />
             </div>
           </div>
 
-          <div className="form-row" id="location">
+          <div className="form-row">
             <div className="input-field">
-              <label htmlFor="city">City</label>
+              <label>Email</label>
               <input
-                type="text"
-                id="city"
-                name="city"
-                placeholder="City"
-                className={errorClass("city")}
-                value={formData.city}
-                onChange={handleChange}
+                {...register("email", {
+                  required: "Email required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Invalid email format",
+                  },
+                })}
+                className={errors.email ? "error-border" : ""}
+                placeholder="Enter your email"
               />
+              {errors.email && <small>{errors.email.message}</small>}
             </div>
+
             <div className="input-field">
-              <label htmlFor="country">Country</label>
+              <label>Phone No</label>
+              <input
+                {...register("phoneNumber", {
+                  required: "Phone Number required",
+                })}
+                className={errors.phoneNumber ? "error-border" : ""}
+                placeholder="Enter Phone"
+              />
+              {errors.phoneNumber && (
+                <small>{errors.phoneNumber.message}</small>
+              )}
+            </div>
+          </div>
+
+          {/* City & Country */}
+          <div className="form-row">
+            <div className="input-field">
+              <label>City</label>
+              <input
+                {...register("city", { required: "City required" })}
+                className={errors.city ? "error-border" : ""}
+                placeholder="City"
+              />
+              {errors.city && <small>{errors.city.message}</small>}
+            </div>
+
+            <div className="input-field">
+              <label>Country</label>
               <select
-                id="country"
-                name="country"
-                className={errorClass("country")}
-                value={formData.country}
-                onChange={handleChange}
+                {...register("country", { required: "Country required" })}
+                className={errors.country ? "error-border" : ""}
               >
                 <option value="">Select Country</option>
                 <option value="pakistan">Pakistan</option>
@@ -184,48 +125,52 @@ const SignUp = () => {
                 <option value="usa">USA</option>
                 <option value="uk">UK</option>
               </select>
+              {errors.country && <small>{errors.country.message}</small>}
             </div>
           </div>
+
+          {/* State & Zip Code */}
           <div className="form-row">
             <div className="input-field">
-              <label htmlFor="email">state</label>
+              <label>State</label>
               <input
-                type="text"
-                id="state"
-                name="state"
-                placeholder="Enter state adress"
-                // className={errorClass("state")}
-                value={formData.state}
-                onChange={handleChange}
+                {...register("state")}
+                placeholder="Enter state address"
               />
             </div>
+
             <div className="input-field">
-              <label htmlFor="lastName">Zip Code</label>
+              <label>Zip Code</label>
               <input
-                type="number"
-                id="zipCode"
-                name="zipCode"
-                placeholder="Enter zip code "
-                className={errorClass("zipCode")}
-                value={formData.zipCode}
-                onChange={handleChange}
+                {...register("zipCode", {
+                  required: "Zip code required",
+                })}
+                className={errors.zipCode ? "error-border" : ""}
+                placeholder="Enter zip code"
               />
+              {errors.zipCode && <small>{errors.zipCode.message}</small>}
             </div>
           </div>
-          {/* Password */}
+
+          {/* Password & Repeat Password */}
           <div className="form-row">
             <div className="input-field">
-              <label htmlFor="password">Password</label>
+              <label>Password</label>
               <div
-                className={`field-wrap password-wrap ${errorClass("password")}`}
+                className={`field-wrap password-wrap ${
+                  errors.password ? "error-border" : ""
+                }`}
               >
                 <input
                   type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
+                  {...register("password", {
+                    required: "Password required",
+                    minLength: {
+                      value: 6,
+                      message: "Minimum 6 characters",
+                    },
+                  })}
                   placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
                 />
                 <div
                   className="icon"
@@ -234,20 +179,24 @@ const SignUp = () => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </div>
               </div>
+              {errors.password && <small>{errors.password.message}</small>}
             </div>
 
             <div className="input-field">
-              <label htmlFor="repeatPassword">Repeat Password</label>
+              <label>Repeat Password</label>
               <div
-                className={`field-wrap password-wrap ${errorClass("password")}`}
+                className={`field-wrap password-wrap ${
+                  errors.repeatPassword ? "error-border" : ""
+                }`}
               >
                 <input
                   type={showRepeatPassword ? "text" : "password"}
-                  id="repeatPassword"
-                  name="repeatPassword"
+                  {...register("repeatPassword", {
+                    required: "Repeat password",
+                    validate: (val) =>
+                      val === watch("password") || "Passwords do not match",
+                  })}
                   placeholder="Repeat password"
-                  value={formData.repeatPassword}
-                  onChange={handleChange}
                 />
                 <div
                   className="icon"
@@ -256,6 +205,9 @@ const SignUp = () => {
                   {showRepeatPassword ? <FaEyeSlash /> : <FaEye />}
                 </div>
               </div>
+              {errors.repeatPassword && (
+                <small>{errors.repeatPassword.message}</small>
+              )}
             </div>
           </div>
 
@@ -265,7 +217,8 @@ const SignUp = () => {
         </form>
 
         <div className="sign-up">
-          I have an account <a onClick={() => navigate("/login")}>Sign In</a>
+          I have an account{" "}
+          <a onClick={() => navigate("/login")}>Sign In</a>
         </div>
       </FormCard>
     </AuthPageLayout>

@@ -154,6 +154,11 @@ export const SearchagentConatiner = styled.div`
       }
 
     }
+         .error-text {
+  color: red;
+  font-size: 0.85rem;
+  margin: 0;
+}
           .css-1kpc6lj-control{
         border-radius: 0px !important;
         padding: 6px;
