@@ -1,18 +1,28 @@
-import {Routes, Route } from "react-router-dom";
-import PropertyListing from "../pages/propertyListing/propertyListing";
-import HomePage from "../pages/Home/home";
-import Contact from "../pages/Contact/Contact";
-import SinglePropertyDetail from "../pages/PropertyDetails/PropertyDetails";
-import AuthLogin from "../Auth/Login/login";
-import ResetPassword from "../Auth/forgotPassword/forgotPassword";
-import VerifyEmail from "../Auth/EmailVerify/verifyEmail";
-import OtpVerify from "../Auth/OTP/OTP";
-import SignUp from "../Auth/signUp/signUp";
-import Agents from "../pages/Agents/Agents";
-import SingleAgentDetail from "../pages/SingleAgentDetail/SingleAgentDetail";
-import NotFoundPage from "../components/shared/pageNotFound/pageNotFount";
-NotFoundPage
+import {Routes, Route, useLocation } from "react-router-dom";
+import PropertyListing from "../Pages/property-page/property-listing/PropertyListing";
+import HomePage from "../Pages/home-Page/home/home";
+import Contact from "../Pages/Contact/Contact";
+import SinglePropertyDetail from "../pages/property-page/property-details1/PropertyDetails";
+import AuthLogin from "../Pages/auth/login/login";
+import ResetPassword from "../Pages/auth/forgot-password/forgotPassword";
+import VerifyEmail from "../Pages/auth/email-verify/verifyEmail";
+import OtpVerify from "../Pages/auth/otp/OTP";
+import SignUp from "../Pages/auth/sign-up/signUp";
+import Agents from "../pages/agent-page/agents/Agents";
+import SingleAgentDetail from "../pages/agent-page/single-agent-detail/SingleAgentDetail";
+import NotFoundPage from "../components/shared/page-not-found/PageNotFount";
+// import ResetPasswordVerification from "../Pages/auth/verification/ResetPasswordVerification";
+import RegistrationVerification from "../Pages/auth/verification/RegistrationVerification";
+import UserProfile from "../Pages/profile/UserProfile.jsx";
+import FavoritePage from "../Pages/favorite-items/FavoritePage.jsx";
+import { useEffect } from "react";
 const PublicRoutes = () => {
+    const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -20,13 +30,18 @@ const PublicRoutes = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/propertydetails/:id" element={<SinglePropertyDetail />} />
       <Route path="/login" element={<AuthLogin />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/reset-password-verification" element={<ResetPassword />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/otp-verification" element={<OtpVerify />} />
       <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/agents" element={<Agents />} />
-<Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
-<Route path="*" element={<NotFoundPage />} />
+      <Route path="/agents" element={<Agents />} />
+      <Route path="/agent-detail/:id" element={<SingleAgentDetail />} />
+      <Route path="/registration-verification" element={<RegistrationVerification />} />
+      <Route path="/user-profile" element={<UserProfile />} />
+      <Route path="/favorite-items" element={<FavoritePage />} />
+
+      <Route path="*" element={<NotFoundPage />} />
+
     </Routes>
   )
 }

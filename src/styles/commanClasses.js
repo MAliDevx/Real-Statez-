@@ -13,7 +13,7 @@ export const DividerWithText = styled.div`
   &::after {
     content: "";
     flex: .1;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-color);
     margin: 0 ;
   }
 
@@ -28,7 +28,7 @@ export const DividerWithText = styled.div`
 
 
 export const CarouselWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   margin: 40px auto;
   position: relative;
 
@@ -80,6 +80,7 @@ export const Card = styled.div`
     padding: 6px 8px;
     background-color: var(--large-text);
     color: white;
+    text-transform: capitalize;
   }
 
   .property-feature {
@@ -94,7 +95,7 @@ export const Card = styled.div`
     text-transform: uppercase;
     transform: rotate(-45deg);
     transform-origin: left top;
-    z-index: 1;
+    z-index: 0;
     outline: none;
     border: 0;
   }
@@ -149,10 +150,10 @@ export const CardImg = styled.img`
   width: 100%;
   height: 300px;
   object-fit: cover;
-  transition: transform 0.3s ease; /* Smooth transition */
+  transition: transform 0.3s ease;
 
 &:hover {
-  transform: scale(1.05); /* Zoom in slightly */
+  transform: scale(1.05);
 }
 `;
 
@@ -176,8 +177,22 @@ export const CardBodyTop = styled.div`
     text-transform: capitalize;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 15px;
+    .truncate-text {
+  display: inline-block; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 93%;            
+}
+
+  }
+  .add-fevorite{
+        display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
   }
   .property-name {
     margin: 0;
@@ -206,7 +221,7 @@ text-align: start;
   }
   
 `;
-export const Button = styled.div`
+export const Button = styled.button`
 
           padding: 12px 24px;
           display:flex;
@@ -238,3 +253,26 @@ export const ScrollTop = styled.div`
    cursor: pointer;
 
 `
+
+export const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: var(--border-color);
+      cursor: not-allowed;
+    }
+  }
+`;
+

@@ -15,6 +15,7 @@ const Variables = createGlobalStyle`
     --dark-blue:#6610f2;
     --cyan:#C1D0FF;
     --input-border: #e9ecef;
+    --border-color:#ccc
   }
 `;
 

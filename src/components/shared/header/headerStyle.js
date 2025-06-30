@@ -65,6 +65,10 @@ export const NavLink = styled.a`
 
 
 export const LoginButtonWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
   @media (max-width: 576px) {
     display: none;
   }
@@ -136,5 +140,42 @@ export const MobileMenuItem = styled.div`
 
   &:hover {
     color: ${({ $primary }) => ($primary ? "white" : "#007bff")};
+  }
+`;
+
+
+export  const ProfileImage = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  img{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #020202;
+    object-fit: contain;
+  }
+`;
+
+export  const DropdownMenu = styled.div`
+  position: absolute;
+  top: 50px;
+  right: -130px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.5em;
+  width: 150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+`;
+
+ export const DropdownItem = styled.div`
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 7px;
+  &:hover {
+    background: #f5f5f5;
   }
 `;
