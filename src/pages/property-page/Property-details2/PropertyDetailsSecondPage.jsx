@@ -114,7 +114,7 @@ const embedMapUrl = `https://www.google.com/maps?q=${lat},${lng}&hl=es;&output=e
 
 <div className="education-facilities">
   <h2>What's Nearby</h2>
-  {nearBy.nearby && nearBy.nearby.length >= 2 && (
+  {nearBy.nearby  && (
   <div className="facilities-container">
       <div className="facilities-box">
       <div className="facilities-heading">
@@ -165,7 +165,7 @@ const embedMapUrl = `https://www.google.com/maps?q=${lat},${lng}&hl=es;&output=e
             {propertyData === 0 ? (
   <p>No cards found.</p>
 ) : (
-            propertyData.map((item, idx) => (
+            propertyData?.map((item, idx) => (
               <SwiperSlide key={idx}>
                 <PropertyCard item={item} isError={isError} />
                 

@@ -22,11 +22,18 @@ const getSingleAgent = async (id) =>  {
   return response
 }
 
+const contactAgent = async (payload) =>{
+
+  const response = API.post("/notification/send-notification", payload)
+  return response
+}
+
   return (
     <AgentContext.Provider
       value={{
         getAllAgents,
-        getSingleAgent
+        getSingleAgent,
+        contactAgent
       }}
     >
       {children}

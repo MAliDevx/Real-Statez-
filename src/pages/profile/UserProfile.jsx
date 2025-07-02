@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaPlus, FaArrowLeft, FaSave } from "react-icons/fa";
 import { StyledProfileWrapper } from "./UserProfile";
-import { useUserContext } from "../../context/UserContext";
+import { useUserContext } from "../../Context/UserContext";
 import API from "../../api/axios";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Button } from "../../styles/CommanClasses";
@@ -41,22 +41,20 @@ function UserProfile() {
       email: prev.email,
     }));
   };
-
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setProfileImage(URL.createObjectURL(file));
-
-      const formData = new FormData();
-      formData.append("files", file);
+      const formDataObj = new FormData();
+      formDataObj.append("files", file);
 
       try {
-        const response = await uploadfile(formData);
+        const response = await uploadfile(formDataObj);
         const uploadedPath = response?.data?.data?.files?.[0]?.path;
 
         if (uploadedPath) {
+          const fullImageUrl = `${API.defaults.baseURL}/public/${uploadedPath}`;
+          setShowImage(fullImageUrl);
           setProfileImage(uploadedPath);
-        } else {
         }
       } catch (error) {
         console.error("Upload failed", error);
@@ -80,7 +78,9 @@ function UserProfile() {
       });
 
       if (user.image) {
-        const image = `${API.defaults.baseURL}${user.image}`;
+        const image = `${API.defaults.baseURL}/public/${user.image}`;
+        console.log("image url", image);
+
         setShowImage(image);
         setProfileImage(user.image);
       }
@@ -237,9 +237,8 @@ function UserProfile() {
               width: "150px",
               padding: "10px",
               backgroundColor: "var(--primary-button)",
-              border:'1px solid transparent',
+              border: "1px solid transparent",
               color: "white",
-              
             }}
           >
             <FaSave style={{ marginRight: "5px" }} />
