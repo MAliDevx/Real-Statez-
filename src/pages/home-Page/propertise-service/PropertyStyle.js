@@ -14,6 +14,8 @@ export const FilteredContent = styled.div`
   @media (max-width:768px) {
     position: relative;
     top: 430px;
+      padding: 8px;
+
   }
 
 `;

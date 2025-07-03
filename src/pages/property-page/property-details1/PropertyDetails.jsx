@@ -156,11 +156,12 @@ const SinglePropertyDetail = () => {
                 className="mySwiper slider-left"
                 onSlideChange={handleSlideChange}
               >
-                {images.map((slide, index) => (
+                {images?.map((slide, index) => (
+                  
                   <SwiperSlide key={index}>
                     <div
                       style={{
-                        backgroundImage: `url(${baseUrl}${slide})`,
+                        backgroundImage: `url(${baseUrl}/public/${slide})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                         width: "100%",
@@ -177,7 +178,7 @@ const SinglePropertyDetail = () => {
                 <div
                   className="preview-image"
                   style={{
-                    backgroundImage: `url(${baseUrl}${nextSlide})`,
+                    backgroundImage: `url(${baseUrl}/public/${nextSlide})`,
                   }}
                 ></div>
               </div>
@@ -186,7 +187,7 @@ const SinglePropertyDetail = () => {
                 <div
                   className="first-image"
                   style={{
-                    backgroundImage: `url(${baseUrl}${currentSlide})`,
+                    backgroundImage: `url(${baseUrl}/public/${currentSlide})`,
                   }}
                 >
                   <div className="overlay-text">
@@ -271,7 +272,7 @@ const SinglePropertyDetail = () => {
         <div className="profile-image-container" key={index}>
           <div className="profile-right-side">
             <img
-              src={`${API.defaults.baseURL}${data.image}`}
+              src={`${API.defaults.baseURL}/public/${data.image}`}
               className="profile-image"
               alt="img"
             />
@@ -389,7 +390,7 @@ const SinglePropertyDetail = () => {
                       controls
                       muted
                       playsInline
-                      poster={`${API.defaults.baseURL}${property.thumbnail}`}
+                      poster={`${API.defaults.baseURL}/public/${property.thumbnail}`}
                       onError={() => setVideoError(true)}
                     >
                       <source src={`${baseUrl}${property.video}`} type="video/webm" />
@@ -398,7 +399,7 @@ const SinglePropertyDetail = () => {
 
                     {videoError && (
                       <div className="video-error">
-                        <p>Video failed to load. <a href={`${API.defaults.baseURL}${property.video}`} target="_blank" rel="noopener noreferrer">open Video</a></p>
+                        <p>Video failed to load. <a href={`${API.defaults.baseURL}/public/${property.video}`} target="_blank" rel="noopener noreferrer">open Video</a></p>
                       </div>
                     )}
                   </div>

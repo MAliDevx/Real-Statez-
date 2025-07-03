@@ -14,6 +14,10 @@ export const PropertyListingContainer = styled.div`
     justify-content: center;
     margin-bottom: 150px;
     background-color: var(--background-color);
+    @media (max-width:768px) {
+          margin-bottom: 70px;
+
+    }
   }
 
   .propertyname-heading {
@@ -66,6 +70,7 @@ export const PropertyFilterdiv = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+
     span {
       font-family: "Open Sans", sans-serif;
       font-size: 14px;
@@ -74,10 +79,11 @@ export const PropertyFilterdiv = styled.div`
       margin-right: 5px;
     }
   }
+
   .icon-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* More natural icon alignment */
+    justify-content: flex-start;
     border: 1px solid var(--border-color);
     /* padding: 0px 10px; */
     /* border-radius: 4px; */
@@ -92,14 +98,20 @@ export const PropertyFilterdiv = styled.div`
     height: 20px;
     font-size: 16px;
     transition: all 0.2s ease;
-    /* border-radius: 4px; */
   }
 
   .icons.active {
     background-color: var(--primary-button);
     color: var(--white-color);
   }
+
+  .list-icon {
+    @media (max-width: 380px) {
+      display: none;
+    }
+  }
 `;
+
 export const Filterbox = styled.div`
 
   color: var(--subheading-color);

@@ -1,13 +1,26 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import {
-  FaPaperPlane, FaBath, FaBed, FaInbox, FaMap, FaMapMarkerAlt,
-  FaPhoneAlt, FaFax, FaEnvelope, FaFacebookF, FaTwitter,
-  FaLinkedinIn, FaInstagram, FaBuilding, FaRegFilePdf, FaRegFileWord
+  FaPaperPlane,
+  FaBath,
+  FaBed,
+  FaInbox,
+  FaMap,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaFax,
+  FaEnvelope,
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaInstagram,
+  FaBuilding,
+  FaRegFilePdf,
+  FaRegFileWord,
 } from "react-icons/fa";
 import { TfiYoutube } from "react-icons/tfi";
-import agentImage from '../../../assets/Images/team12.jpg';
+import agentImage from "../../../assets/Images/team12.jpg";
 import {
   SingleAgentHeadingContainer,
   AgentContentMainContainer,
@@ -44,21 +57,26 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useAgentContext } from "../../../context/AgentContext";
 import API from "../../../api/axios";
+import {
+  showSuccessToast,
+  showErrorToast,
+} from "../../../components/shared/toaster/toaster";
+
 const SingleAgentDetail = () => {
   const [showFull, setShowFull] = useState(false);
   const [agent, setAgent] = useState(null);
   const [properties, setProperties] = useState([]);
   const [propertyCategories, setPropertyCategories] = useState([]);
-  const { id } = useParams()
- const {getSingleAgent} = useAgentContext();
- const [SingleAgent, setSingleAgnet] = useState([])
- const [agentProperties, setAgnetProperties] = useState([])
-   const [fullName, setFullName] = useState("");
+  const { id } = useParams();
+  const { getSingleAgent, contactAgent } = useAgentContext();
+  const [SingleAgent, setSingleAgnet] = useState([]);
+  const [agentProperties, setAgnetProperties] = useState([]);
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
 
-const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     // Static agent data
     const staticAgent = {
@@ -91,7 +109,7 @@ const navigate = useNavigate()
         purpose: "For Sale",
         type: "Apartment",
         agentName: "Sarah Lee",
-        agentInitial: "S"
+        agentInitial: "S",
       },
       {
         id: 2,
@@ -108,8 +126,8 @@ const navigate = useNavigate()
         purpose: "For Rent",
         type: "Apartment",
         agentName: "Sarah Lee",
-        agentInitial: "S"
-      }
+        agentInitial: "S",
+      },
     ];
 
     // Static property categories
@@ -117,77 +135,97 @@ const navigate = useNavigate()
       acc[prop.type] = (acc[prop.type] || 0) + 1;
       return acc;
     }, {});
-    const formattedCategories = Object.entries(categories).map(([name, count]) => ({ name, count }));
+    const formattedCategories = Object.entries(categories).map(
+      ([name, count]) => ({ name, count })
+    );
 
     setAgent(staticAgent);
     setProperties(staticProperties);
     setPropertyCategories(formattedCategories);
   }, []);
 
-const getDataSingleAgent = async() =>{
-  const data = await getSingleAgent(id)
-setAgnetProperties(data.data.data.properties)
-  setSingleAgnet(data?.data?.data?.agent)
-  
-}
-
-useEffect(()=>{
-  getDataSingleAgent()
-},[])
-
-
-  const handleSubmit = () => {
-    const payload = {
-      fullName,
-      email,
-      phone,
-      message,
-      agentName: SingleAgent?.name || "Unknown Agent",
-    };
-
-    console.log("Contact Form Payload:", payload);
-
+  const getDataSingleAgent = async () => {
+    const data = await getSingleAgent(id);
+    setAgnetProperties(data.data.data.properties);
+    setSingleAgnet(data?.data?.data?.agent);
   };
 
+  useEffect(() => {
+    getDataSingleAgent();
+  }, []);
+
+  const handleSubmit = async () => {
+    try {
+      const payload = {
+        description: message,
+        receiverId: id,
+        propertyId: "684a65b64d26c4401af07f8c",
+      };
+
+
+
+      const data  = await contactAgent(payload)
+      // const response = await API.post(
+      //   "/apinotification/send-notification",
+      //   payload
+      // );
+
+      showSuccessToast("Message sent successfully!");
+      setMessage(""); // Clear the textarea after sending
+    } catch (error) {
+      showErrorToast("Failed to send message.");
+    }
+  };
 
   if (!agent) return <div>Loading...</div>;
 
   const agentDescription = [
-    `${agent.name} is a top-rated ${agent.title.toLowerCase()} with over ${agent.listings} listings.`,
+    `${agent.name} is a top-rated ${agent.title.toLowerCase()} with over ${
+      agent.listings
+    } listings.`,
     `With deep knowledge in the local market, ${agent.name} helps clients find dream properties quickly and smoothly.`,
-    `${agent.name.split(" ")[0]} has ${agent.experience} years of experience in real estate.`,
+    `${agent.name.split(" ")[0]} has ${
+      agent.experience
+    } years of experience in real estate.`,
     `${agent.name} is among the top agents in their region.`,
   ];
 
   return (
     <>
       <SingleAgentHeadingContainer>
-        <div className="imageContainer">
-
-        </div>
+        <div className="imageContainer"></div>
       </SingleAgentHeadingContainer>
 
       <AgentContentMainContainer>
         <StyledAgentInnerContainer>
           <AgentDetailContainer>
             <StyledAgentDetail>
-            {/* {SingleAgent.map((item, index)=>( */}
-                           <Card >
+              {/* {SingleAgent.map((item, index)=>( */}
+              <Card>
                 <ImageWrapper>
-                  <img src={`${API.defaults.baseURL}${SingleAgent.image}`} alt={SingleAgent.name} />
+                  <img
+                    src={`${API.defaults.baseURL}${SingleAgent.image}`}
+                    alt={SingleAgent.name}
+                  />
                   {/* <Badge>{item.listings} LISTING</Badge> */}
                 </ImageWrapper>
                 <Content>
                   <Name>{SingleAgent.name}</Name>
                   <Title>{SingleAgent.name}</Title>
-                  <InfoRow><FaBuilding /> <span>Office:</span> <span>{SingleAgent.phone}</span></InfoRow>
-                  <InfoRow><FaPhoneAlt /> <span>Mobile:</span> <span>{SingleAgent.phone}</span></InfoRow>
-                  <InfoRow><FaEnvelope /> <span>Email:</span> <span>{SingleAgent.email}</span></InfoRow>
-                  
+                  <InfoRow>
+                    <FaBuilding /> <span>Office:</span>{" "}
+                    <span>{SingleAgent.phone}</span>
+                  </InfoRow>
+                  <InfoRow>
+                    <FaPhoneAlt /> <span>Mobile:</span>{" "}
+                    <span>{SingleAgent.phone}</span>
+                  </InfoRow>
+                  <InfoRow>
+                    <FaEnvelope /> <span>Email:</span>{" "}
+                    <span>{SingleAgent.email}</span>
+                  </InfoRow>
                 </Content>
               </Card>
-            
-
             </StyledAgentDetail>
 
             <TabsButtonContainer>
@@ -201,11 +239,17 @@ useEffect(()=>{
                 <TabPanel>
                   <Heading>Hi, nice to meet you</Heading>
                   <div className="para-container">
-                    {(showFull ? agentDescription : agentDescription.slice(0, 2)).map((line, i) => (
+                    {(showFull
+                      ? agentDescription
+                      : agentDescription.slice(0, 2)
+                    ).map((line, i) => (
                       <p key={i}>{line}</p>
                     ))}
                     <div className="button-Container">
-                      <button className="descriptionButton" onClick={() => setShowFull(!showFull)}>
+                      <button
+                        className="descriptionButton"
+                        onClick={() => setShowFull(!showFull)}
+                      >
                         {showFull ? "Show Less" : "Show More"}
                       </button>
                     </div>
@@ -214,24 +258,56 @@ useEffect(()=>{
 
                 <TabPanel>
                   {agentProperties?.map((property, index) => (
-                    <CardContainer key={index} onClick={()=> navigate(`/propertydetails/${property._id}`)}>
+                    <CardContainer
+                      key={index}
+                      onClick={() =>
+                        navigate(`/propertydetails/${property._id}`)
+                      }
+                    >
                       <ImageContainer>
-                        <img src={`${API.defaults.baseURL}${property?.images[0]}`} alt={property?.title} />
+                        <img
+                          src={`${API.defaults.baseURL}${property?.images[0]}`}
+                          alt={property?.title}
+                        />
                         <SoldOutRibbon>{property.status}</SoldOutRibbon>
-                        <button >For {property?.purpose}</button>
+                        <button>For {property?.purpose}</button>
                       </ImageContainer>
                       <InfoSection>
                         <Tag>{property?.propertyType}</Tag>
                         <AgentTitle>{property.name}</AgentTitle>
                         <Location>
-                          <FaMapMarkerAlt size={12} style={{marginTop:'2px'}} /> {property?.fullAddress}
+                          <FaMapMarkerAlt
+                            size={12}
+                            style={{ marginTop: "2px" }}
+                          />{" "}
+                          {property?.fullAddress}
                         </Location>
 
                         <DetailRow>
-                          <p><span>Baths</span><span><FaBath /> {property.bathrooms}</span></p>
-                          <p><span>Beds</span><span><FaBed /> {property.bedrooms}</span></p>
-                          <p><span>Rooms</span><span><FaInbox /> {property.rooms}</span></p>
-                          <p><span>Area</span><span><FaMap /> {property.area} Sq Ft</span></p>
+                          <p>
+                            <span>Baths</span>
+                            <span>
+                              <FaBath /> {property.bathrooms}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Beds</span>
+                            <span>
+                              <FaBed /> {property.bedrooms}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Rooms</span>
+                            <span>
+                              <FaInbox /> {property.rooms}
+                            </span>
+                          </p>
+                          <p>
+                            <span>Area</span>
+                            <span>
+                              <FaMap /> {property.area} Sq Ft
+                            </span>
+                          </p>
                         </DetailRow>
                       </InfoSection>
 
@@ -248,13 +324,14 @@ useEffect(()=>{
           </AgentDetailContainer>
 
           <PropertyContainerMaindiv>
-<SearchagentConatiner>
-      <div className="heading-container">
-        <Heading>Contact With {SingleAgent?.name}</Heading>
-      </div>
+            <SearchagentConatiner>
+              <div className="heading-container">
+                <Heading>Contact With {SingleAgent?.name}</Heading>
+              </div>
 
-      <div className="InputContainer">
-        <div className="lable-input-div">
+              <div className="InputContainer">
+                {/* here is no need these field to send massage */}
+                {/* <div className="lable-input-div">
           <label htmlFor="fullName">Full Name</label>
           <input
             id="fullName"
@@ -285,30 +362,30 @@ useEffect(()=>{
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
-        </div>
+        </div> */}
 
-        <div className="lable-input-div">
-          <label htmlFor="message">Your Message</label>
-          <textarea
-            id="message"
-            rows={4}
-            placeholder="Enter your message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-        </div>
-      </div>
+                <div className="lable-input-div">
+                  <label htmlFor="message">Your Message</label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    placeholder="Enter your message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                </div>
+              </div>
 
-      <div className="ButtonDiv" onClick={handleSubmit}>
-        <button type="button" >
-          Submit
-        </button>
-        <FaPaperPlane />
-      </div>
-    </SearchagentConatiner>
+              <div className="ButtonDiv" onClick={handleSubmit}>
+                <button type="button">Submit</button>
+                <FaPaperPlane />
+              </div>
+            </SearchagentConatiner>
 
             <PropertyCetagoriesContainer>
-              <Subheading><Heading>Categories Property</Heading></Subheading>
+              <Subheading>
+                <Heading>Categories Property</Heading>
+              </Subheading>
               <div className="property-category-div">
                 {propertyCategories.map((category, index) => (
                   <div className="property-category-item" key={index}>
@@ -322,8 +399,14 @@ useEffect(()=>{
             <PropertyAttachmentDiv>
               <Heading>Property Attachments</Heading>
               <div className="button-container">
-                <div className="button-div"><FaRegFilePdf /><button>Download Documents.Pdf</button></div>
-                <div className="button-div"><FaRegFileWord /><button>Presentation 2024.Doc</button></div>
+                <div className="button-div">
+                  <FaRegFilePdf />
+                  <button>Download Documents.Pdf</button>
+                </div>
+                <div className="button-div">
+                  <FaRegFileWord />
+                  <button>Presentation 2024.Doc</button>
+                </div>
               </div>
             </PropertyAttachmentDiv>
           </PropertyContainerMaindiv>

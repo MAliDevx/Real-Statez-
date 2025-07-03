@@ -169,7 +169,7 @@ const CompanyShowCase = () => {
 
         <CardBox>
           {lastesNews.map((item, idx) => (
-            <Card style={{ width: "33%" }} key={idx}>
+            <Card className="latast-card-container" key={idx}>
               <button className="isForSale">For Sale</button>
               <CardImg src={item.imgage} alt={item.name} />
               <CardBodyTop>
