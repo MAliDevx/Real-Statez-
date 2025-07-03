@@ -131,7 +131,7 @@ export const Card = styled.div`
     }
 
     &__name {
-      font-weight: normal;
+      font-weight: 600;
       color: var(--gray);
       margin: 0;
       font-size: 15px;
@@ -219,7 +219,7 @@ text-align: start;
     gap: 5px;
     margin-top: 6px;
   }
-  
+
 `;
 export const Button = styled.button`
 

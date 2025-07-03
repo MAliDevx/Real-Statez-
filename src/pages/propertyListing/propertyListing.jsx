@@ -268,19 +268,19 @@ const PropertyListing = () => {
 
 
               </CardBodyBottom>
-<div className="property-profile">
-  <div className="property-profile__info">
-   <figure>
-   <img
-      src="https://wallsproperty.netlify.app/images/profile-blog.jpg"
-      alt="Owner"
-      className="property-profile__image"
-    />
-   </figure>
-    <p className="property-profile__name">{item.ownerName}</p>
-  </div>
-  <div className="property-profile__price">{item.price}.00</div>
-</div>
+        <div className="property-profile">
+          <div className="property-profile__info">
+            <figure>
+              <img
+                src={`${API.defaults.baseURL}/public/${item.agencyImage}`}
+                alt="Owner"
+                className="property-profile__image"
+              />
+            </figure>
+            <p className="property-profile__name">{item?.agencyName}</p>
+          </div>
+          <div className="property-profile__price">{item?.price}.00</div>
+        </div>
             </Card>
         ))}
         </GridContainer>

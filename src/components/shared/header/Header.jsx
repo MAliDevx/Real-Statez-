@@ -34,7 +34,7 @@ const Header = () => {
       console.log('header response ', response.data);
       const profile = response.data
             if (profile.image) {
-        const image = `${API.defaults.baseURL}${profile.image}`
+        const image = `${API.defaults.baseURL}/public/${profile.image}`
         setImage(image);        
 
       }
