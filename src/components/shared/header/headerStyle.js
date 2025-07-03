@@ -144,7 +144,7 @@ export const MobileMenuItem = styled.div`
 `;
 
 
-export  const ProfileImage = styled.div`
+export const ProfileImage = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -154,11 +154,11 @@ export  const ProfileImage = styled.div`
     height: 42px;
     border-radius: 50%;
     border: 1px solid #020202;
-    object-fit: contain;
+    object-fit: cover;
   }
 `;
 
-export  const DropdownMenu = styled.div`
+export const DropdownMenu = styled.div`
   position: absolute;
   top: 50px;
   right: -130px;
@@ -171,7 +171,7 @@ export  const DropdownMenu = styled.div`
   z-index: 100;
 `;
 
- export const DropdownItem = styled.div`
+export const DropdownItem = styled.div`
   padding: 0.5em;
   cursor: pointer;
   border-radius: 7px;

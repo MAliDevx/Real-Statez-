@@ -197,6 +197,7 @@ export const CardBodyTop = styled.div`
   .property-name {
     margin: 0;
     font-size: 1.2rem;
+    text-align: start;
     text-transform: capitalize;
     color: #002247;
   }
