@@ -199,7 +199,7 @@ const SingleAgentDetail = () => {
               <Card>
                 <ImageWrapper>
                   <img
-                    src={`${API.defaults.baseURL}${SingleAgent.image}`}
+                    src={`${API.defaults.baseURL}/public/${SingleAgent.image}`}
                     alt={SingleAgent.name}
                   />
                   {/* <Badge>{item.listings} LISTING</Badge> */}
@@ -261,7 +261,7 @@ const SingleAgentDetail = () => {
                     >
                       <ImageContainer>
                         <img
-                          src={`${API.defaults.baseURL}${property?.images[0]}`}
+                          src={`${API.defaults.baseURL}/public/${property?.images[0]}`}
                           alt={property?.title}
                         />
 <SoldOutRibbon status={property.status}>{property.status}</SoldOutRibbon>

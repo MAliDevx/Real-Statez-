@@ -197,14 +197,13 @@ export const customSelectStyles = {
     // height: "60px",
     padding: "0 10px",
     boxSizing: "border-box",
-    border: `1px solid ${
-      state.isFocused ? "var(--primary-button)" : "var(--border-color)"
-    }`,
+    border: `1px solid ${state.isFocused ? "var(--primary-button)" : "var(--border-color)"
+      }`,
     boxShadow: "none",
     fontFamily: '"Open Sans", sans-serif',
     fontSize: "16px",
     display: "flex",
-    alignItems: "center", 
+    alignItems: "center",
     cursor: "pointer",
     transition: "border-color 0.3s ease",
     "&:hover": {
@@ -218,7 +217,7 @@ export const customSelectStyles = {
     color: "rgb(33, 37, 41)",
     fontFamily: '"Open Sans", sans-serif',
     display: "flex",
-    alignItems: "center", 
+    alignItems: "center",
 
   }),
 
@@ -228,7 +227,7 @@ export const customSelectStyles = {
     color: "#999",
     fontFamily: '"Open Sans", sans-serif',
     display: "flex",
-    alignItems: "center", 
+    alignItems: "center",
     // height: "60px", 
     // lineHeight: "60px",
   }),
@@ -243,7 +242,7 @@ export const customSelectStyles = {
     display: "flex",
     alignItems: "center",
     height: "40px",
-    lineHeight: "40px", 
+    lineHeight: "40px",
   }),
 
   indicatorSeparator: () => ({
@@ -265,6 +264,7 @@ export const Card = styled.div`
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 }
 

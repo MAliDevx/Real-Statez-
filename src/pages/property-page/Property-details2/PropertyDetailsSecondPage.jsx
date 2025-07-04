@@ -52,12 +52,17 @@ const SecondSinglePropertyDetail = ({ViewProperty}) => {
     const navigate = useNavigate()
      const [showCard, setCard] = useState(3);
      const [propertyData, setpropertyData] = useState([]);
+     const [location, setLocation] = useState([]);
      const [isError, setIsError] = useState(false);
      const [nearBy, setNearBy] = useState([])
      
 const fetchData = async () => {
   try{
   const data = await ViewProperty();   
+  console.log("data", data);
+  
+  setLocation( data.property.location.coordinates);
+  
   const similarPropertise = data.similarProperties
   setNearBy(data.property)
   setpropertyData(similarPropertise)
@@ -90,9 +95,8 @@ useEffect(() => {
 }, [])
 
 
-const lat = propertyData?.location?.coordinates?.lat;
-const lng = propertyData?.location?.coordinates?.long;
-
+const lat = location.lat;
+const lng = location.long;
 const embedMapUrl = `https://www.google.com/maps?q=${lat},${lng}&hl=es;&output=embed`;
 
 

@@ -55,7 +55,7 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
       fetchProperties()
     } catch (err) {}
   };
-  const image = `${API.defaults.baseURL}${item?.images?.[0]}`;
+  const image = `${API.defaults.baseURL}/public/${item?.images?.[0]}`;
 
 
   return (
@@ -146,7 +146,7 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
           <div className="property-profile__info">
             <figure>
               <img
-                src={item?.agencyImage}
+                src={`${API.defaults.baseURL}/public/${item.agencyImage}`}
                 alt="Owner"
                 className="property-profile__image"
               />

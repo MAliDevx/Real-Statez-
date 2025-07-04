@@ -175,7 +175,7 @@ const filterAgent = async () => {
               >
                 <div className="image-wrapper">
                   <img
-                    src={`${API.defaults.baseURL}${agent.image}`}
+                    src={`${API.defaults.baseURL}/public/${agent.image}`}
                     alt={agent.name}
                   />
                   <Badge>{agent.propertyListing} LISTING</Badge>

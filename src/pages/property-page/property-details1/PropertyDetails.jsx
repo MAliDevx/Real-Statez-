@@ -68,21 +68,23 @@ const SinglePropertyDetail = () => {
   const [videoError, setVideoError] = useState(false);
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (videoRef.current && property.video) {
-      videoRef.current.muted = true; 
-      const playPromise = videoRef.current.pause();
+useEffect(() => {
+  if (videoRef.current && property.video) {
+    const video = videoRef.current;
+    video.muted = true;
 
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => setIsPlaying(true))
-          .catch(error => {
-            console.log("Autoplay prevented:", error);
-            setIsPlaying(false);
-          });
-      }
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => setIsPlaying(true))
+        .catch(error => {
+          console.log("Autoplay prevented:", error);
+          setIsPlaying(false);
+        });
     }
-  }, [property.video]);
+  }
+}, [property.video]);
   const handleSlideChange = (swiper) => {
     setCurrentIndex(swiper.realIndex || 0);
   };
@@ -157,7 +159,6 @@ const SinglePropertyDetail = () => {
                 onSlideChange={handleSlideChange}
               >
                 {images?.map((slide, index) => (
-                  
                   <SwiperSlide key={index}>
                     <div
                       style={{
@@ -268,7 +269,7 @@ const SinglePropertyDetail = () => {
         Contact our agents for more details and personalized assistance.
       </p>
 
-      {property.agents.map((data, index) => (
+      {property?.agents?.map((data, index) => (
         <div className="profile-image-container" key={index}>
           <div className="profile-right-side">
             <img
@@ -384,17 +385,17 @@ const SinglePropertyDetail = () => {
               <div className="video-container">
                 {property.video ? (
                   <div className="video-wrapper">
-                    <video
-                      ref={videoRef}
-                      width="100%"
-                      controls
-                      muted
-                      playsInline
-                      poster={`${API.defaults.baseURL}/public/${property.thumbnail}`}
-                      onError={() => setVideoError(true)}
-                    >
-                      <source src={`${baseUrl}${property.video}`} type="video/webm" />
-                    </video>
+<video
+  ref={videoRef}
+  width="100%"
+  controls
+  muted
+  playsInline
+  poster={`${API.defaults.baseURL}/public/${property.video}`}
+  onError={() => setVideoError(true)}
+>
+  <source src={`${baseUrl}/public/${property.video}`} type="video/webm" />
+</video>
 
 
                     {videoError && (

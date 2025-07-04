@@ -144,7 +144,7 @@ export const Card = styled.div`
     }
 
     &__name {
-      font-weight: normal;
+      font-weight: 600;
       color: var(--gray);
       margin: 0;
       font-size: 15px;
@@ -211,6 +211,7 @@ export const CardBodyTop = styled.div`
   .property-name {
     margin: 0;
     font-size: 1.2rem;
+    text-align: start;
     text-transform: capitalize;
     color: #002247;
     @media (max-width:768px) {
@@ -237,7 +238,7 @@ text-align: start;
     gap: 5px;
     margin-top: 6px;
   }
-  
+
 `;
 export const Button = styled.button`
 
