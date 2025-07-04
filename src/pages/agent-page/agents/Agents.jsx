@@ -21,6 +21,7 @@ import DataNotFound from "../../../components/shared/not-found";
 
 const Agents = () => {
   const allCity = [
+    {value:"none", name:"None"},
     { value:"uk", name: "UK" },
     { value:"pakistan",name: "Pakistan" },
     {value:"uae", name: "UAE" },
@@ -43,44 +44,64 @@ const Agents = () => {
       const data = await getAllAgents();
       setAgents(data?.data?.data?.data || []);
     };
-  useEffect(() => {
-    fetchAgents();
-  }, []);
+useEffect(() => {
+  const autoFilter = async () => {
+    // Don't filter if both are empty
+    if (!formData.name.trim() && !city.trim()) {
+      setInputError(false);
+      fetchAgents(); // show all agents
+      return;
+    }
+
+    const filters = {};
+
+    if (formData.name.trim()) filters.name = formData.name.trim();
+    if (city.trim()) filters.city = city.trim();
+
+    const data = await getAllAgents(filters);
+    setAgents(data?.data?.data?.data || []);
+    setInputError(false);
+  };
+
+  autoFilter();
+}, [formData.name, city]);
+
 
   const cityOptions = allCity.map((city) => ({
     label: city.name,
     value: city.value,
   }));
+const handleCityChange = (selectedOption) => {
+  if (selectedOption?.value === "none") {
+    setCity(""); // reset city filter
+  } else {
+    setCity(selectedOption?.value || "");
+  }
+};
 
-  const handleCityChange = (selectedOption) => {
-    if (selectedOption) {
-      setCity(selectedOption.value);
 
-      
-    }
-  };
 
-const filterAgent = async() => {
+const filterAgent = async () => {
   if (!formData.name && !city) {
     setInputError(true);
     return;
   }
-  
-  const filters = {}; 
-  
-  if (formData.name) {
-    filters.name = formData.name; 
+
+  const filters = {};
+
+  if (formData.name.trim() !== "") {
+    filters.name = formData.name.trim();
   }
-  
-  if (city) {
-    filters.city = city; 
+
+  if (city.trim() !== "") {
+    filters.city = city.trim();
   }
-  
-  console.log("filters", filters);
-  const data = await getAllAgents(filters); 
+
+  const data = await getAllAgents(filters);
   setAgents(data?.data?.data?.data || []);
   setInputError(false);
 };
+
 
   return (
     <>
@@ -134,10 +155,10 @@ const filterAgent = async() => {
               {/* </div> */}
             </div>
 
-            <div className="ButtonDiv" onClick={filterAgent}>
+            {/* <div className="ButtonDiv" onClick={filterAgent}>
               <button type="button">Search Agents</button>
               <FaSearch />
-            </div>
+            </div> */}
           </SearchagentConatiner>
         </PropertyContainerMaindiv>
 

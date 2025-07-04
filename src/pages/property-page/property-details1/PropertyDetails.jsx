@@ -15,7 +15,7 @@ import { Button } from "../../../styles/CommanClasses";
 import { FaAngleDown, FaAngleUp, FaLocationDot } from "react-icons/fa6";
 import SecondSinglePropertyDetail from "../Property-details2/propertyDetailsSecondPage";
 import { useParams } from "react-router-dom";
-import { useUserContext } from "../../../context/UserContext";
+import { useUserContext } from "../../../Context/UserContext";
 import {useNavigate } from "react-router-dom";
 
 

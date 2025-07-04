@@ -49,19 +49,15 @@ import {
   AgentTitle,
   Location,
   DetailRow,
-  RightSection,
-  AgentCircle,
-  AgentName,
+  // RightSection,
+  // AgentCircle,
+  // AgentName,
   Price,
 } from "./SingleAgentDetailStyle";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAgentContext } from "../../../context/AgentContext";
 import API from "../../../api/axios";
-import {
-  showSuccessToast,
-  showErrorToast,
-} from "../../../components/shared/toaster/toaster";
-
+import { showSuccessToast,showErrorToast } from "../../../components/shared/toaster/Toaster";
 const SingleAgentDetail = () => {
   const [showFull, setShowFull] = useState(false);
   const [agent, setAgent] = useState(null);
@@ -78,7 +74,7 @@ const SingleAgentDetail = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    // Static agent data
+
     const staticAgent = {
       id: "1",
       name: "Sarah Lee",
@@ -92,7 +88,7 @@ const SingleAgentDetail = () => {
       experience: 8,
     };
 
-    // Static properties data
+
     const staticProperties = [
       {
         id: 1,
@@ -130,7 +126,7 @@ const SingleAgentDetail = () => {
       },
     ];
 
-    // Static property categories
+
     const categories = staticProperties.reduce((acc, prop) => {
       acc[prop.type] = (acc[prop.type] || 0) + 1;
       return acc;
@@ -200,7 +196,6 @@ const SingleAgentDetail = () => {
         <StyledAgentInnerContainer>
           <AgentDetailContainer>
             <StyledAgentDetail>
-              {/* {SingleAgent.map((item, index)=>( */}
               <Card>
                 <ImageWrapper>
                   <img
@@ -269,7 +264,7 @@ const SingleAgentDetail = () => {
                           src={`${API.defaults.baseURL}${property?.images[0]}`}
                           alt={property?.title}
                         />
-                        <SoldOutRibbon>{property.status}</SoldOutRibbon>
+<SoldOutRibbon status={property.status}>{property.status}</SoldOutRibbon>
                         <button>For {property?.purpose}</button>
                       </ImageContainer>
                       <InfoSection>
@@ -308,14 +303,19 @@ const SingleAgentDetail = () => {
                               <FaMap /> {property.area} Sq Ft
                             </span>
                           </p>
-                        </DetailRow>
-                      </InfoSection>
+                 
 
+                        </DetailRow>
+                                                       <p>
+ <Price>${property.price}</Price>
+                                  </p> 
+                      </InfoSection>
+{/* 
                       <RightSection>
-                        {/* <AgentCircle>{property.agentInitial}</AgentCircle>
-                        <AgentName>{property.agentName}</AgentName> */}
+                        <AgentCircle>{property.agentInitial}</AgentCircle>
+                        <AgentName>{property.agentName}</AgentName>
                         <Price>${property.price}</Price>
-                      </RightSection>
+                      </RightSection> */}
                     </CardContainer>
                   ))}
                 </TabPanel>
@@ -395,7 +395,7 @@ const SingleAgentDetail = () => {
                 ))}
               </div>
             </PropertyCetagoriesContainer>
-
+{/* 
             <PropertyAttachmentDiv>
               <Heading>Property Attachments</Heading>
               <div className="button-container">
@@ -408,7 +408,7 @@ const SingleAgentDetail = () => {
                   <button>Presentation 2024.Doc</button>
                 </div>
               </div>
-            </PropertyAttachmentDiv>
+            </PropertyAttachmentDiv> */}
           </PropertyContainerMaindiv>
         </StyledAgentInnerContainer>
       </AgentContentMainContainer>
