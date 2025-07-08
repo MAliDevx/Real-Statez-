@@ -53,6 +53,9 @@ export const Card = styled.div`
   border: 1px solid #ddd;
   overflow: hidden;
   background: #fff;
+  height: fit-content;
+  height: 640px !important;
+
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0px 8px;
   cursor: pointer;

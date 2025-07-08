@@ -120,7 +120,6 @@ const Header = () => {
         </NavLink>
       </NavLinks>
 
-      {/* Login or Profile */}
       <LoginButtonWrapper ref={dropdownRef}>
         <FaRegHeart
           onClick={() => navigate("/favorite-items")}
@@ -151,12 +150,10 @@ const Header = () => {
         )}
       </LoginButtonWrapper>
 
-      {/* Hamburger Icon */}
       <HamburgerIcon scrolled={scrolled} onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </HamburgerIcon>
 
-      {/* Mobile Menu */}
       <MobileMenu isOpen={menuOpen}>
         <MobileMenuItem onClick={() => handleNavigate("/")}>
           Home
