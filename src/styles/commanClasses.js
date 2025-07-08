@@ -82,23 +82,36 @@ export const Card = styled.div`
     color: white;
     text-transform: capitalize;
   }
+.property-feature {
+  position: absolute;
+  top: 77px;
+  left: -28px;
+  width: 151px;
+  color: white;
+  padding: 6px 12px;
+  font-size: 14px;
+  text-transform: uppercase;
+  transform: rotate(-45deg);
+  transform-origin: left top;
+  z-index: 0;
+  outline: none;
+  border: 0;
+  background-color: var(--primary-button);
+}
 
-  .property-feature {
-    position: absolute;
-    top: 77px;
-    left: -28px;
-    width: 151px;
-    background-color: var(--primary-button);
-    color: white;
-    padding: 6px 12px;
-    font-size: 14px;
-    text-transform: uppercase;
-    transform: rotate(-45deg);
-    transform-origin: left top;
-    z-index: 0;
-    outline: none;
-    border: 0;
-  }
+.property-feature.sold {
+  background-color: #ff0000; 
+}
+
+.property-feature.rented {
+  background-color: #ff6d0e; 
+}
+
+.property-feature.available {
+  background-color: var(--primary-button); 
+}
+
+
 
   .property-profile {
     display: flex;
@@ -176,29 +189,35 @@ export const CardBodyTop = styled.div`
     margin: 6px 0;
     text-transform: capitalize;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-between;
     font-size: 15px;
+    gap: 10px;
     .truncate-text {
   display: inline-block; 
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 93%;            
+  max-width: 100%;            
 }
 
   }
   .add-fevorite{
         display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
     width: 100%;
   }
   .property-name {
     margin: 0;
     font-size: 1.2rem;
+    text-align: start;
     text-transform: capitalize;
     color: #002247;
+    @media (max-width:768px) {
+        font-size: 1rem;
+  
+    }
   }
 `;
 export const CardBodyBottom = styled.div`

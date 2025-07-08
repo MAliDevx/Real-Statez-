@@ -112,8 +112,9 @@ export const SearchagentConatiner = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  padding: 30px 0px;
   .heading-container {
-    padding: 20px;
+    /* padding: 20px; */
 
     h4 {
       text-transform: capitalize;

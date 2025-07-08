@@ -60,7 +60,11 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
 
   return (
     <Card onClick={() => navigate(`/propertydetails/${item._id}`)}>
-      {!isError && <button className="property-feature">{item?.status}</button>}
+{!isError && (
+  <button className={`property-feature ${item?.status?.toLowerCase()}`}>
+    {item?.status}
+  </button>
+)}
       {!isError && <button className="isForSale">{item?.purpose}</button>}
 
       <div style={{ height: "300px" }}>

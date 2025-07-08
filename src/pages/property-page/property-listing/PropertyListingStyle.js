@@ -146,5 +146,11 @@ export const GridContainer = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 85%;
-    margin: 29px auto
+    margin: 29px auto;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2,1fr);
+    }
+    @media (max-width: 368px) {
+      grid-template-columns: repeat(1,1fr);
+    }
 `;

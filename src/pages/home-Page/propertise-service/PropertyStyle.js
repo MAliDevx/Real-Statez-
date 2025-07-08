@@ -59,7 +59,7 @@ export const FilterRow = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 
   @media (max-width: 768px) {
     flex-direction: column;

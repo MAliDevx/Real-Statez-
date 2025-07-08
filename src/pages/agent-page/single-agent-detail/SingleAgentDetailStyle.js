@@ -278,7 +278,7 @@ export const CardContainer = styled.div`
 
 export const ImageContainer = styled.div`
   position: relative;
-  width: 40%;
+  width:50%;
   height: 300px;
   overflow: hidden;
     @media (max-width: 480px) {
@@ -323,22 +323,29 @@ export const SoldOutRibbon = styled.div`
   transform: rotate(-45deg);
   transform-origin: left top;
   font-size: 13px;
-  background-color: var(--primary-button);
+  background-color: ${({ status }) =>
+    status === "rented"
+      ? "#ff6d0e"
+      : status === "sold"
+      ? "red"
+      : "var(--primary-button)"};
   color: white;
   text-transform: uppercase;
   cursor: pointer;
   z-index: 1;
-
   outline: none;
 `;
 
+
 export const InfoSection = styled.div`
   display: flex;
-  width: 40%;
+  width: 50%;
   /* align-items: center; */
   justify-content: center;
+  gap: 5px;
   flex-direction: column;
-  padding: 20px 15px;
+  padding: 15px;
+  box-sizing: border-box;
     @media (max-width: 480px) {
   width: 100%;
   }
@@ -367,7 +374,7 @@ export const Location = styled.div`
   color: #495057;
   line-height: 1.5;
   display: flex;
-  align-items: center;
+  align-items:baseline;
   gap: 5px;
 `;
 
