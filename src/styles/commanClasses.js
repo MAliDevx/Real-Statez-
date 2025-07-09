@@ -161,7 +161,11 @@ export const Card = styled.div`
   }
 `;
 
-
+export const FeedbackCard=styled.div`
+height: auto;
+padding: 2rem;
+border: 1px solid #f4f4f4;
+`
 export const CardImg = styled.img`
   width: 100%;
   height: 300px;
@@ -179,6 +183,12 @@ export const CardBodyTop = styled.div`
   align-items: start;
   justify-content: start;
   flex-direction: column;
+  .property-type-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   .isHouse{
     border: none;
     outline: none;
@@ -196,6 +206,7 @@ export const CardBodyTop = styled.div`
     justify-content: space-between;
     font-size: 15px;
     gap: 10px;
+    text-align: start;
     .truncate-text {
   display: inline-block; 
   /* white-space: nowrap; */
