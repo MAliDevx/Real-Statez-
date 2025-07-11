@@ -169,7 +169,7 @@ const SingleAgentDetail = () => {
       showSuccessToast("Message sent successfully!");
       setMessage(""); // Clear the textarea after sending
     } catch (error) {
-      showErrorToast("Failed to send message.");
+      showErrorToast("Failed to send message. Please try again.");
     }
   };
 

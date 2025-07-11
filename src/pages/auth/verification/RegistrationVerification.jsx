@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../Context/AuthContext";
 import { Button } from "../../../styles/CommanClasses";
 import axios from "axios"; // Required for API call to /reset-email
 

@@ -7,7 +7,7 @@ import {
   showSuccessToast,
   showErrorToast,
 } from "../../../components/shared/toaster/Toaster";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../Context/AuthContext";
 
 const SignUp = () => {
   const { register: registerUser } = useAuth();

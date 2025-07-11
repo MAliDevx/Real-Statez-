@@ -14,68 +14,100 @@ const AuthProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       const response = await axios.post("/auth/register", userData);
-      showSuccessToast("Verifiy your email address");
+      showSuccessToast("Please verify your email address to complete registration.");
     } catch (err) {
-      if(err.status === 409){
-              showErrorToast("Email already exist ");
-              return
+        if (err.response?.status === 409) {
+          showErrorToast("An account with this email already exists.");
+        } else if (!err.response) {
+          showErrorToast("Network error. Please check your internet connection.");
+        } else {
+          showErrorToast("Registration failed. Please try again.");
+        }
 
-      }      
-      showErrorToast("Registration failed");
+        throw err;
     }
   };
-const emailVerificaion = async (userData) => {
+const emailVerification = async (userData) => {
   try {
     const response = await axios.post("/auth/verify", userData);
-    showSuccessToast("Email Verified");
-    return response.data; 
+    showSuccessToast("Your email has been successfully verified.");
+    return response.data;
   } catch (err) {
-    showErrorToast("Otp Expired Verify again");
-    return { success: false }; 
+    if (err.response?.status === 410) {
+      showErrorToast("The verification code has expired. Please request a new one.");
+    } else if (err.response?.status === 400) {
+      showErrorToast("Invalid verification code. Please try again.");
+    } else {
+      showErrorToast("Email verification failed. Please try again later.");
+    }
+
+    return { success: false };
   }
 };
 
 
 
-  const login = async (credentials) => {
-    try {
-      const res = await axios.post("/auth/login", credentials);
-      const { token, user } = res.data.data;
-      setAuthUser(res.data.user);      
-      localStorage.setItem("token", token);
-      showSuccessToast("Logged in successfully!");
-      navigate("/");
-    } catch (err) {
-      showErrorToast("Login failed invalid credential");
+const login = async (credentials) => {
+  try {
+    const res = await axios.post("/auth/login", credentials);
+    const { token, user } = res.data.data;
+
+    setAuthUser(user);
+    localStorage.setItem("token", token);
+
+    showSuccessToast("You’ve successfully logged in.");
+    navigate("/");
+  } catch (err) {
+    if (err.response?.status === 401) {
+      showErrorToast("Invalid email or password. Please try again.");
+    } else if (!err.response) {
+      showErrorToast("Network error. Please check your internet connection.");
+    } else {
+      showErrorToast("Login failed. Please try again later.");
     }
-  };
+  }
+};
 
   const logout = () => {
     localStorage.removeItem("token");
     setAuthUser(null);
-    showSuccessToast("Logged out successfully!");
+    showSuccessToast("You have been logged out successfully.");
   };
 
   const resetPassword = async (email) => {
     try {
-      await axios.post("/auth/forget-password", email );
-      showSuccessToast("Password reset link sent to email.");
+      await axios.post("/auth/forget-password", { email });
+      showSuccessToast("A password reset link has been sent to your email.");
     } catch (err) {
-      showErrorToast("Reset failed");
+      if (err.response?.status === 404) {
+        showErrorToast("No account found with this email address.");
+      } else if (!err.response) {
+        showErrorToast("Network error. Please check your internet connection.");
+      } else {
+        showErrorToast("Failed to send password reset link. Please try again.");
+      }
     }
   };
 
   const changePassword = async (credentials) => {
     try {
-      await axios.post("/auth/reset-password", credentials );
-      showSuccessToast("password reset successfully .");
+      await axios.post("/auth/reset-password", credentials);
+      showSuccessToast("Your password has been reset successfully.");
     } catch (err) {
-      showErrorToast("Otp Failed  verify your email again");
+      if (err.response?.status === 410) {
+        showErrorToast("The OTP has expired. Please verify your email again.");
+      } else if (err.response?.status === 400) {
+        showErrorToast("Invalid OTP or request. Please try again.");
+      } else if (!err.response) {
+        showErrorToast("Network error. Please check your internet connection.");
+      } else {
+        showErrorToast("Password reset failed. Please try again.");
+      }
     }
   };
 
   return (
-    <AuthContext.Provider value={{ register,emailVerificaion, login, logout, resetPassword, authUser,changePassword }}>
+    <AuthContext.Provider value={{ register, login, logout, resetPassword, authUser,changePassword }}>
       {children}
     </AuthContext.Provider>
   );
