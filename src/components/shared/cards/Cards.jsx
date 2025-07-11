@@ -18,7 +18,7 @@ import {
   FaTrashAlt,
    
 } from "react-icons/fa";
-import { useUserContext } from "../../../context/UserContext";
+import { useUserContext } from "../../../Context/UserContext";
 import API from "../../../api/axios";
 
 const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
@@ -74,10 +74,9 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
 
       {!isError && (
         <CardBodyTop>
+          <div className="property-type-container">
           <button className="isHouse">{item?.propertyType}</button>
-          <div className="add-fevorite">
-            <h4 className="property-name">{item?.name}</h4>
-            {!isFavoritePage && (
+    {!isFavoritePage && (
               <span onClick={handleFavoriteClick}>
                 {isFavorite || item.isFavorite ? (
                   <FaHeart
@@ -98,13 +97,18 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
                 )}
               </span>
             )}
-            {isFavoritePage && (
+                {isFavoritePage && (
               <span onClick={handleDeleteFavorite}>
                 <FaTrashAlt
                   style={{ color: "gray", cursor: "pointer", fontSize: "20px" }}
                 />
               </span>
             )}
+          </div>
+          <div className="add-fevorite">
+            <h4 className="property-name">{item?.name}</h4>
+        
+        
           </div>
           <div className="property-location">
             <FaLocationDot /> <span  className="truncate-text">{item?.fullAddress}</span>

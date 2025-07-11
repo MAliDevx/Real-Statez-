@@ -92,27 +92,32 @@ function UserProfile() {
   useEffect(() => {
     fetchData();
   }, []);
-  const handleSubmit = async (e) => {
-    event.preventDefault();
-    console.log("click");
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const payload = {
-      name: formData.name,
-      phone: formData.phoneNumber,
-      image: profileImage,
-      address: {
-        country: formData.country,
-        state: formData.state,
-        city: formData.city,
-        zipCode: formData.zipCode,
-      },
-    };
-
-    try {
-      const response = await updateProfile(payload);
-      fetchData();
-    } catch (error) {}
+  const payload = {
+    name: formData.name,
+    phone: formData.phoneNumber,
+    image: profileImage,
+    address: {
+      country: formData.country,
+      state: formData.state,
+      city: formData.city,
+      zipCode: formData.zipCode,
+    },
   };
+
+  try {
+    await updateProfile(payload);
+    fetchData();
+
+  
+    window.dispatchEvent(new Event("profile-updated"));
+  } catch (error) {
+    console.error("Update failed:", error);
+  }
+};
+
 
   return (
     <StyledProfileWrapper>

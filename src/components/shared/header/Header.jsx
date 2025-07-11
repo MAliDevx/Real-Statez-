@@ -29,15 +29,18 @@ const Header = () => {
   const dropdownRef = useRef();
   const { fetchUserProfile } = useUserContext();
 
-  const getUserProfile = async () => {
-    const response = await fetchUserProfile();
-    console.log("header response ", response.data);
-    const profile = response.data;
-    if (profile.image) {
-      const image = `${API.defaults.baseURL}${profile.image}`;
-      setImage(image);
-    }
-  };
+const getUserProfile = async () => {
+  const response = await fetchUserProfile();
+  const profile = response.data;
+
+  if (profile.image) {
+  
+    const image = `${API.defaults.baseURL}/public/${profile.image.replace(/^\/?public\/?/, "")}`;
+    setImage(image);
+  }
+};
+
+
   useEffect(() => {
     const updateToken = () => {
       const storedToken = localStorage.getItem("token");
@@ -48,8 +51,12 @@ const Header = () => {
     getUserProfile();
 
     window.addEventListener("login-success", updateToken);
+    window.addEventListener("profile-updated", getUserProfile);
 
-    return () => window.removeEventListener("login-success", updateToken);
+    return () => {
+      window.removeEventListener("login-success", updateToken);
+      window.removeEventListener("profile-updated", getUserProfile);
+    };
   }, []);
 
   useEffect(() => {
@@ -120,7 +127,6 @@ const Header = () => {
         </NavLink>
       </NavLinks>
 
-      {/* Login or Profile */}
       <LoginButtonWrapper ref={dropdownRef}>
         <FaRegHeart
           onClick={() => navigate("/favorite-items")}
@@ -131,7 +137,11 @@ const Header = () => {
             onClick={() => setDropdownOpen(!dropdownOpen)}
             scrolled={scrolled}
           >
-            <img src={image} alt="" />
+            {/* <p>{image}</p> */}
+            <img
+              src={image || "https://via.placeholder.com/100?text=User"}
+              alt="profile"
+            />
             {dropdownOpen && (
               <DropdownMenu>
                 <DropdownItem onClick={() => handleNavigate("/user-profile")}>
@@ -151,12 +161,10 @@ const Header = () => {
         )}
       </LoginButtonWrapper>
 
-      {/* Hamburger Icon */}
       <HamburgerIcon scrolled={scrolled} onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </HamburgerIcon>
 
-      {/* Mobile Menu */}
       <MobileMenu isOpen={menuOpen}>
         <MobileMenuItem onClick={() => handleNavigate("/")}>
           Home

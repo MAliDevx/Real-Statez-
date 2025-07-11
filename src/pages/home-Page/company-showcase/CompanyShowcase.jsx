@@ -13,8 +13,7 @@ import {
 import {
   DividerWithText,
   CarouselWrapper,
-  Card,
-  CardBodyTop,
+FeedbackCard,  CardBodyTop,
   CardImg,
   Button,
 } from "../../../styles/CommanClasses";
@@ -82,7 +81,6 @@ const CompanyShowCase = () => {
 
   return (
     <MainContainer>
-      {/* Partners Section */}
       <PartnersSection>
         <DividerWithText style={{ padding: "20px 0px 27px 0px" }}>
           <span>Our Partners</span>
@@ -99,7 +97,6 @@ const CompanyShowCase = () => {
         </div>
       </PartnersSection>
 
-      {/* People Feedback Section */}
       <PeopleFeedBack>
         <DividerWithText style={{ padding: "80px 0px 27px 0px" }}>
           <span>What People Say</span>
@@ -129,14 +126,11 @@ const CompanyShowCase = () => {
           >
             {listings.map((item, idx) => (
               <SwiperSlide key={idx}>
-                <Card
-                  style={{
-                    padding: "2rem",
-                    border: "1px solid #f4f4f4",
-                  }}
+                <FeedbackCard
+                
                 >
                   <p>{item.feedbackMessage}</p>
-                </Card>
+                </FeedbackCard>
                 <FeedBackProfile>
                   <figure>
                     <img
