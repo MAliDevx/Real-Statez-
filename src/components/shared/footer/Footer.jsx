@@ -27,8 +27,9 @@ function FooterPage() {
 
           </Logo>
           <p>
-            Estate Mate Real Estate is a premium Property template based on Bootstrap 4.
-            Estate Mate Real Estate helped thousands of clients to find the right property for their needs.
+            Estate Mate is a trusted name in real estate, offering a premium property browsing experience powered by modern, responsive design. Built on Bootstrap 4, our platform has helped thousands of clients find the perfect home, investment property, or commercial space. Whether you're buying, selling, or exploring, Estate Mate connects you with the right opportunities.
+
+
           </p>
           <Address>
             <p><FaMapMarkerAlt /> 214 West Arnold St. New York, NY 10002</p>
@@ -80,12 +81,12 @@ function FooterPage() {
         </Column>
       </FooterWrapper>
       <Copyright>
-     <div>   © 2020 Estate Mate Real Estate – Premium real estate & theme by <a href="https://retenvi.com">RETENVI.COM</a></div>
+     <div>© 2025 Estate Mate – Premium Real Estate</div>
      <div className="icons">
       <NavLink >Privacy</NavLink> /
       <NavLink href="">Contact</NavLink> /
-      <NavLink href="">About</NavLink> /
-      <NavLink href="">Faq</NavLink> 
+      <NavLink href="">About Us</NavLink> /
+      <NavLink href="">FAQs</NavLink> 
      </div>
       </Copyright>
     </FooterContainer>

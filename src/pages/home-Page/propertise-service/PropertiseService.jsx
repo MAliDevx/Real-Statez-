@@ -229,7 +229,7 @@ const PropertyFilter = () => {
 
       <FilteredContent>
         <DividerWithText>
-          <span>Recent Property</span>
+          <span>Recent Properties</span>
         </DividerWithText>
         <p>We provide full service at every step</p>
 
@@ -258,7 +258,7 @@ const PropertyFilter = () => {
 
       <FilteredContent style={{ background: `var(--background-light-gray)` }}>
         <DividerWithText>
-          <span>Recent Property</span>
+          <span>Recent Properties</span>
         </DividerWithText>
         <p>We provide full service at every step</p>
 

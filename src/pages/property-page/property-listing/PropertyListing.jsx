@@ -172,9 +172,9 @@ const PropertyListing = () => {
         <div className="propertyname-heading">
           <FaHome id="homeIcon" />
           <IoIosArrowForward />
-          <span id="property">Property</span>
+          <span id="property">Properties</span>
           <IoIosArrowForward />
-          <span id="housetype">Luxury family home</span>
+          <span id="housetype">Luxury Family Homes</span>
         </div>
       </div>
 
@@ -270,7 +270,7 @@ const PropertyListing = () => {
       </PropertyFilterdiv>
 {activeView === "grid" && (
   properties.length === 0 ? (
-    <DataNotFound message="Property Not Found" />
+    <DataNotFound message="Oops! Nothing to show on this page. Please try again later or check network connection." />
   ) : (
  <GridContainer>
   {properties.map((item, idx) => (
@@ -284,7 +284,7 @@ const PropertyListing = () => {
 
       {activeView === "list" && (
           properties.length === 0 ? (
-    <DataNotFound message="Property Not Found" />
+    <DataNotFound message="Oops! Nothing to show on this page. Please try again later or check network connection." />
   ) : (
         <ListConatiner>
                   {properties.map((property, index) => (
