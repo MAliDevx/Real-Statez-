@@ -42,40 +42,53 @@ const fetchAllPropertise = async ({ page = 1, limit = 10, filters = {} } = {}) =
   const updateProfile = async (userData) => {
     try {
       const response = await API.put("/profile/edit-profile", userData);
-      showSuccessToast("Updated Successfully ");
+      showSuccessToast("Your profile has been updated successfully.");
       return response;
     } catch (err) {
-      showErrorToast("Profile edit failed");
+      if (err.response?.status === 400) {
+        showErrorToast("Invalid profile data. Please review and try again.");
+      } else if (!err.response) {
+        showErrorToast("Network error. Please check your internet connection.");
+      } else {
+        showErrorToast("Failed to update profile. Please try again.");
+      }
     }
   };
 
 
-  const uploadfile = async (userData) => {
-    try {
-      const response = await API.post("/upload/file", userData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      showSuccessToast("File Uploaded Successfully ");
-      return response;
-    } catch (err) {
-      showErrorToast("File uploaded failed");
+const uploadfile = async (userData) => {
+  try {
+    const response = await API.post("/upload/file", userData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    showSuccessToast("File uploaded successfully.");
+    return response;
+  } catch (err) {
+    if (err.response?.status === 413) {
+      showErrorToast("File is too large. Please upload a smaller file.");
+    } else if (!err.response) {
+      showErrorToast("Network error. Please check your internet connection.");
+    } else {
+      showErrorToast("File upload failed. Please try again.");
     }
-  };
+  }
+};
+
 const addFevorite = async (userData) => {
   try {
     const response = await API.post("/favorite/add-favorite", userData);
-    showSuccessToast("Added Favorite");
+    showSuccessToast("Property has been added to your favorites.");
     return response;
 
   } catch (err) {
-    if (err.response && err.response.status === 409) {
-      showErrorToast("Already in favorites");
-    } else if (err.response && err.response.status === 401) {
-      showErrorToast("Please Login First");
+    if (err.response?.status === 409) {
+      showErrorToast("This property is already in your favorites.");
+    } else if (err.response?.status === 401) {
+      showErrorToast("You must be logged in to add favorites.");
     } else if (!err.response) {
-      showErrorToast("Please check your Internet connection.");
+      showErrorToast("Network error. Please check your internet connection.");
     } else {
-      showErrorToast("Failed to add to favorites");
+      showErrorToast("Failed to add the property to your favorites.");
     }
 
     throw err;
@@ -94,7 +107,7 @@ const fetchAllFevorite = async (page, limit) => {
   const deleteFavorite = async (_id) => {
     const res = await API.delete(`/favorite/delete-favorite/${_id}`);
     const propertyArray = res.data.data || [];
-    showErrorToast("Deleted sucessfully");
+    showSuccessToast("Property has been successfully removed from your favorites.");
 
     return propertyArray;
   };

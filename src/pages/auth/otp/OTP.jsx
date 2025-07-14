@@ -20,7 +20,7 @@ const OtpVerify = () => {
     }
 
     console.log("OTP entered:", otp); 
-    showSuccessToast('Verified OTP');
+    showSuccessToast("OTP verified successfully.");
     navigate("/reset-password");
   };
 
