@@ -83,10 +83,10 @@ const CompanyShowCase = () => {
     <MainContainer>
       <PartnersSection>
         <DividerWithText style={{ padding: "20px 0px 27px 0px" }}>
-          <span>Our Partners</span>
+          <span>Our Trusted Partners </span>
         </DividerWithText>
         <Para className="partners__description">
-          Brand Partners Successful Projects Trusted Many Clients Real Estate
+          Partnering with Top Brands, Delivering Successful Projects, Trusted by Thousands
         </Para>
         <div className="partners__logos" id="partnersLogos">
           <img src={pattnerImage1} alt="Partner 1" className="partners__logo" />
@@ -99,7 +99,7 @@ const CompanyShowCase = () => {
 
       <PeopleFeedBack>
         <DividerWithText style={{ padding: "80px 0px 27px 0px" }}>
-          <span>What People Say</span>
+          <span>What People Say </span>
         </DividerWithText>
         <Para className="partners__description">
           People say about Estate Mate

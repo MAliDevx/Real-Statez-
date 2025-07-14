@@ -28,6 +28,7 @@ const slides = [
   },
 ];
 
+
 const HomePage = () => {
   const navigate = useNavigate();
   return (

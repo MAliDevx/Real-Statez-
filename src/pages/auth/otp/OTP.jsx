@@ -19,7 +19,6 @@ const OtpVerify = () => {
       return;
     }
 
-    console.log("OTP entered:", otp); 
     showSuccessToast("OTP verified successfully.");
     navigate("/reset-password");
   };

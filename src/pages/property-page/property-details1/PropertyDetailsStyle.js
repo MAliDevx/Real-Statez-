@@ -34,7 +34,7 @@ export const SwiperStyles = createGlobalStyle`
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    /* padding: 0 1rem; */
 
     .leftSection {
       .name {

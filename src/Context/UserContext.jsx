@@ -21,7 +21,6 @@ const fetchAllPropertise = async ({ page = 1, limit = 10, filters = {} } = {}) =
     const propertyArray = res.data.data;
     return propertyArray;
   } catch (error) {
-    console.error("Error fetching properties:", error);
     throw error;
   }
 };
@@ -112,6 +111,7 @@ const fetchAllFevorite = async (page, limit) => {
     return propertyArray;
   };
 
+
   return (
     <UserContext.Provider
       value={{
@@ -122,8 +122,8 @@ const fetchAllFevorite = async (page, limit) => {
         addFevorite,
         fetchAllFevorite,
         viewSingleProperty,
-        deleteFavorite
-      }}
+        deleteFavorite,
+            }}
     >
       {children}
     </UserContext.Provider>

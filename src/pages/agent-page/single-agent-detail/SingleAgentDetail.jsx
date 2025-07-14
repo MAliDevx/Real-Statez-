@@ -142,7 +142,7 @@ const SingleAgentDetail = () => {
 
   const getDataSingleAgent = async () => {
     const data = await getSingleAgent(id);
-    setAgnetProperties(data.data.data.properties);
+    setAgnetProperties(data.data.data.properties);    
     setSingleAgnet(data?.data?.data?.agent);
   };
 
@@ -173,18 +173,14 @@ const SingleAgentDetail = () => {
     }
   };
 
-  if (!agent) return <div>Loading...</div>;
 
-  const agentDescription = [
-    `${agent.name} is a top-rated ${agent.title.toLowerCase()} with over ${
-      agent.listings
-    } listings.`,
-    `With deep knowledge in the local market, ${agent.name} helps clients find dream properties quickly and smoothly.`,
-    `${agent.name.split(" ")[0]} has ${
-      agent.experience
-    } years of experience in real estate.`,
-    `${agent.name} is among the top agents in their region.`,
-  ];
+const agentDescription = [
+  `${SingleAgent.name} is a top-rated agent.`,
+  `With in-depth knowledge of the local market, ${SingleAgent.name} helps clients find their dream properties quickly and smoothly.`,
+  `He is an experienced real estate professional.`,
+  `${SingleAgent.name} is recognized among the top agents in the region.`,
+];
+
 
   return (
     <>

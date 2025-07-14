@@ -57,7 +57,6 @@ function UserProfile() {
           setProfileImage(uploadedPath);
         }
       } catch (error) {
-        console.error("Upload failed", error);
       }
     }
   };
@@ -79,13 +78,11 @@ function UserProfile() {
 
       if (user.image) {
         const image = `${API.defaults.baseURL}/public/${user.image}`;
-        console.log("image url", image);
 
         setShowImage(image);
         setProfileImage(user.image);
       }
     } catch (error) {
-      console.error("Error fetching user profile:", error);
     }
   };
 
@@ -114,7 +111,6 @@ const handleSubmit = async (e) => {
   
     window.dispatchEvent(new Event("profile-updated"));
   } catch (error) {
-    console.error("Update failed:", error);
   }
 };
 

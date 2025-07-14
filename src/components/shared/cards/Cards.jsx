@@ -43,7 +43,6 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
         setIsFavorite(true);
       }
     } catch (error) {
-      console.error("Error updating favorite:", error);
     } finally {
       setIsLoading(false);
     }
