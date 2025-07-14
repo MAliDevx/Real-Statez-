@@ -38,19 +38,19 @@ const CompanyShowCase = () => {
     {
       name: "Modern Villa",
       feedbackMessage:
-        "Thank you walls property help me, choice dream home. We were impressed with the build quality, Plus they are competitively priced.",
+        "Thank you, Estate Mate, for helping me choose my dream home. I was impressed with the build quality, and the prices are very competitive.",
       role: "Owner, Digital Agency",
     },
     {
       name: "Urban Apartment",
       feedbackMessage:
-        "Thank you walls property help me, choice dream home. We were impressed with the build quality, Plus they are competitively priced.",
+        "Thank you, Estate Mate, for helping me choose my dream home. I was impressed with the build quality, and the prices are very competitive.",
       role: "Owner, Digital Agency",
     },
     {
       name: "Cozy Cottage",
       feedbackMessage:
-        "Thank you walls property help me, choice dream home. We were impressed with the build quality, Plus they are competitively priced.",
+        "Thank you, Estate Mate, for helping me choose my dream home. I was impressed with the build quality, and the prices are very competitive.",
       role: "Owner, Digital Agency",
     },
   ];
@@ -102,7 +102,7 @@ const CompanyShowCase = () => {
           <span>What People Say</span>
         </DividerWithText>
         <Para className="partners__description">
-          People say about Walls Property
+          People say about Estate Mate
         </Para>
 
         <CarouselWrapper>

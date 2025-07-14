@@ -9,7 +9,7 @@ export const NotFoundWrapper = styled.div`
 `;
 
 export const NotFoundText = styled.h1`
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--border-color);
   letter-spacing: 1px;

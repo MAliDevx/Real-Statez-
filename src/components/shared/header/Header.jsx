@@ -109,7 +109,7 @@ const getUserProfile = async () => {
           active={location.pathname === "/property-listing"}
           onClick={() => handleNavigate("/property-listing")}
         >
-          Property
+          Properties
         </NavLink>
         <NavLink
           scrolled={scrolled}

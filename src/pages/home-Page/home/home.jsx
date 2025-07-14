@@ -13,18 +13,18 @@ import { useNavigate } from 'react-router-dom';
 const slides = [
   {
     image: 'https://wallsproperty.netlify.app/images/bg.jpg',
-    HeadingText: 'Explore the Mountains',
-    paraText: 'Experience breathtaking views and peaceful moments in nature.',
+    HeadingText: 'Find Your Dream Home',
+    paraText: 'Browse beautiful properties tailored to your lifestyle and budget.',
   },
   {
     image: 'https://wallsproperty.netlify.app/images/bg15.jpg',
-    HeadingText: 'Adventure Awaits',
-    paraText: 'Unleash your spirit of adventure with thrilling destinations.',
+    HeadingText: 'Invest in the Future',
+    paraText: 'Discover high-yield investment properties in prime locations.',
   },
   {
     image: 'https://wallsproperty.netlify.app/images/bg19.jpg',
-    HeadingText: 'Discover the World',
-    paraText: 'Travel the globe and discover hidden treasures and cultures.',
+    HeadingText: 'Live Where You Love',
+    paraText: 'Explore vibrant neighborhoods and premium living spaces.',
   },
 ];
 
