@@ -106,7 +106,7 @@ const fetchAllFevorite = async (page, limit) => {
   const deleteFavorite = async (_id) => {
     const res = await API.delete(`/favorite/delete-favorite/${_id}`);
     const propertyArray = res.data.data || [];
-    showSuccessToast("Property has been successfully removed from your favorites.");
+    showErrorToast("Successfully removed from Favorites!.");
 
     return propertyArray;
   };

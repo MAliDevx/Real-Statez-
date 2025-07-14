@@ -34,6 +34,7 @@ import pattnerImage5 from "../../../assets/Images/partner-logo5.png";
 import { FaChevronRight } from "react-icons/fa";
 
 const CompanyShowCase = () => {
+<<<<<<< HEAD
 const listings = [
   {
     name: "Modern Villa",
@@ -54,6 +55,28 @@ const listings = [
     role: "Buyer, Cozy Cottage",
   },
 ];
+=======
+  const listings = [
+    {
+      name: "Modern Villa",
+      feedbackMessage:
+        "Thank you, Estate Mate, for helping me choose my dream home. I was impressed with the build quality, and the prices are very competitive.",
+      role: "Owner, Digital Agency",
+    },
+    {
+      name: "Urban Apartment",
+      feedbackMessage:
+        "Thank you, Estate Mate, for helping me choose my dream home. I was impressed with the build quality, and the prices are very competitive.",
+      role: "Owner, Digital Agency",
+    },
+    {
+      name: "Cozy Cottage",
+      feedbackMessage:
+        "Thank you, Estate Mate, for helping me choose my dream home. I was impressed with the build quality, and the prices are very competitive.",
+      role: "Owner, Digital Agency",
+    },
+  ];
+>>>>>>> a26529c53e7678fb7762cd41d894d42745d2270f
 
   const lastesNews = [
     {
@@ -102,7 +125,11 @@ const listings = [
           <span>What People Say </span>
         </DividerWithText>
         <Para className="partners__description">
+<<<<<<< HEAD
           Hear what people are saying about their experience with Reat Statez Property
+=======
+          People say about Estate Mate
+>>>>>>> a26529c53e7678fb7762cd41d894d42745d2270f
         </Para>
 
         <CarouselWrapper>

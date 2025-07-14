@@ -14,6 +14,7 @@ const slides = [
   {
     image: 'https://wallsproperty.netlify.app/images/bg.jpg',
     HeadingText: 'Find Your Dream Home',
+<<<<<<< HEAD
     paraText: 'Explore premium properties with scenic views and modern amenities.',
   },
   {
@@ -25,6 +26,19 @@ const slides = [
     image: 'https://wallsproperty.netlify.app/images/bg19.jpg',
     HeadingText: 'Live the Lifestyle You Deserve',
     paraText: 'Explore homes that offer more than space — they offer meaning.',
+=======
+    paraText: 'Browse beautiful properties tailored to your lifestyle and budget.',
+  },
+  {
+    image: 'https://wallsproperty.netlify.app/images/bg15.jpg',
+    HeadingText: 'Invest in the Future',
+    paraText: 'Discover high-yield investment properties in prime locations.',
+  },
+  {
+    image: 'https://wallsproperty.netlify.app/images/bg19.jpg',
+    HeadingText: 'Live Where You Love',
+    paraText: 'Explore vibrant neighborhoods and premium living spaces.',
+>>>>>>> a26529c53e7678fb7762cd41d894d42745d2270f
   },
 ];
 

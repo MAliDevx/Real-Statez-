@@ -137,7 +137,7 @@ const handleCityChange = (selectedOption) => {
 
         <AgentGridContainer>
                         {agents.length === 0 ? (
-    <DataNotFound message="Agnet Not Found" />
+    <DataNotFound message="Oops! Nothing to show on this page. Please try again later or check network connection." />
   ) : (
           <div className="grid-container">
 

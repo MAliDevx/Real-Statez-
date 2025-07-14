@@ -62,7 +62,7 @@ const FavoritePage = () => {
         <p>Explore all the listings you love in one place</p>
       </Header>
         {favorites.length === 0 ? (
-          <DataNotFound message="No favorite property found" />
+          <DataNotFound message="Oops! Nothing to show on this page. Please try again later or check network connection." />
         ) : (
       <CardGrid>
 
