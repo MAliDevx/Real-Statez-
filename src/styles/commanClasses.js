@@ -54,7 +54,7 @@ export const Card = styled.div`
   overflow: hidden;
   background: #fff;
   height: fit-content;
-  height: 640px !important;
+  height: 570px !important;
 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0px 8px;
@@ -207,12 +207,15 @@ export const CardBodyTop = styled.div`
     font-size: 15px;
     gap: 10px;
     text-align: start;
+        width: 100%;
+
     .truncate-text {
   display: inline-block; 
-  /* white-space: nowrap; */
+  flex: 1; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;            
+  max-width: 100%;           
 }
 
   }
@@ -227,7 +230,10 @@ export const CardBodyTop = styled.div`
     font-size: 1.2rem;
     text-align: start;
     text-transform: capitalize;
-    color: #002247;
+    color: var(--large-text);
+      white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
     @media (max-width:768px) {
         font-size: 1rem;
   
@@ -288,11 +294,13 @@ export const ScrollTop = styled.div`
 `
 
 export const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 2rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 97%;
+    margin: 20px 0px;
 
   button {
     padding: 8px 16px;

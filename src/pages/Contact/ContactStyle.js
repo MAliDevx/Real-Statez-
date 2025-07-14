@@ -3,8 +3,8 @@ import backgroundImg from "../../assets/Images/Contactbg.jpg";
 
 export const StyledContactPage = styled.div`
   width: 100%;
-  background-color: var(--primary-button);
-  color: var(--white-color);
+  background-color: var(--white-color);
+  color: var(--large-text);
 
   .mainheading-div {
     text-align: center;
@@ -164,8 +164,10 @@ export const StyledContactPage = styled.div`
     }
 
     .image-container {
-      width: 100%;
-      height: 100%;
+    width: 90%;
+    height: 90%;
+    border-radius: 11px;
+    overflow: hidden;
 
       img {
         width: 100%;

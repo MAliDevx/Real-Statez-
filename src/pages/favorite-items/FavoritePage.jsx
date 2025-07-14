@@ -59,7 +59,7 @@ const FavoritePage = () => {
     <Wrapper>
       <Header>
         <h1>Your Favorite Properties</h1>
-        <p>Explore all properties you've marked as favorite</p>
+        <p>Explore all the listings you love in one place</p>
       </Header>
         {favorites.length === 0 ? (
           <DataNotFound message="No favorite property found" />

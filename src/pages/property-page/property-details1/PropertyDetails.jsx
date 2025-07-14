@@ -60,7 +60,7 @@ const SinglePropertyDetail = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showFull, setShowFull] = useState(false);
   const { id } = useParams();
-  const { viewSingleProperty } = useUserContext();
+  const { viewSingleProperty, addFevorite } = useUserContext();
   const [property, setProperties] = useState([]);
   const [isError, setIsError] = useState(false);
   const [images, setImages] = useState([]);
@@ -79,7 +79,6 @@ useEffect(() => {
       playPromise
         .then(() => setIsPlaying(true))
         .catch(error => {
-          console.log("Autoplay prevented:", error);
           setIsPlaying(false);
         });
     }
@@ -109,6 +108,19 @@ useEffect(() => {
       return null;
     }
   };
+
+const handleAddFavorite = async (id) => {  
+  const payload = {
+    propertyId:id
+  }
+  try {
+    const data = await addFevorite(payload); 
+    ViewProperty(id)
+
+  } catch (err) {
+  }
+};
+
   useEffect(() => {
 
     ViewProperty();
@@ -117,7 +129,6 @@ useEffect(() => {
 
   useEffect(() => { }, [property]);
   useEffect(() => {
-    console.log("Updated images here ", images);
   }, [images]);
 
   const toggleText = () => {
@@ -126,9 +137,9 @@ useEffect(() => {
 
   const [openIndexes, setOpenIndex] = useState([]);
 
-  const handleDropDown = (index) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
-  };
+  // const handleDropDown = (index) => {
+  //   setOpenIndex((prev) => (prev === index ? null : index));
+  // };
 
   const getTrimmedText = (text = "", wordCount = 100) => {
     const words = text.split(" ");
@@ -253,12 +264,14 @@ useEffect(() => {
 
               <div className="rightSection">
                 {/* <button className="purchaseButton">Purchase this Property</button> */}
-                <div className="actionIcons">
-                  {/* <FaExchangeAlt className="icon" />
-        <FaPrint className="icon" /> */}
-                  {/* <FaRegHeart className="icon" /> */}
-                  <FaHeart style={{color:'red'}} className="icon" />
-                </div>
+<div className="actionIcons">
+  {property?.isFavorite ? (
+    <FaHeart className="icon" style={{ color: 'red' }} />
+  ) : (
+<FaRegHeart onClick={() => handleAddFavorite(property._id)} className="icon" />
+  )}
+</div>
+
               </div>
             </div>
 <div>

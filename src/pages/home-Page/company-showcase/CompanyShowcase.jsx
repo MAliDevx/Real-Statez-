@@ -34,26 +34,26 @@ import pattnerImage5 from "../../../assets/Images/partner-logo5.png";
 import { FaChevronRight } from "react-icons/fa";
 
 const CompanyShowCase = () => {
-  const listings = [
-    {
-      name: "Modern Villa",
-      feedbackMessage:
-        "Thank you walls property help me, choice dream home. We were impressed with the build quality, Plus they are competitively priced.",
-      role: "Owner, Digital Agency",
-    },
-    {
-      name: "Urban Apartment",
-      feedbackMessage:
-        "Thank you walls property help me, choice dream home. We were impressed with the build quality, Plus they are competitively priced.",
-      role: "Owner, Digital Agency",
-    },
-    {
-      name: "Cozy Cottage",
-      feedbackMessage:
-        "Thank you walls property help me, choice dream home. We were impressed with the build quality, Plus they are competitively priced.",
-      role: "Owner, Digital Agency",
-    },
-  ];
+const listings = [
+  {
+    name: "Modern Villa",
+    feedbackMessage:
+      "Real Statez helped me find the perfect villa. The process was smooth, transparent, and truly professional. Highly recommended!",
+    role: "Homeowner, Modern Villa",
+  },
+  {
+    name: "Urban Apartment",
+    feedbackMessage:
+      "I'm extremely satisfied with my apartment purchase through Real Statez. Great location, reasonable pricing, and top-notch service!",
+    role: "Owner, Urban Apartment",
+  },
+  {
+    name: "Cozy Cottage",
+    feedbackMessage:
+      "From the first visit to the final deal, Real Statez made everything seamless. The cottage is everything I was looking for.",
+    role: "Buyer, Cozy Cottage",
+  },
+];
 
   const lastesNews = [
     {
@@ -83,10 +83,10 @@ const CompanyShowCase = () => {
     <MainContainer>
       <PartnersSection>
         <DividerWithText style={{ padding: "20px 0px 27px 0px" }}>
-          <span>Our Partners</span>
+          <span>Our Trusted Partners </span>
         </DividerWithText>
         <Para className="partners__description">
-          Brand Partners Successful Projects Trusted Many Clients Real Estate
+          Partnering with Top Brands, Delivering Successful Projects, Trusted by Thousands
         </Para>
         <div className="partners__logos" id="partnersLogos">
           <img src={pattnerImage1} alt="Partner 1" className="partners__logo" />
@@ -99,10 +99,10 @@ const CompanyShowCase = () => {
 
       <PeopleFeedBack>
         <DividerWithText style={{ padding: "80px 0px 27px 0px" }}>
-          <span>What People Say</span>
+          <span>What People Say </span>
         </DividerWithText>
         <Para className="partners__description">
-          People say about Walls Property
+          Hear what people are saying about their experience with Reat Statez Property
         </Para>
 
         <CarouselWrapper>

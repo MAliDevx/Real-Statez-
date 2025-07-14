@@ -59,7 +59,6 @@ const SecondSinglePropertyDetail = ({ViewProperty}) => {
 const fetchData = async () => {
   try{
   const data = await ViewProperty();   
-  console.log("data", data);
   
   setLocation( data.property.location.coordinates);
   
@@ -67,7 +66,6 @@ const fetchData = async () => {
   setNearBy(data.property)
   setpropertyData(similarPropertise)
   setIsError(false)
-  console.log("similarProperties", similarPropertise); 
   }catch(error){
    setProperties([CardJSON, CardJSON, CardJSON]);
    setIsError(true);

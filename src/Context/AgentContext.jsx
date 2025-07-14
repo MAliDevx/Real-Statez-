@@ -12,7 +12,6 @@ const AgentProvider = ({ children }) => {
 const getAllAgents = async (filters = {}) => {
   const queryString = new URLSearchParams(filters).toString();
   const data = await API.get(`/agent/view-agents?${queryString}`);
-  console.log("agent data", data);
   return data;
 };
 
@@ -28,12 +27,17 @@ const contactAgent = async (payload) =>{
   return response
 }
 
+  const getALlCities = async () =>{
+    const data = await API.get(`/city/view-cities`);
+    return data.data.data.data
+  }
   return (
     <AgentContext.Provider
       value={{
         getAllAgents,
         getSingleAgent,
-        contactAgent
+        contactAgent,
+        getALlCities
       }}
     >
       {children}

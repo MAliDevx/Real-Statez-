@@ -231,10 +231,10 @@ const PropertyFilter = () => {
         <DividerWithText>
           <span>Recent Property</span>
         </DividerWithText>
-        <p>We provide full service at every step</p>
+        <p>We'll provide full service at every step</p>
 
         {properties.length === 0 ? (
-          <DataNotFound message="No searched property found." />
+          <DataNotFound message="No properties found. Please try a different filter" />
         ) : (
           <CarouselWrapper>
             <Swiper
@@ -260,10 +260,10 @@ const PropertyFilter = () => {
         <DividerWithText>
           <span>Recent Property</span>
         </DividerWithText>
-        <p>We provide full service at every step</p>
+        <p>Full service, full support — your dream home is just one step away.</p>
 
         {properties.length === 0 ? (
-          <DataNotFound message="No search property found." />
+          <DataNotFound message="No properties found. Please try a different filter" />
         ) : (
           <CarouselWrapper>
             <Swiper

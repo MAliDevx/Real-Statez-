@@ -20,36 +20,32 @@ import API from "../../../api/axios";
 import DataNotFound from "../../../components/shared/not-found";
 
 const Agents = () => {
-  const allCity = [
-    {value:"none", name:"None"},
-    { value:"uk", name: "UK" },
-    { value:"pakistan",name: "Pakistan" },
-    {value:"uae", name: "UAE" },
-  ];
-  const allCatogery = [
-    { name: "House" },
-    { name: "Appartment" },
-    { name: "Bangla" },
-    { name: "Plot" },
-  ];
+
   const [city, setCity] = useState('');
   const [category, setCategory] = useState('');
   const navigate = useNavigate();
-  const { getAllAgents } = useAgentContext();
+  const { getAllAgents, getALlCities } = useAgentContext();
   const [agents, setAgents] = useState([]);
   const [formData, setFormData] = useState( {name: ""} );
   const [inputError, setInputError] = useState(false)
-
+  const [cityArray, setCityArray ] = useState([])
       const fetchAgents = async () => {
       const data = await getAllAgents();
       setAgents(data?.data?.data?.data || []);
     };
+
+const getALlCitiesFn = async () => {
+  const data = await getALlCities()
+  setCityArray(data)
+  
+}
+
 useEffect(() => {
   const autoFilter = async () => {
-    // Don't filter if both are empty
     if (!formData.name.trim() && !city.trim()) {
       setInputError(false);
-      fetchAgents(); // show all agents
+      fetchAgents(); 
+      getALlCitiesFn()
       return;
     }
 
@@ -67,41 +63,18 @@ useEffect(() => {
 }, [formData.name, city]);
 
 
-  const cityOptions = allCity.map((city) => ({
+  const cityOptions = cityArray.map((city) => ({
     label: city.name,
-    value: city.value,
+    value: city.name,
   }));
+
 const handleCityChange = (selectedOption) => {
   if (selectedOption?.value === "none") {
-    setCity(""); // reset city filter
+    setCity(""); 
   } else {
     setCity(selectedOption?.value || "");
   }
 };
-
-
-
-const filterAgent = async () => {
-  if (!formData.name && !city) {
-    setInputError(true);
-    return;
-  }
-
-  const filters = {};
-
-  if (formData.name.trim() !== "") {
-    filters.name = formData.name.trim();
-  }
-
-  if (city.trim() !== "") {
-    filters.city = city.trim();
-  }
-
-  const data = await getAllAgents(filters);
-  setAgents(data?.data?.data?.data || []);
-  setInputError(false);
-};
-
 
   return (
     <>
