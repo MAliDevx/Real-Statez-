@@ -23,98 +23,97 @@ import API from "../../../api/axios";
 
 const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
   const navigate = useNavigate();
-  const [isFavorite, setIsFavorite] = useState(false);
   const { addFevorite, deleteFavorite } = useUserContext();
+
+  const [isFavorite, setIsFavorite] = useState(item.isFavorite);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleFavoriteClick = async (e) => {
+  const toggleFavorite = async (e) => {
     e.stopPropagation();
-
     if (isLoading) return;
     setIsLoading(true);
+    setIsFavorite((prev) => !prev);
 
     try {
-      if (isFavorite || item.isFavorite) {
+      if (isFavorite) {
         await deleteFavorite(item._id);
-
-        setIsFavorite(false);
       } else {
         await addFevorite({ propertyId: item._id });
-        setIsFavorite(true);
       }
-    } catch (error) {
+      fetchProperties?.();
+    } catch (err) {
+      setIsFavorite((prev) => !prev);
     } finally {
       setIsLoading(false);
     }
   };
-  const handleDeleteFavorite = async (e) => {
+  const removeFromFavoritePage = async (e) => {
     e.stopPropagation();
     try {
-      const res = await deleteFavorite(item._id);
-      fetchProperties()
-    } catch (err) {}
+      await deleteFavorite(item._id);
+      fetchProperties?.(); 
+    } catch {}
   };
   const image = `${API.defaults.baseURL}/public/${item?.images?.[0]}`;
 
-
+  /* ────────── Render ────────── */
   return (
     <Card onClick={() => navigate(`/propertydetails/${item._id}`)}>
-{!isError && (
-  <button className={`property-feature ${item?.status?.toLowerCase()}`}>
-    {item?.status}
-  </button>
-)}
-      {!isError && <button className="isForSale">{item?.purpose}</button>}
+      {!isError && (
+        <>
+          <button className={`property-feature ${item.status?.toLowerCase()}`}>
+            {item.status}
+          </button>
+          <button className="isForSale">{item.purpose}</button>
+        </>
+      )}
 
+      {/* Image */}
       <div style={{ height: "300px" }}>
         {!isError && <CardImg src={image} alt={item?.propertyType} />}
         {isError && <CardImg src={house} />}
       </div>
 
+      {/* Top section */}
       {!isError && (
         <CardBodyTop>
           <div className="property-type-container">
-          <button className="isHouse">{item?.propertyType}</button>
-    {!isFavoritePage && (
-              <span onClick={handleFavoriteClick}>
-                {isFavorite || item.isFavorite ? (
+            <button className="isHouse">{item.propertyType}</button>
+
+            {/* Heart / Trash icon */}
+            {!isFavoritePage ? (
+              <span>
+                {isFavorite ? (
                   <FaHeart
-                    style={{
-                      color: "red",
-                      cursor: "pointer",
-                      fontSize: "25px",
-                    }}
+                    onClick={toggleFavorite}
+                    style={{ color: "red", cursor: "pointer", fontSize: 25 }}
                   />
                 ) : (
                   <FaRegHeart
-                    style={{
-                      color: "gray",
-                      cursor: "pointer",
-                      fontSize: "25px",
-                    }}
+                    onClick={toggleFavorite}
+                    style={{ color: "gray", cursor: "pointer", fontSize: 25 }}
                   />
                 )}
               </span>
-            )}
-                {isFavoritePage && (
-              <span onClick={handleDeleteFavorite}>
+            ) : (
+              <span onClick={removeFromFavoritePage}>
                 <FaTrashAlt
-                  style={{ color: "gray", cursor: "pointer", fontSize: "20px" }}
+                  style={{ color: "gray", cursor: "pointer", fontSize: 20 }}
                 />
               </span>
             )}
           </div>
-          <div className="add-fevorite">
-            <h4 className="property-name">{item?.name}</h4>
-        
-        
-          </div>
+
+          <h4 className="property-name">{item.name}</h4>
+
           <div className="property-location">
-            <FaLocationDot /> <span  className="truncate-text">{item?.fullAddress}</span>
+            <FaLocationDot />
+            <span className="truncate-text">{item?.fullAddress}</span>
           </div>
         </CardBodyTop>
       )}
 
+      {/* Stats */}
       {!isError && (
         <CardBodyBottom>
           <div className="bath-box">
@@ -144,6 +143,7 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
         </CardBodyBottom>
       )}
 
+      {/* Agency profile */}
       {!isError && (
         <div className="property-profile">
           <div className="property-profile__info">
@@ -160,14 +160,15 @@ const PropertyCard = ({ item, isError, isFavoritePage,fetchProperties }) => {
         </div>
       )}
 
+      {/* Fallback */}
       {isError && (
         <div
           className="fallback-message"
           style={{
             textAlign: "center",
             color: "gray",
-            marginTop: "10px",
-            height: "100px",
+            marginTop: 10,
+            height: 100,
             display: "flex",
             alignItems: "center",
           }}
