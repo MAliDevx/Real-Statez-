@@ -60,7 +60,7 @@ const SinglePropertyDetail = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showFull, setShowFull] = useState(false);
   const { id } = useParams();
-  const { viewSingleProperty, addFevorite } = useUserContext();
+  const { viewSingleProperty, addFevorite,deleteFavorite } = useUserContext();
   const [property, setProperties] = useState([]);
   const [isError, setIsError] = useState(false);
   const [images, setImages] = useState([]);
@@ -120,6 +120,13 @@ const handleAddFavorite = async (id) => {
   } catch (err) {
   }
 };
+  const handleDeleteFavorite = async () => {
+
+    try {
+      const res = await deleteFavorite(id);
+      ViewProperty(id)
+    } catch (err) {}
+  };
 
   useEffect(() => {
 
@@ -266,7 +273,7 @@ const handleAddFavorite = async (id) => {
                 {/* <button className="purchaseButton">Purchase this Property</button> */}
 <div className="actionIcons">
   {property?.isFavorite ? (
-    <FaHeart className="icon" style={{ color: 'red' }} />
+    <FaHeart onClick={ handleDeleteFavorite} className="icon" style={{ color: 'red' }} />
   ) : (
 <FaRegHeart onClick={() => handleAddFavorite(property._id)} className="icon" />
   )}
